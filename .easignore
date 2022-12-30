@@ -1,0 +1,6 @@
+.expo/
+.git/
+.idea/
+devBuilds/
+node_modules/
+*.iml

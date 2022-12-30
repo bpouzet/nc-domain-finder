@@ -1,0 +1,17 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "allowJs": true,
+    "strict": true,
+    "types": [ "node", "webpack-env", "react", "react-native" ],
+    "typeRoots": [ "src/types" ],
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": [ "src/components/*" ],
+      "@config/*": [ "src/config/*" ],
+      "@hooks/*": [ "src/hooks/*" ],
+      "@types/*": [ "src/types/*" ]
+    }
+  },
+  "include": [ "src", "app.config.ts", ".eslintrc.js", "babel.config.js" ],
+}
