@@ -1,0 +1,45 @@
+/* eslint-disable */
+export const dark = {
+  "colors": {
+    "primary": "rgb(165, 213, 118)",
+    "onPrimary": "rgb(27, 55, 0)",
+    "primaryContainer": "rgb(42, 80, 0)",
+    "onPrimaryContainer": "rgb(192, 241, 144)",
+    "secondary": "rgb(191, 203, 174)",
+    "onSecondary": "rgb(41, 52, 31)",
+    "secondaryContainer": "rgb(63, 74, 52)",
+    "onSecondaryContainer": "rgb(219, 231, 201)",
+    "tertiary": "rgb(160, 207, 205)",
+    "onTertiary": "rgb(0, 55, 54)",
+    "tertiaryContainer": "rgb(30, 78, 76)",
+    "onTertiaryContainer": "rgb(187, 236, 233)",
+    "error": "rgb(255, 180, 171)",
+    "onError": "rgb(105, 0, 5)",
+    "errorContainer": "rgb(147, 0, 10)",
+    "onErrorContainer": "rgb(255, 180, 171)",
+    "background": "rgb(27, 28, 24)",
+    "onBackground": "rgb(227, 227, 220)",
+    "surface": "rgb(27, 28, 24)",
+    "onSurface": "rgb(227, 227, 220)",
+    "surfaceVariant": "rgb(68, 72, 62)",
+    "onSurfaceVariant": "rgb(196, 200, 186)",
+    "outline": "rgb(142, 146, 134)",
+    "outlineVariant": "rgb(68, 72, 62)",
+    "shadow": "rgb(0, 0, 0)",
+    "scrim": "rgb(0, 0, 0)",
+    "inverseSurface": "rgb(227, 227, 220)",
+    "inverseOnSurface": "rgb(47, 49, 44)",
+    "inversePrimary": "rgb(64, 105, 23)",
+    "elevation": {
+      "level0": "transparent",
+      "level1": "rgb(34, 37, 29)",
+      "level2": "rgb(38, 43, 32)",
+      "level3": "rgb(42, 48, 34)",
+      "level4": "rgb(44, 50, 35)",
+      "level5": "rgb(46, 54, 37)"
+    },
+    "surfaceDisabled": "rgba(227, 227, 220, 0.12)",
+    "onSurfaceDisabled": "rgba(227, 227, 220, 0.38)",
+    "backdrop": "rgba(46, 50, 40, 0.4)"
+  }
+} ;

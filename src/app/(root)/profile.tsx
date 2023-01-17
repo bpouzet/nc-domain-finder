@@ -1,13 +1,15 @@
+import { Text } from 'react-native-paper' ;
 import { useTranslation } from 'react-i18next' ;
-import { Text, View } from 'react-native' ;
+
+import SafeView from '@components/SafeView' ;
 
 export default function Profile() {
   const { t } = useTranslation() ;
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeView>
       <Text>{t('profile')}</Text>
-    </View>
+    </SafeView>
   ) ;
 
 }

@@ -1,5 +1,20 @@
 {
-  "search": "Rechercher",
+  "about": "A propos",
+  "clear": "Effacer",
+  "date": "{{val, datetime}}",
+  "domain": {
+    "created": "Date création",
+    "dns": "DNS",
+    "expired": "Date d'expiration",
+    "manager": "Gestionnaire",
+    "owner": "Bénéficiaire",
+    "ridet": "RIDET"
+  },
   "profile": "Profile",
-  "about": "A propos"
+  "relateTime": "{{val, relativetime}}",
+  "search": {
+    "helper": "Veuillez rechercher un domaine!",
+    "placeholder": "Rechercher un domaine",
+    "title": "Rechercher"
+  }
 }

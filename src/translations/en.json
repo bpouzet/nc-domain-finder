@@ -1,5 +1,20 @@
 {
-  "search": "Search",
+  "about": "About",
+  "clear": "Clear",
+  "date": "{{val, datetime}}",
+  "domain": {
+    "created": "Creation date",
+    "dns": "DNS",
+    "expired": "Expired date",
+    "manager": "Manager",
+    "owner": "Owner",
+    "ridet": "RIDET"
+  },
   "profile": "Profile",
-  "about": "About"
+  "relateTime": "{{val, relativetime}}",
+  "search": {
+    "helper": "Please search a domain!",
+    "placeholder": "Search domain",
+    "title": "Search"
+  }
 }
