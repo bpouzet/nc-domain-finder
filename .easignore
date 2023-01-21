@@ -1,6 +1,7 @@
 .expo/
 .git/
 .idea/
-devBuilds/
+android/
+ios/
 node_modules/
 *.iml

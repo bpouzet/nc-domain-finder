@@ -12,5 +12,9 @@ web-build/
 *.iml
 .env*
 
+.expo/
+android/
+ios/
+
 # macOS
 .DS_Store

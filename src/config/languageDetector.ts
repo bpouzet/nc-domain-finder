@@ -1,14 +1,21 @@
-import AsyncStorage from '@react-native-async-storage/async-storage' ;
 import * as Localization from 'expo-localization' ;
 import * as Sentry from 'sentry-expo' ;
+import AsyncStorage from '@react-native-async-storage/async-storage' ;
+import { LanguageDetectorAsyncModule } from 'i18next' ;
 
 const STORE_LOCALE_KEY = 'settings.locale' ;
 
-const languageDetectorPlugin = {
-  type: 'languageDetector',
+export const initLanguageDetector: LanguageDetectorAsyncModule = {
   async: true,
-  init: () => {},
-  detect: async function (callback: (lang: string) => void) {
+  cacheUserLanguage: async function (language: string) {
+    try {
+      //save a user's language choice in Async storage
+      await AsyncStorage.setItem(STORE_LOCALE_KEY, language) ;
+    } catch (error) {
+      Sentry.Native.captureException(error) ;
+    }
+  },
+  detect: async function (callback: (lng: (string)) => undefined): Promise<string | undefined> {
     try {
       //get stored language from Async storage
       await AsyncStorage.getItem(STORE_LOCALE_KEY).then((language) => {
@@ -22,16 +29,8 @@ const languageDetectorPlugin = {
       }) ;
     } catch (error) {
       Sentry.Native.captureException(error) ;
+      return undefined ;
     }
   },
-  cacheUserLanguage: async function (language: string) {
-    try {
-      //save a user's language choice in Async storage
-      await AsyncStorage.setItem(STORE_LOCALE_KEY, language) ;
-    } catch (error) {
-      Sentry.Native.captureException(error) ;
-    }
-  },
+  type: 'languageDetector',
 } ;
-
-module.exports = { languageDetectorPlugin } ;

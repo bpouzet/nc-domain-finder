@@ -3,7 +3,11 @@ module.exports = function(api) {
   api.cache(true) ;
 
   return {
-    presets: ['babel-preset-expo'],
+    env: {
+      production: {
+        plugins: [ 'react-native-paper/babel' ],
+      },
+    },
     plugins: [
       require.resolve('expo-router/babel'),
       [
@@ -13,11 +17,13 @@ module.exports = function(api) {
             // This needs to be mirrored in tsconfig.json
             '@components': './src/components',
             '@config': './src/config',
+            '@customTypes': './src/types',
+            '@helpers': './src/helpers',
             '@hooks': './src/hooks',
-            '@types': './src/types',
           },
         },
       ],
     ],
+    presets: [ 'babel-preset-expo' ],
   } ;
 } ;

@@ -9,8 +9,9 @@
     "paths": {
       "@components/*": [ "src/components/*" ],
       "@config/*": [ "src/config/*" ],
-      "@hooks/*": [ "src/hooks/*" ],
-      "@types/*": [ "src/types/*" ]
+      "@customTypes/*": [ "src/types/*" ],
+      "@helpers/*": [ "src/helpers/*" ],
+      "@hooks/*": [ "src/hooks/*" ]
     }
   },
   "include": [ "src", "app.config.ts", ".eslintrc.js", "babel.config.js" ],
