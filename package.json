@@ -109,6 +109,6 @@
     "extends": "universe/native"
   },
   "validate-branch-name": {
-    "pattern": "^(main|develop){1}$|^(feature|feat|fix|hotfix|release)/.+$"
+    "pattern": "^(main|develop){1}$|^(chore|feature|feat|fix|hotfix|release)/.+$"
   }
 }

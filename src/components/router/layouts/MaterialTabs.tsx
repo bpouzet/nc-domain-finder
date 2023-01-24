@@ -1,3 +1,4 @@
+// Waiting fixing in library
 // import {
 //   MaterialBottomTabNavigationOptions,
 //   createMaterialBottomTabNavigator,
@@ -24,18 +25,6 @@ export const MaterialTabs = withLayoutContext<
 >(BottomTabNavigator, (screens) => {
   // Support the `href` shortcut prop.
   return screens.map((screen) => {
-    if (
-      typeof screen.options !== 'function' &&
-      screen.options?.href !== undefined
-    ) {
-      const { ...options } = screen.options ;
-      return {
-        ...screen,
-        options: {
-          ...options,
-        },
-      } ;
-    }
     return screen ;
   }) ;
 }) ;
