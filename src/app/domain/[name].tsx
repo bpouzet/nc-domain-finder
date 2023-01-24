@@ -60,7 +60,7 @@ export default function Name() {
           }}
         >
           <Appbar.BackAction
-            style={{ backgroundColor: theme.colors.background, zIndex: 1 }}
+            style={{ backgroundColor: theme.colors.background, zIndex: 2 }}
             onPress={() => router.back()}
           />
           <LoaderImage
