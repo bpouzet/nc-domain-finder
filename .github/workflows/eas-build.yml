@@ -7,8 +7,11 @@ on:
       - release/*
 jobs:
   build:
-    name: Install and build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["16"]
+    name: Install and build with Node ${{ matrix.node }}
     steps:
       - name: Check for EXPO_TOKEN
         run: |
@@ -19,11 +22,13 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: ${{ matrix.node }}
           cache: yarn
 
       - name: Setup Expo and EAS
