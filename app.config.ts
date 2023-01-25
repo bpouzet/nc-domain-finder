@@ -4,19 +4,22 @@ import { ConfigContext } from 'expo/config' ;
 import { MyExpoConfig } from '@customTypes/expoConfig' ;
 import manifest from './package.json' ;
 
+const IS_DEV = process.env.APP_ENV === 'development' ;
+
 const VERSION = manifest.version ;
-const CODE = 1 ;
-const PACKAGE = 'nc.domainFinder.app' ;
+const PACKAGE = 'nc.domainFinder.app' + (IS_DEV ? '.dev' : '') ;
+
+const ICON = './assets/images/' + (IS_DEV ? 'dev_' : '') + 'icon.png' ;
+const ADAPTIVE_ICON = './assets/images/' + (IS_DEV ? 'dev_' : '') + 'adaptive-icon.png' ;
 
 export default ({ config }: ConfigContext): MyExpoConfig => ({
   ...config,
   android: {
     adaptiveIcon: {
       backgroundColor: '#194544',
-      foregroundImage: './assets/images/adaptive-icon.png',
+      foregroundImage: ADAPTIVE_ICON,
     },
     package: PACKAGE,
-    versionCode: CODE,
   },
   assetBundlePatterns: [
     'src/assets/**/*',
@@ -44,9 +47,8 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       },
     ],
   },
-  icon: './assets/images/icon.png',
+  icon: ICON,
   ios: {
-    buildNumber: CODE.toString(),
     bundleIdentifier: PACKAGE,
     infoPlist: {
       LSApplicationQueriesSchemes: [ 'itms-apps' ],
@@ -54,7 +56,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     supportsTablet: true,
   },
   jsEngine: 'hermes',
-  name: 'NC Domain Finder',
+  name: 'NC Domain Finder' + (IS_DEV ? ' (dev)' : ''),
   orientation: 'portrait',
   plugins: [
     [
@@ -62,12 +64,23 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
         android: {
           allowBackup: false,
           enableProguardInReleaseBuilds: true,
+          extraProguardRules: '-keep public class com.dylanvann.fastimage.* {*;}\n' +
+            '-keep public class com.dylanvann.fastimage.** {*;}\n' +
+            '-keep public class * implements com.bumptech.glide.module.GlideModule\n' +
+            '-keep public class * extends com.bumptech.glide.module.AppGlideModule\n' +
+            '-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {\n' +
+            '  **[] $VALUES;\n' +
+            '  public *;\n' +
+            '}',
         },
       },
     ],
     'expo-community-flipper',
     'sentry-expo',
   ],
+  runtimeVersion: {
+    policy: 'appVersion',
+  },
   scheme: 'nc-domain-finder',
   slug: 'nc-domain-finder',
   splash: {
