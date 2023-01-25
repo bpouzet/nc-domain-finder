@@ -24,7 +24,8 @@ export default function useCachedResources() {
         Sentry.Native.captureException(e) ;
       } finally {
         setLoadingComplete(true) ;
-        await SplashScreen.hideAsync() ;
+        // expo router handle closing splashscreen
+        //await SplashScreen.hideAsync() ;
       }
     }
 
