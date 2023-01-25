@@ -20,18 +20,18 @@ jobs:
             exit 1
           fi
 
-      - name: Checkout repository
+      - name: 🏗 Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
 
-      - name: Setup Node
+      - name: 🏗 Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           cache: yarn
 
-      - name: Setup Expo and EAS
+      - name: 🏗 Setup Expo and EAS
         uses: expo/expo-github-action@v7
         with:
           expo-version: latest
@@ -49,8 +49,13 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: yarn install --immutable
 
-      - name: Build on EAS
-        run: eas build --platform android --non-interactive
+      - name: 🚀 Build on EAS
+        run: EAS_PROJECT_ID=${{ secrets.EAS_PROJECT_ID }} eas build --platform android --non-interactive
+
+      - name: 💬 Comment preview
+        uses: expo/expo-github-action/preview-comment@v7
+        with:
+          channel: pr-${{ github.event.number }}
