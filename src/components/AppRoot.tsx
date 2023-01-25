@@ -3,7 +3,7 @@ import React, { FC } from 'react' ;
 import Constants from 'expo-constants' ;
 import { Provider as PaperProvider } from 'react-native-paper' ;
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client' ;
-import { RootContainer } from 'expo-router' ;
+//import { RootContainer } from 'expo-router' ;
 import { StatusBar } from 'expo-status-bar' ;
 import { Try } from 'expo-router/build/views/Try' ;
 
@@ -56,7 +56,7 @@ type Props = {
 }
 const AppRoot: FC<Props> = ({ children }) => {
 
-  const navigationRef = RootContainer.useRef() ;
+  //const navigationRef = RootContainer.useRef() ;
 
   const isLoadingComplete = useCachedResources() ;
 
@@ -65,10 +65,10 @@ const AppRoot: FC<Props> = ({ children }) => {
   if (!isLoadingComplete) {
     return null ;
   } else {
-    if(navigationRef?.isReady) {
-      // Register the navigation container with the instrumentation
-      routingInstrumentation.registerNavigationContainer(navigationRef) ;
-    }
+    // if(navigationRef?.isReady) {
+    //   // Register the navigation container with the instrumentation
+    //   routingInstrumentation.registerNavigationContainer(navigationRef) ;
+    // }
     return (
       <PersistQueryClientProvider
         client={queryClient}
