@@ -4,6 +4,7 @@ import { ScrollView, View, useWindowDimensions } from 'react-native' ;
 import { useRouter, useSearchParams } from 'expo-router' ;
 import FastImage from 'react-native-fast-image' ;
 import LoaderImage from '@components/LoaderImage' ;
+import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
 import { useDomain } from '@helpers/query' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
@@ -28,7 +29,7 @@ export default function Name() {
   const { top } = useSafeAreaInsets() ;
   const { height } = useWindowDimensions() ;
 
-  const { data, isFetching } = useDomain(name, extension) ;
+  const { data, isLoading } = useDomain(name, extension) ;
 
   const header = (40 / 100) * height ;
 
@@ -48,6 +49,33 @@ export default function Name() {
   const getRelativeTime = (num: number) => t('relateTime', { val: num }) ;
 
   const onPress = (name: string, extension: string) => () => void Linking.openURL('http://' + name + extension) ;
+
+  const renderContent = () => {
+    if( isLoading ) {
+      return <LoaderItems items={4} /> ;
+    } else if( data ) {
+      return (
+        <ScrollView style={{ flex: 1 }}>
+          <List.Item title={t('domain.owner')} description={getProperOwner(data.beneficiaire, data.ridet)} />
+          {data.ridet ? <List.Item title={t('domain.ridet')} description={data.ridet}/> : null}
+          {(data.gestionnaire && data.gestionnaire !== 'AUCUN') ?
+            <List.Item title={t('domain.manager')} description={data.gestionnaire}/>
+            : null}
+          <List.Item title={t('domain.dns')} description={data.dns.join(', ')} />
+          <List.Item
+            title={t('domain.created')}
+            description={getDate(data.dateCreation)}
+          />
+          <List.Item
+            title={t('domain.expired')}
+            description={getDate(data.dateExpiration) + ' ' + getRelativeTime(data.nbDaysBeforeExpires)}
+          />
+        </ScrollView>
+      ) ;
+    } else {
+      return null ;
+    }
+  } ;
 
   return (
     <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
@@ -84,31 +112,13 @@ export default function Name() {
       <List.Item
         title={name}
         description={extension}
-        onPress={() => null}
         left={getFavicon(name, extension)}
         right={() => (
           <FAB icon="open-in-new" size='small' mode='flat' onPress={onPress(name, extension)} />
         )}
       />
 
-      {data ? (
-        <ScrollView style={{ flex: 1 }}>
-          <List.Item title={t('domain.owner')} description={getProperOwner(data.beneficiaire, data.ridet)} />
-          {data.ridet ? <List.Item title={t('domain.ridet')} description={data.ridet}/> : null}
-          {(data.gestionnaire && data.gestionnaire !== 'AUCUN') ?
-            <List.Item title={t('domain.manager')} description={data.gestionnaire}/>
-            : null}
-          <List.Item title={t('domain.dns')} description={data.dns.join(', ')} />
-          <List.Item
-            title={t('domain.created')}
-            description={getDate(data.dateCreation)}
-          />
-          <List.Item
-            title={t('domain.expired')}
-            description={getDate(data.dateExpiration) + ' ' + getRelativeTime(data.nbDaysBeforeExpires)}
-          />
-        </ScrollView>
-      ) : null}
+      {renderContent()}
 
     </View>
   ) ;
