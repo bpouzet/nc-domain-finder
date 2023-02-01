@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 0.54.1"
+    "appVersionSource": "remote",
+    "version": ">= 3.3.0"
   },
   "build": {
     "development": {
@@ -13,6 +14,7 @@
     "development-simulator": {
       "extends": "development",
       "ios": {
+        "resourceClass": "m1-medium",
         "simulator": true
       }
     },
@@ -21,6 +23,7 @@
       "channel": "staging"
     },
     "production": {
+      "autoIncrement": true,
       "channel": "production",
       "env": {
         "APP_ENV": "production",

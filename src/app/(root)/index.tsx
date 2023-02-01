@@ -59,7 +59,6 @@ export default function Index () {
           data={data}
           renderItem={renderItem}
           estimatedItemSize={70}
-          keyExtractor={item => item.name}
           ItemSeparatorComponent={() => <Divider />}
         />
       ) : (

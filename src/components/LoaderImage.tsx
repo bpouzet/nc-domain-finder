@@ -26,6 +26,8 @@ const LoaderImage:FC<Props> = ({ resizeMode, shimmerStyle, source, style }) => {
           width: '100%',
           zIndex: 1,
         }}
+        width={400}
+        shimmerWidthPercent={0.8}
         visible={!loading}
       />
       <FastImage
