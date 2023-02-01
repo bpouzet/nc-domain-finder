@@ -10,7 +10,7 @@
     "owner": "Bénéficiaire",
     "ridet": "RIDET"
   },
-  "profile": "Profile",
+  "favorites": "Favoris",
   "relateTime": "{{val, relativetime}}",
   "search": {
     "helper": "Veuillez rechercher un domaine!",

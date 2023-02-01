@@ -10,7 +10,7 @@
     "owner": "Owner",
     "ridet": "RIDET"
   },
-  "profile": "Profile",
+  "favorites": "Favorites",
   "relateTime": "{{val, relativetime}}",
   "search": {
     "helper": "Please search a domain!",
