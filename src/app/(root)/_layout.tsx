@@ -30,11 +30,11 @@ export default function RootLayout() {
         }}
       />
       <MaterialTabs.Screen
-        name='profile'
+        name='favorites'
         options={{
-          href: '/profile',
+          href: '/favorites',
           tabBarIcon: renderTabBarIcon('cards-heart'),
-          title: t('profile'),
+          title: t('favorites'),
         }}
       />
       <MaterialTabs.Screen

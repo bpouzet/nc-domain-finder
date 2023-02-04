@@ -1,12 +1,14 @@
 import * as Linking from 'expo-linking' ;
-import { Appbar, FAB, List, useTheme } from 'react-native-paper' ;
+import { Appbar, Divider, FAB, List, useTheme } from 'react-native-paper' ;
 import { ScrollView, View, useWindowDimensions } from 'react-native' ;
 import { useRouter, useSearchParams } from 'expo-router' ;
+import { DomainList } from '../../schemas/DomainListSchema' ;
 import FastImage from 'react-native-fast-image' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
 import { useDomain } from '@helpers/query' ;
+import useFavoritesStore from '@hooks/useFavoritesStore' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useTranslation } from 'react-i18next' ;
 
@@ -31,6 +33,8 @@ export default function Name() {
 
   const { data, isLoading } = useDomain(name, extension) ;
 
+  const { addFavorite, isFavorite, removeFavorite } = useFavoritesStore() ;
+
   const header = (40 / 100) * height ;
 
   const getDate = (date: string) => t('date', {
@@ -49,6 +53,15 @@ export default function Name() {
   const getRelativeTime = (num: number) => t('relateTime', { val: num }) ;
 
   const onPress = (name: string, extension: string) => () => void Linking.openURL('http://' + name + extension) ;
+
+  const onChangeFavorite = () => {
+    const fav: DomainList = { extension, name } ;
+    if(isFavorite(fav)) {
+      removeFavorite(fav) ;
+    } else {
+      addFavorite(fav) ;
+    }
+  } ;
 
   const renderContent = () => {
     if( isLoading ) {
@@ -76,6 +89,16 @@ export default function Name() {
       return null ;
     }
   } ;
+
+  const getActions = () => (
+    <>
+      <FAB icon={isFavorite({ extension, name }) ? 'heart' : 'heart-outline'} size='small' mode='flat' onPress={onChangeFavorite} />
+      <Divider style={{ width: 10 }} />
+      <FAB icon="bell-outline" size='small' mode='flat' />
+      <Divider style={{ width: 10 }} />
+      <FAB icon="open-in-new" size='small' mode='flat' onPress={onPress(name, extension)} />
+    </>
+  ) ;
 
   return (
     <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
@@ -113,9 +136,7 @@ export default function Name() {
         title={name}
         description={extension}
         left={getFavicon(name, extension)}
-        right={() => (
-          <FAB icon="open-in-new" size='small' mode='flat' onPress={onPress(name, extension)} />
-        )}
+        right={getActions}
       />
 
       {renderContent()}
