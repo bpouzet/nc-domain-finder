@@ -12,14 +12,26 @@ const PACKAGE = 'nc.domainFinder.app' + (IS_DEV ? '.dev' : '') ;
 const ICON = './assets/images/' + (IS_DEV ? 'dev_' : '') + 'icon.png' ;
 const ADAPTIVE_ICON = './assets/images/' + (IS_DEV ? 'dev_' : '') + 'adaptive-icon.png' ;
 
+const BG_COLOR = '#194544' ;
+
 export default ({ config }: ConfigContext): MyExpoConfig => ({
   ...config,
   android: {
     adaptiveIcon: {
-      backgroundColor: '#194544',
+      backgroundColor: BG_COLOR,
       foregroundImage: ADAPTIVE_ICON,
     },
     package: PACKAGE,
+    permissions: [],
+  },
+  androidNavigationBar: {
+    backgroundColor: BG_COLOR,
+    barStyle: 'light-content',
+  },
+  androidStatusBar: {
+    backgroundColor: BG_COLOR,
+    barStyle: 'light-content',
+    translucent: false,
   },
   assetBundlePatterns: [
     'src/assets/**/*',
@@ -84,7 +96,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   scheme: 'nc-domain-finder',
   slug: 'nc-domain-finder',
   splash: {
-    backgroundColor: '#194544',
+    backgroundColor: BG_COLOR,
     image: './assets/images/splash.png',
     resizeMode: 'contain',
   },
