@@ -1,0 +1,104 @@
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/LICENSE b/node_modules/@react-navigation/material-bottom-tabs/LICENSE
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/README.md b/node_modules/@react-navigation/material-bottom-tabs/README.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/index.js b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/index.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/index.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/index.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/navigators/createMaterialBottomTabNavigator.js b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/navigators/createMaterialBottomTabNavigator.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/navigators/createMaterialBottomTabNavigator.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/navigators/createMaterialBottomTabNavigator.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/types.js b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/types.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/types.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/types.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/views/MaterialBottomTabView.js b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/views/MaterialBottomTabView.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/views/MaterialBottomTabView.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/commonjs/views/MaterialBottomTabView.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/index.js b/node_modules/@react-navigation/material-bottom-tabs/lib/module/index.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/index.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/module/index.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/navigators/createMaterialBottomTabNavigator.js b/node_modules/@react-navigation/material-bottom-tabs/lib/module/navigators/createMaterialBottomTabNavigator.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/navigators/createMaterialBottomTabNavigator.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/module/navigators/createMaterialBottomTabNavigator.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/types.js b/node_modules/@react-navigation/material-bottom-tabs/lib/module/types.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/types.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/module/types.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/views/MaterialBottomTabView.js b/node_modules/@react-navigation/material-bottom-tabs/lib/module/views/MaterialBottomTabView.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/module/views/MaterialBottomTabView.js.map b/node_modules/@react-navigation/material-bottom-tabs/lib/module/views/MaterialBottomTabView.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/index.d.ts b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/index.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/index.d.ts.map b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/index.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/navigators/createMaterialBottomTabNavigator.d.ts b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/navigators/createMaterialBottomTabNavigator.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/navigators/createMaterialBottomTabNavigator.d.ts.map b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/navigators/createMaterialBottomTabNavigator.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/types.d.ts b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/types.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/types.d.ts.map b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/types.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/views/MaterialBottomTabView.d.ts b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/views/MaterialBottomTabView.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/views/MaterialBottomTabView.d.ts.map b/node_modules/@react-navigation/material-bottom-tabs/lib/typescript/src/views/MaterialBottomTabView.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/src/index.tsx b/node_modules/@react-navigation/material-bottom-tabs/src/index.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/src/navigators/createMaterialBottomTabNavigator.tsx b/node_modules/@react-navigation/material-bottom-tabs/src/navigators/createMaterialBottomTabNavigator.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/src/types.tsx b/node_modules/@react-navigation/material-bottom-tabs/src/types.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx b/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx
+old mode 100644
+new mode 100755
+index 0b19704..7854ef1
+--- a/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx
++++ b/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx
+@@ -12,8 +12,8 @@ import * as React from 'react';
+ import { Platform, StyleSheet, Text } from 'react-native';
+ import {
+   BottomNavigation,
+-  DarkTheme,
+-  DefaultTheme,
++  MD3DarkTheme as DarkTheme,
++  MD3LightTheme as DefaultTheme,
+   useTheme as usePaperTheme,
+ } from 'react-native-paper';
+ import { useSafeAreaInsets } from 'react-native-safe-area-context';
