@@ -8,7 +8,7 @@
     "dev:ios:simulator": "npx eas-cli build --profile development-simulator --platform ios",
     "lint": "eslint --ext .tsx --ext .ts src/ app.config.ts babel.config.js",
     "test": "jest --watchAll",
-    "postinstall": "license-report --only=prod > src/licenses.json",
+    "postinstall": "patch-package && license-report --only=prod > src/licenses.json",
     "prepare": "husky install"
   },
   "author": "Benoit Pouzet",
@@ -67,6 +67,8 @@
     "expo-updates": "~0.15.6",
     "expo-web-browser": "~12.0.0",
     "i18next": "^22.4.8",
+    "patch-package": "^6.5.1",
+    "postinstall-postinstall": "^2.1.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-i18next": "^12.1.1",

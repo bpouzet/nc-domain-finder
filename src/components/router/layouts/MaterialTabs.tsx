@@ -1,10 +1,8 @@
-// Waiting fixing in library
-// import {
-//   MaterialBottomTabNavigationOptions,
-//   createMaterialBottomTabNavigator,
-// } from '@react-navigation/material-bottom-tabs' ;
+import {
+  MaterialBottomTabNavigationOptions,
+  createMaterialBottomTabNavigator,
+} from '@react-navigation/material-bottom-tabs' ;
 
-import { MaterialBottomTabNavigationOptions, createMaterialBottomTabNavigator } from '@components/tabs' ;
 import { withLayoutContext } from 'expo-router' ;
 
 export type Href = string | HrefObject ;
