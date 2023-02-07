@@ -12,7 +12,7 @@ const SafeView: FC<Props> = ({ children }) => {
     <SafeAreaView style={{
       backgroundColor: theme.colors.background,
       flex: 1,
-      padding: 10,
+      paddingHorizontal: 10,
     }}>
       { children }
     </SafeAreaView>

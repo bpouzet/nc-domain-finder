@@ -37,6 +37,8 @@ export default function Name() {
 
   const header = (40 / 100) * height ;
 
+  const isItemFavorite = isFavorite({ extension, name }) ;
+
   const getDate = (date: string) => t('date', {
     formatParams: { val: options },
     val: new Date(date),
@@ -92,11 +94,28 @@ export default function Name() {
 
   const getActions = () => (
     <>
-      <FAB icon={isFavorite({ extension, name }) ? 'heart' : 'heart-outline'} size='small' mode='flat' onPress={onChangeFavorite} />
+      <FAB
+        accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
+        icon={isItemFavorite ? 'heart' : 'heart-outline'}
+        mode='flat'
+        size='small'
+        onPress={onChangeFavorite}
+      />
       <Divider style={{ width: 10 }} />
-      <FAB icon="bell-outline" size='small' mode='flat' />
+      <FAB
+        accessibilityLabel={t('actions.addReminder')}
+        icon="bell-outline"
+        mode='flat'
+        size='small'
+      />
       <Divider style={{ width: 10 }} />
-      <FAB icon="open-in-new" size='small' mode='flat' onPress={onPress(name, extension)} />
+      <FAB
+        accessibilityLabel={t('actions.openWebsite')}
+        icon="open-in-new"
+        mode='flat'
+        size='small'
+        onPress={onPress(name, extension)}
+      />
     </>
   ) ;
 
@@ -110,10 +129,6 @@ export default function Name() {
             width: '100%',
           }}
         >
-          <Appbar.BackAction
-            style={{ backgroundColor: theme.colors.background, zIndex: 2 }}
-            onPress={() => router.back()}
-          />
           <LoaderImage
             source={{ uri: THUMB_URL + name + extension }}
             style={{
@@ -128,6 +143,10 @@ export default function Name() {
               top: -top,
               width: '100%',
             }}
+          />
+          <Appbar.BackAction
+            style={{ backgroundColor: theme.colors.background, zIndex: 2 }}
+            onPress={() => router.back()}
           />
         </Appbar.Header>
       </View>

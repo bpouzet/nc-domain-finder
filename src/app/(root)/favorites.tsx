@@ -1,4 +1,4 @@
-import { Appbar, Divider, List } from 'react-native-paper' ;
+import { Appbar, Divider, List, Text } from 'react-native-paper' ;
 import { FlashList, ListRenderItem } from '@shopify/flash-list' ;
 import { View } from 'react-native' ;
 import { useCallback } from 'react' ;
@@ -32,16 +32,31 @@ export default function Favorites() {
     />
   ), []) ;
 
+  const EmptyList = useCallback(() => (
+    <View
+      style={{
+        alignItems: 'center',
+        height: 200,
+        justifyContent: 'center',
+      }}
+    >
+      <Text>{t('favorites.empty')}</Text>
+    </View>
+  ), []) ;
+
+  const ItemSeparator = useCallback(() => <Divider />, []) ;
+
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
-        <Appbar.Content title={t('favorites')} />
+        <Appbar.Content title={t('favorites.title')} />
       </Appbar.Header>
       <FlashList
         data={favorites}
         estimatedItemSize={70}
         renderItem={renderItem}
-        ItemSeparatorComponent={() => <Divider />}
+        ItemSeparatorComponent={ItemSeparator}
+        ListEmptyComponent={EmptyList}
       />
     </View>
   ) ;
