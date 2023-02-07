@@ -38,11 +38,11 @@ export default function RootLayout() {
         }}
       />
       <MaterialTabs.Screen
-        name='about'
+        name='settings'
         options={{
-          href: '/about',
-          tabBarIcon: renderTabBarIcon('information-variant'),
-          title: t('about.title'),
+          href: '/settings',
+          tabBarIcon: renderTabBarIcon('cog'),
+          title: t('settings.title'),
         }}
       />
     </MaterialTabs>

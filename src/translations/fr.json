@@ -1,7 +1,4 @@
 {
-  "about": {
-    "title": "A propos"
-  },
   "actions": {
     "addFavorite": "Ajouter aux favoris",
     "addReminder": "Ajouter rappel",
@@ -22,11 +19,28 @@
     "empty": "Pas de favoris!",
     "title": "Favoris"
   },
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français"
+  },
   "relateTime": "{{val, relativetime}}",
   "search": {
     "empty": "Pas de résultat!",
     "helper": "Veuillez rechercher un domaine!",
     "placeholder": "Rechercher un domaine",
     "title": "Rechercher"
+  },
+  "settings": {
+    "appearance": "Apparence",
+    "language": {
+      "title": "Langue"
+    },
+    "title": "Paramètres",
+    "theme": {
+      "dark": "Sombre",
+      "default": "Valeur par défaut du système",
+      "light": "Clair",
+      "title": "Thème"
+    }
   }
 }
