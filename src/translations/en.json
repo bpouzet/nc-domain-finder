@@ -1,5 +1,13 @@
 {
-  "about": "About",
+  "about": {
+    "title": "About"
+  },
+  "actions": {
+    "addFavorite": "Add to favorites",
+    "addReminder": "Add reminder",
+    "openWebsite": "Open website",
+    "removeFavorite": "Remove from favorites"
+  },
   "clear": "Clear",
   "date": "{{val, datetime}}",
   "domain": {
@@ -10,9 +18,13 @@
     "owner": "Owner",
     "ridet": "RIDET"
   },
-  "favorites": "Favorites",
+  "favorites": {
+    "empty": "No favorites!",
+    "title": "Favorites"
+  },
   "relateTime": "{{val, relativetime}}",
   "search": {
+    "empty": "No result!",
     "helper": "Please search a domain!",
     "placeholder": "Search domain",
     "title": "Search"

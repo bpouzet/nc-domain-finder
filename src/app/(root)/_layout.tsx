@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons' ;
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
 import React from 'react' ;
 import { useTranslation } from 'react-i18next' ;
 
@@ -34,7 +34,7 @@ export default function RootLayout() {
         options={{
           href: '/favorites',
           tabBarIcon: renderTabBarIcon('cards-heart'),
-          title: t('favorites'),
+          title: t('favorites.title'),
         }}
       />
       <MaterialTabs.Screen
@@ -42,7 +42,7 @@ export default function RootLayout() {
         options={{
           href: '/about',
           tabBarIcon: renderTabBarIcon('information-variant'),
-          title: t('about'),
+          title: t('about.title'),
         }}
       />
     </MaterialTabs>

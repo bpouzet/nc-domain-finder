@@ -9,6 +9,7 @@ const IS_DEV = process.env.APP_ENV === 'development' ;
 const VERSION = manifest.version ;
 const PACKAGE = 'nc.domainFinder.app' + (IS_DEV ? '.dev' : '') ;
 
+const SPLASH = './assets/images/splash.png' ;
 const ICON = './assets/images/' + (IS_DEV ? 'dev_' : '') + 'icon.png' ;
 const ADAPTIVE_ICON = './assets/images/' + (IS_DEV ? 'dev_' : '') + 'adaptive-icon.png' ;
 
@@ -70,6 +71,10 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   jsEngine: 'hermes',
   name: 'NC Domain Finder' + (IS_DEV ? ' (dev)' : ''),
   orientation: 'portrait',
+  platforms: [
+    'android',
+    'ios',
+  ],
   plugins: [
     [
       'expo-build-properties', {
@@ -90,6 +95,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     'expo-community-flipper',
     'sentry-expo',
   ],
+  primaryColor: BG_COLOR,
   runtimeVersion: {
     policy: 'appVersion',
   },
@@ -97,7 +103,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   slug: 'nc-domain-finder',
   splash: {
     backgroundColor: BG_COLOR,
-    image: './assets/images/splash.png',
+    image: SPLASH,
     resizeMode: 'contain',
   },
   updates: {

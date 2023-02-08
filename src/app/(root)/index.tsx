@@ -41,37 +41,42 @@ export default function Index () {
     />
   ), []) ;
 
+  const EmptyList = useCallback(() => {
+    if(isFetching) return null ;
 
+    const message = (data === undefined) ? t('search.helper') : t('search.empty') ;
+    return (
+      <View
+        style={{
+          alignItems: 'center',
+          height: 200,
+          justifyContent: 'center',
+        }}
+      >
+        <Text>{message}</Text>
+      </View>
+    ) ;
+  }, [ isFetching, data ]) ;
+
+  const ItemSeparator = useCallback(() => <Divider />, []) ;
 
   return (
     <SafeView>
       <Searchbar
         clearAccessibilityLabel={t('clear')}
-        searchAccessibilityLabel={t('search.placeholder')}
         placeholder={t('search.placeholder')}
         onChangeText={onChangeSearch}
         value={value}
         loading={isFetching}
       />
 
-      {data ? (
-        <FlashList
-          data={data}
-          renderItem={renderItem}
-          estimatedItemSize={70}
-          ItemSeparatorComponent={() => <Divider />}
-        />
-      ) : (
-        <View
-          style={{
-            alignItems: 'center',
-            flex: 1,
-            justifyContent: 'center',
-          }}
-        >
-          <Text>{t('search.helper')}</Text>
-        </View>
-      )}
+      <FlashList
+        data={data}
+        renderItem={renderItem}
+        estimatedItemSize={70}
+        ItemSeparatorComponent={ItemSeparator}
+        ListEmptyComponent={EmptyList}
+      />
     </SafeView>
   ) ;
 

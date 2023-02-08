@@ -1,5 +1,13 @@
 {
-  "about": "A propos",
+  "about": {
+    "title": "A propos"
+  },
+  "actions": {
+    "addFavorite": "Ajouter aux favoris",
+    "addReminder": "Ajouter rappel",
+    "openWebsite": "Ouvrir le site internet",
+    "removeFavorite": "Enlever des favoris"
+  },
   "clear": "Effacer",
   "date": "{{val, datetime}}",
   "domain": {
@@ -10,9 +18,13 @@
     "owner": "Bénéficiaire",
     "ridet": "RIDET"
   },
-  "favorites": "Favoris",
+  "favorites": {
+    "empty": "Pas de favoris!",
+    "title": "Favoris"
+  },
   "relateTime": "{{val, relativetime}}",
   "search": {
+    "empty": "Pas de résultat!",
     "helper": "Veuillez rechercher un domaine!",
     "placeholder": "Rechercher un domaine",
     "title": "Rechercher"
