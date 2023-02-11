@@ -1,16 +1,24 @@
+import * as AddCalendarEvent from 'react-native-add-calendar-event' ;
+import * as Calendar from 'expo-calendar' ;
 import * as Linking from 'expo-linking' ;
-import { Appbar, Divider, FAB, List, useTheme } from 'react-native-paper' ;
-import { ScrollView, View, useWindowDimensions } from 'react-native' ;
+import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
+import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
 import { useRouter, useSearchParams } from 'expo-router' ;
-import { DomainList } from '../../schemas/DomainListSchema' ;
+import { DateTime } from 'luxon' ;
 import FastImage from 'react-native-fast-image' ;
+import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
+import { useState } from 'react' ;
+import { useTranslation } from 'react-i18next' ;
+
+import { DomainList } from '../../schemas/DomainListSchema' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
 import { useDomain } from '@helpers/query' ;
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
-import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
-import { useTranslation } from 'react-i18next' ;
+
+const BOTTOM_APPBAR_HEIGHT = 80 ;
+const MEDIUM_FAB_HEIGHT = 56 ;
 
 const THUMB_URL = 'https://image.thum.io/get/noanimate/http://' ;
 
@@ -28,10 +36,12 @@ export default function Name() {
 
   const { name, extension } = useSearchParams() ;
 
-  const { top } = useSafeAreaInsets() ;
+  const { bottom, top } = useSafeAreaInsets() ;
   const { height } = useWindowDimensions() ;
 
   const { data, isLoading } = useDomain(name, extension) ;
+
+  const [ showSnackBar, setShowSnackBar ] = useState<boolean>(false) ;
 
   const { addFavorite, isFavorite, removeFavorite } = useFavoritesStore() ;
 
@@ -54,7 +64,63 @@ export default function Name() {
 
   const getRelativeTime = (num: number) => t('relateTime', { val: num }) ;
 
-  const onPress = (name: string, extension: string) => () => void Linking.openURL('http://' + name + extension) ;
+  const onAddReminder = () => {
+    void addReminder() ;
+  } ;
+
+  const addReminder = async () => {
+    try {
+      if(!data) return ;
+
+      const timeZone = 'Pacific/Noumea' ;
+      const eventTitle = t('reminder.title', { val: name + extension }) ;
+
+      let endDate = DateTime.fromISO(data.dateExpiration, { zone: timeZone }) ;
+      endDate = endDate.plus({ hours: 23, minutes: 59 }) ;
+
+      const startDate = DateTime.fromISO(data.dateExpiration, { zone: timeZone }) ;
+
+      if( Platform.OS === 'android' ) {
+
+        const extra: AddCalendarEvent.CreateOptions = {
+          endDate: endDate.toUTC().toString(),
+          startDate: startDate.toUTC().toString(),
+          title: eventTitle,
+        } ;
+
+        await AddCalendarEvent.presentEventCreatingDialog(extra) ;
+      } else if(Platform.OS === 'ios') {
+        // check if calendar is available
+        const available = await Calendar.isAvailableAsync() ;
+
+        if(available) {
+          // check permissions
+          const { status } = await Calendar.requestRemindersPermissionsAsync() ;
+          if(status === Calendar.PermissionStatus.GRANTED) {
+            const minusDate = startDate.minus({ days: 7 }) ;
+
+            await Calendar.createReminderAsync(null, {
+              dueDate: startDate.toJSDate(),
+              notes: t('reminder.date', { val: startDate.toString() }),
+              startDate: minusDate.toJSDate(),
+              timeZone,
+              title: eventTitle,
+            }) ;
+
+            setShowSnackBar(true) ;
+          } else {
+            console.log('NOT GRANTED') ;
+          }
+        }
+      }
+      return ;
+    } catch (e) {
+      console.log('ERROR => ', e) ;
+      return ;
+    }
+  } ;
+
+  const onOpenWebsite = () => void Linking.openURL('http://' + name + extension) ;
 
   const onChangeFavorite = () => {
     const fav: DomainList = { extension, name } ;
@@ -70,7 +136,10 @@ export default function Name() {
       return <LoaderItems items={4} /> ;
     } else if( data ) {
       return (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: BOTTOM_APPBAR_HEIGHT + bottom }}
+          style={{ flex: 1 }}
+        >
           <List.Item title={t('domain.owner')} description={getProperOwner(data.beneficiaire, data.ridet)} />
           {data.ridet ? <List.Item title={t('domain.ridet')} description={data.ridet}/> : null}
           {(data.gestionnaire && data.gestionnaire !== 'AUCUN') ?
@@ -92,74 +161,100 @@ export default function Name() {
     }
   } ;
 
-  const getActions = () => (
-    <>
-      <FAB
-        accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
-        icon={isItemFavorite ? 'heart' : 'heart-outline'}
-        mode='flat'
-        size='small'
-        onPress={onChangeFavorite}
-      />
-      <Divider style={{ width: 10 }} />
-      <FAB
-        accessibilityLabel={t('actions.addReminder')}
-        icon="bell-outline"
-        mode='flat'
-        size='small'
-      />
-      <Divider style={{ width: 10 }} />
-      <FAB
-        accessibilityLabel={t('actions.openWebsite')}
-        icon="open-in-new"
-        mode='flat'
-        size='small'
-        onPress={onPress(name, extension)}
-      />
-    </>
-  ) ;
-
   return (
-    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
-      <View style={{ height: header }}>
-        <Appbar.Header
-          style={{
-            backgroundColor: 'transparent',
-            paddingHorizontal: 0,
-            width: '100%',
-          }}
-        >
-          <LoaderImage
-            source={{ uri: THUMB_URL + name + extension }}
+    <>
+      <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
+        <View style={{ height: header }}>
+          <Appbar.Header
             style={{
-              borderBottomLeftRadius: 20,
-              borderBottomRightRadius: 20,
-              flex: 1,
-            }}
-            resizeMode={FastImage.resizeMode.cover}
-            shimmerStyle={{
-              height: header,
-              position: 'absolute',
-              top: -top,
+              backgroundColor: 'transparent',
+              paddingHorizontal: 0,
               width: '100%',
             }}
-          />
-          <Appbar.BackAction
-            style={{ backgroundColor: theme.colors.background, zIndex: 2 }}
-            onPress={() => router.back()}
-          />
-        </Appbar.Header>
+          >
+            <LoaderImage
+              source={{ uri: THUMB_URL + name + extension }}
+              style={{
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+                flex: 1,
+              }}
+              resizeMode={FastImage.resizeMode.cover}
+              shimmerStyle={{
+                height: header,
+                position: 'absolute',
+                top: -top,
+                width: '100%',
+              }}
+            />
+            <Appbar.BackAction
+              style={{ backgroundColor: theme.colors.background, zIndex: 2 }}
+              onPress={() => router.back()}
+            />
+          </Appbar.Header>
+        </View>
+
+        <List.Item
+          title={name}
+          description={extension}
+          left={getFavicon(name, extension)}
+        />
+
+        {renderContent()}
       </View>
 
-      <List.Item
-        title={name}
-        description={extension}
-        left={getFavicon(name, extension)}
-        right={getActions}
-      />
+      <Snackbar
+        visible={showSnackBar}
+        onDismiss={() => setShowSnackBar(false)}
+        style={{ bottom: BOTTOM_APPBAR_HEIGHT }}
+      >{t('reminder.added')}</Snackbar>
 
-      {renderContent()}
-
-    </View>
+      <Appbar
+        style={[
+          styles.bottom,
+          {
+            backgroundColor: theme.colors.elevation.level2,
+            height: BOTTOM_APPBAR_HEIGHT + bottom,
+          },
+        ]}
+        safeAreaInsets={{ bottom }}
+      >
+        <Appbar.Action
+          accessibilityLabel={t('actions.openWebsite')}
+          icon="open-in-new"
+          onPress={onOpenWebsite}
+        />
+        <Appbar.Action
+          accessibilityLabel={t('actions.addReminder')}
+          icon="bell-outline"
+          onPress={onAddReminder}
+        />
+        <FAB
+          accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
+          mode="flat"
+          size="medium"
+          icon={isItemFavorite ? 'heart' : 'heart-outline'}
+          onPress={onChangeFavorite}
+          style={[
+            styles.fab,
+            { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+          ]}
+        />
+      </Appbar>
+    </>
   ) ;
 }
+
+const styles = StyleSheet.create({
+  bottom: {
+    backgroundColor: 'aquamarine',
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+  },
+  fab: {
+    position: 'absolute',
+    right: 16,
+  },
+}) ;
