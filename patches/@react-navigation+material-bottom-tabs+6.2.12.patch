@@ -88,7 +88,7 @@ new mode 100755
 diff --git a/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx b/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx
 old mode 100644
 new mode 100755
-index 0b19704..7854ef1
+index 0b19704..f2cd626
 --- a/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx
 +++ b/node_modules/@react-navigation/material-bottom-tabs/src/views/MaterialBottomTabView.tsx
 @@ -12,8 +12,8 @@ import * as React from 'react';

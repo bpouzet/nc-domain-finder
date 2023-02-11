@@ -13,7 +13,7 @@ export default function Favorites() {
   const { t } = useTranslation() ;
   const router = useRouter() ;
 
-  const { favorites } = useFavoritesStore() ;
+  const favorites = useFavoritesStore(state => state.favorites) ;
 
   const onPress = (item: DomainList) => () => router.push({
     params: {
