@@ -19,8 +19,8 @@ void i18next
   .use(initReactI18next)
   .use(initLanguageDetector)
   .init({
-    fallbackLng: 'en',
     //language to use if translations in user language are not available
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react!!
     },
@@ -29,6 +29,7 @@ void i18next
     },
     resources,
     returnNull: false,
+    supportedLngs: [ 'en', 'fr' ],
   }) ;
 
 export default i18next ;

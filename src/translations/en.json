@@ -1,7 +1,4 @@
 {
-  "about": {
-    "title": "About"
-  },
   "actions": {
     "addFavorite": "Add to favorites",
     "addReminder": "Add reminder",
@@ -22,11 +19,28 @@
     "empty": "No favorites!",
     "title": "Favorites"
   },
+  "languages": {
+    "en": "English",
+    "fr": "French"
+  },
   "relateTime": "{{val, relativetime}}",
   "search": {
     "empty": "No result!",
     "helper": "Please search a domain!",
     "placeholder": "Search domain",
     "title": "Search"
+  },
+  "settings": {
+    "appearance": "Appearance",
+    "language": {
+      "title": "Language"
+    },
+    "title": "Settings",
+    "theme": {
+      "dark": "Dark",
+      "default": "System default",
+      "light": "Light",
+      "title": "Theme"
+    }
   }
 }
