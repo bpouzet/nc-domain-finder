@@ -6,6 +6,7 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 //import { RootContainer } from 'expo-router' ;
 import { StatusBar } from 'expo-status-bar' ;
 import { Try } from 'expo-router/build/views/Try' ;
+import { View } from 'react-native' ;
 
 import { CombinedDarkTheme, CombinedDefaultTheme } from '@config/theme' ;
 import { persister, queryClient } from '@helpers/query' ;
@@ -69,15 +70,24 @@ const AppRoot: FC<Props> = ({ children }) => {
     //   // Register the navigation container with the instrumentation
     //   routingInstrumentation.registerNavigationContainer(navigationRef) ;
     // }
+    const theme = colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme ;
+
     return (
       <PersistQueryClientProvider
         client={queryClient}
         persistOptions={{ persister }}
       >
-        <PaperProvider theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme}>
-          <Try catch={ErrorAppBoundary}>
-            { children }
-          </Try>
+        <PaperProvider theme={theme}>
+          <View
+            style={{
+              backgroundColor: theme.colors.background,
+              flex: 1,
+            }}
+          >
+            <Try catch={ErrorAppBoundary}>
+              { children }
+            </Try>
+          </View>
           <StatusBar hidden={false} />
         </PaperProvider>
       </PersistQueryClientProvider>

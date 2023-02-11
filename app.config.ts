@@ -24,6 +24,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     },
     package: PACKAGE,
     permissions: [],
+    softwareKeyboardLayoutMode: 'pan',
   },
   androidNavigationBar: {
     backgroundColor: BG_COLOR,
