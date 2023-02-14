@@ -3,7 +3,8 @@
     "addFavorite": "Ajouter aux favoris",
     "addReminder": "Ajouter rappel",
     "openWebsite": "Ouvrir le site internet",
-    "removeFavorite": "Enlever des favoris"
+    "removeFavorite": "Enlever des favoris",
+    "share": "Partager"
   },
   "clear": "Effacer",
   "date": "{{val, datetime}}",
@@ -24,6 +25,11 @@
     "fr": "Français"
   },
   "relateTime": "{{val, relativetime}}",
+  "reminder": {
+    "added": "Rappel ajouté!",
+    "date": "Date d'expiration {{val, string}}",
+    "title": "Expiration du domaine {{val, string}}"
+  },
   "search": {
     "empty": "Pas de résultat!",
     "helper": "Veuillez rechercher un domaine!",

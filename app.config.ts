@@ -65,11 +65,16 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   ios: {
     bundleIdentifier: PACKAGE,
     infoPlist: {
+      CFBundleAllowMixedLocalizations: true,
       LSApplicationQueriesSchemes: [ 'itms-apps' ],
     },
     supportsTablet: true,
   },
   jsEngine: 'hermes',
+  locales: {
+    en: './assets/translations/en.json',
+    fr: './assets/translations/fr.json',
+  },
   name: 'NC Domain Finder' + (IS_DEV ? ' (dev)' : ''),
   orientation: 'portrait',
   platforms: [
