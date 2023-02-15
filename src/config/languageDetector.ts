@@ -24,7 +24,11 @@ export const initLanguageDetector: LanguageDetectorAsyncModule = {
           return callback(language) ;
         } else {
           //if language was not stored yet, use device's locale
-          return callback(Localization.locale) ;
+          let deviceLocale = Localization.locale ;
+          if(deviceLocale.length > 2) {
+            deviceLocale = deviceLocale.substring(0, 2) ;
+          }
+          return callback(deviceLocale) ;
         }
       }) ;
     } catch (error) {
