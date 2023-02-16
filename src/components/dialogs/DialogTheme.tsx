@@ -1,6 +1,6 @@
-import { Dialog, Portal, RadioButton, Text, TouchableRipple } from 'react-native-paper' ;
-import { StyleSheet, View } from 'react-native' ;
+import { Dialog, Portal, RadioButton } from 'react-native-paper' ;
 import { FC } from 'react' ;
+import { StyleSheet } from 'react-native' ;
 import { useTranslation } from 'react-i18next' ;
 
 import useSettingsStore, { Theme } from '@hooks/useSettingsStore' ;
@@ -16,8 +16,8 @@ const DialogTheme: FC<Props> = ({ close, visible }) => {
   const themeStore = useSettingsStore(state => state.theme) ;
   const setTheme = useSettingsStore(state => state.setTheme) ;
 
-  const onThemeChange = (newTheme: Theme) => {
-    setTheme(newTheme) ;
+  const onThemeChange = (newTheme: string) => {
+    setTheme(newTheme as Theme) ;
     close() ;
   } ;
 
@@ -25,41 +25,26 @@ const DialogTheme: FC<Props> = ({ close, visible }) => {
     <Portal>
       <Dialog onDismiss={close} visible={visible}>
         <Dialog.Title>{t('settings.theme.title')}</Dialog.Title>
-        <View>
-          <TouchableRipple onPress={() => onThemeChange('default')}>
-            <View style={styles.row}>
-              <View pointerEvents="none">
-                <RadioButton
-                  value="default"
-                  status={themeStore === 'default' ? 'checked' : 'unchecked'}
-                />
-              </View>
-              <Text variant='bodyLarge' style={styles.text}>{t('settings.theme.default')}</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => onThemeChange('light')}>
-            <View style={styles.row}>
-              <View pointerEvents="none">
-                <RadioButton
-                  value="light"
-                  status={themeStore === 'light' ? 'checked' : 'unchecked'}
-                />
-              </View>
-              <Text variant='bodyLarge' style={styles.text}>{t('settings.theme.light')}</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => onThemeChange('dark')}>
-            <View style={styles.row}>
-              <View pointerEvents="none">
-                <RadioButton
-                  value="dark"
-                  status={themeStore === 'dark' ? 'checked' : 'unchecked'}
-                />
-              </View>
-              <Text variant='bodyLarge' style={styles.text}>{t('settings.theme.dark')}</Text>
-            </View>
-          </TouchableRipple>
-        </View>
+        <RadioButton.Group onValueChange={onThemeChange} value={themeStore}>
+          <RadioButton.Item
+            position='leading'
+            value='default'
+            label={t('settings.theme.default')}
+            labelStyle={styles.text}
+          />
+          <RadioButton.Item
+            position='leading'
+            value='light'
+            label={t('settings.theme.light')}
+            labelStyle={styles.text}
+          />
+          <RadioButton.Item
+            position='leading'
+            value='dark'
+            label={t('settings.theme.dark')}
+            labelStyle={styles.text}
+          />
+        </RadioButton.Group>
         <Dialog.Actions>{null}</Dialog.Actions>
       </Dialog>
     </Portal>
@@ -81,5 +66,6 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingLeft: 8,
+    textAlign: 'left',
   },
 }) ;

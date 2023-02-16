@@ -1,6 +1,6 @@
-import { Dialog, Portal, RadioButton, Text, TouchableRipple } from 'react-native-paper' ;
-import { StyleSheet, View } from 'react-native' ;
+import { Dialog, Portal, RadioButton } from 'react-native-paper' ;
 import { FC } from 'react' ;
+import { StyleSheet } from 'react-native' ;
 import { useTranslation } from 'react-i18next' ;
 
 type Props = {
@@ -32,17 +32,13 @@ const DialogLanguage: FC<Props> = ({ close, visible }) => {
           const translate = t(`languages.${el}`) as string ;
 
           return (
-            <TouchableRipple key={el} onPress={() => onLanguageChange(el)}>
-              <View style={styles.row}>
-                <View pointerEvents="none">
-                  <RadioButton
-                    value={el}
-                    status={languageStore === el ? 'checked' : 'unchecked'}
-                  />
-                </View>
-                <Text variant='bodyLarge' style={styles.text}>{translate}</Text>
-              </View>
-            </TouchableRipple>
+            <RadioButton.Item
+              key={el}
+              position='leading'
+              value={el}
+              label={translate}
+              labelStyle={styles.text}
+            />
           ) ;
         }
         return null ;
@@ -55,9 +51,9 @@ const DialogLanguage: FC<Props> = ({ close, visible }) => {
     <Portal>
       <Dialog onDismiss={close} visible={visible}>
         <Dialog.Title>{t('settings.language.title')}</Dialog.Title>
-        <View>
+        <RadioButton.Group onValueChange={onLanguageChange} value={languageStore}>
           {renderLanguages()}
-        </View>
+        </RadioButton.Group>
         <Dialog.Actions>{null}</Dialog.Actions>
       </Dialog>
     </Portal>
@@ -79,5 +75,6 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingLeft: 8,
+    textAlign: 'left',
   },
 }) ;
