@@ -1,14 +1,14 @@
 import { FC, useState } from 'react' ;
-import FastImage, { ImageStyle, ResizeMode, Source } from 'react-native-fast-image' ;
-import { ImageRequireSource, StyleProp, View, ViewStyle } from 'react-native' ;
+import { Image, ImageContentFit, ImageSource, ImageStyle } from 'expo-image' ;
+import { StyleProp, View, ViewStyle } from 'react-native' ;
 import { LinearGradient } from 'expo-linear-gradient' ;
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder' ;
 
 type Props = {
-  resizeMode?: ResizeMode;
+  resizeMode?: ImageContentFit;
   shimmerStyle?: StyleProp<ViewStyle>;
-  source?: Source | ImageRequireSource;
-  style?: StyleProp<ImageStyle>;
+  source?: ImageSource | string | number | ImageSource[] | string[] | null;
+  style?: ImageStyle | ImageStyle[];
 }
 
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient) ;
@@ -30,10 +30,10 @@ const LoaderImage:FC<Props> = ({ resizeMode, shimmerStyle, source, style }) => {
         shimmerWidthPercent={0.8}
         visible={!loading}
       />
-      <FastImage
+      <Image
         source={source}
         style={style}
-        resizeMode={resizeMode}
+        contentFit={resizeMode}
         onLoadEnd={() => setLoading(false)}
         onLoadStart={() => setLoading(true)}
       />
