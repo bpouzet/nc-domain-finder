@@ -87,18 +87,15 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
         android: {
           allowBackup: false,
           enableProguardInReleaseBuilds: true,
-          extraProguardRules: '-keep public class com.dylanvann.fastimage.* {*;}\n' +
-            '-keep public class com.dylanvann.fastimage.** {*;}\n' +
-            '-keep public class * implements com.bumptech.glide.module.GlideModule\n' +
-            '-keep public class * extends com.bumptech.glide.module.AppGlideModule\n' +
-            '-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {\n' +
-            '  **[] $VALUES;\n' +
-            '  public *;\n' +
-            '}',
+          newArchEnabled: false,
+        },
+        ios: {
+          newArchEnabled: false,
         },
       },
     ],
     'expo-community-flipper',
+    'expo-localization',
     'sentry-expo',
   ],
   primaryColor: BG_COLOR,
@@ -115,6 +112,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   updates: {
     fallbackToCacheTimeout: 0,
   },
-  userInterfaceStyle: 'automatic',
+  //userInterfaceStyle: 'automatic',
   version: VERSION,
 }) ;
