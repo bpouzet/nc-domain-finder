@@ -1,5 +1,5 @@
 import { FlexAlignType, View } from 'react-native' ;
-import FastImage from 'react-native-fast-image' ;
+import { Image } from 'expo-image' ;
 
 const FAVICONS_URL = 'https://icons.duckduckgo.com/ip3/' ;
 
@@ -17,10 +17,10 @@ const getFavicon = (name: string, extension: string) => (props: {
   const uri = FAVICONS_URL + name + extension + '.ico' ;
   return (
     <View style={[ props.style, { justifyContent: 'center' } ]}>
-      <FastImage
+      <Image
         source={{ uri }}
         style={{ height: 20, width: 20 }}
-        resizeMode={FastImage.resizeMode.contain}
+        contentFit='contain'
       />
     </View>
 
