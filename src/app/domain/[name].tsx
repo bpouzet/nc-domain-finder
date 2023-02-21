@@ -1,11 +1,10 @@
-import * as AddCalendarEvent from 'react-native-add-calendar-event' ;
 import * as Calendar from 'expo-calendar' ;
 import * as Linking from 'expo-linking' ;
 import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
 import { useRouter, useSearchParams } from 'expo-router' ;
 import { DateTime } from 'luxon' ;
-import FastImage from 'react-native-fast-image' ;
+import { startAddEventToCalendarAsync } from 'expo-community-add-event-to-calendar' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useState } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
@@ -82,13 +81,14 @@ export default function Name() {
 
       if( Platform.OS === 'android' ) {
 
-        const extra: AddCalendarEvent.CreateOptions = {
-          endDate: endDate.toUTC().toString(),
-          startDate: startDate.toUTC().toString(),
+        const event = {
+          endDate: endDate.toJSDate(),
+          startDate: startDate.toJSDate(),
           title: eventTitle,
         } ;
 
-        await AddCalendarEvent.presentEventCreatingDialog(extra) ;
+        await startAddEventToCalendarAsync(event) ;
+
       } else if(Platform.OS === 'ios') {
         // check if calendar is available
         const available = await Calendar.isAvailableAsync() ;
