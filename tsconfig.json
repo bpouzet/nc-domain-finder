@@ -14,5 +14,5 @@
       "@hooks/*": [ "src/hooks/*" ]
     }
   },
-  "include": [ "src", "app.config.ts", ".eslintrc.js", "babel.config.js" ],
+  "include": [ "src", "app.config.ts", ".eslintrc.js", "babel.config.js", "index.js" ],
 }
