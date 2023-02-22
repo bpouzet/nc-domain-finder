@@ -100,7 +100,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   ],
   primaryColor: BG_COLOR,
   runtimeVersion: {
-    policy: 'appVersion',
+    policy: 'sdkVersion',
   },
   scheme: 'nc-domain-finder',
   slug: 'nc-domain-finder',
@@ -111,6 +111,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   },
   updates: {
     fallbackToCacheTimeout: 0,
+    url: process.env.EAS_UPDATES_URL,
   },
   //userInterfaceStyle: 'automatic',
   version: VERSION,
