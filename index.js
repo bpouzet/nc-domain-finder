@@ -5,7 +5,7 @@ import AppRoot from '@components/AppRoot' ;
 
 // Must be exported or Fast Refresh won't update the context
 export function App() {
-  const ctx = require.context('./app') ;
+  const ctx = require.context('./src/app') ;
   return (
     <AppRoot>
       <ExpoRoot context={ ctx } />
