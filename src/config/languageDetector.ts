@@ -24,9 +24,10 @@ export const initLanguageDetector: LanguageDetectorAsyncModule = {
           return callback(language) ;
         } else {
           //if language was not stored yet, use device's locale
-          let deviceLocale = Localization.locale ;
-          if(deviceLocale.length > 2) {
-            deviceLocale = deviceLocale.substring(0, 2) ;
+          const locales = Localization.getLocales() ;
+          let deviceLocale = 'en' ;
+          if(locales.length > 0) {
+            deviceLocale = locales[0].languageCode ;
           }
           return callback(deviceLocale) ;
         }

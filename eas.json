@@ -7,6 +7,7 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
+      "channel": "development",
       "env": {
         "APP_ENV": "development"
       }
@@ -19,9 +20,9 @@
       }
     },
     "preview": {
+      "autoIncrement": true,
       "android": {
-        "buildType": "apk",
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "app-bundle"
       },
       "distribution": "internal",
       "channel": "staging",
@@ -39,6 +40,7 @@
     }
   },
   "submit": {
+    "preview": {},
     "production": {}
   }
 }

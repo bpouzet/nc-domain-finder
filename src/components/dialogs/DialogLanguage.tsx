@@ -35,6 +35,7 @@ const DialogLanguage: FC<Props> = ({ close, visible }) => {
             <RadioButton.Item
               key={el}
               position='leading'
+              accessibilityLabel={el}
               value={el}
               label={translate}
               labelStyle={styles.text}

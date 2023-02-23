@@ -1,3 +1,5 @@
+import * as Application from 'expo-application' ;
+import * as Updates from 'expo-updates' ;
 import { Appbar, List } from 'react-native-paper' ;
 import { ScrollView, View } from 'react-native' ;
 import { useState } from 'react' ;
@@ -38,6 +40,23 @@ export default function Settings() {
             title={t('settings.language.title')}
             description={language}
             onPress={() => setVisibleLanguageModal(true)}
+          />
+          <List.Subheader>Application</List.Subheader>
+          <List.Item
+            title="Version"
+            description={Application.nativeApplicationVersion}
+          />
+          <List.Item
+            title="Build"
+            description={Application.nativeBuildVersion}
+          />
+          <List.Item
+            title="Channel"
+            description={Updates.channel || 'none'}
+          />
+          <List.Item
+            title="Runtime version"
+            description={Updates.runtimeVersion}
           />
         </List.Section>
       </ScrollView>

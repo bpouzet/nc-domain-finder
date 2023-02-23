@@ -5,7 +5,7 @@
 
 NC Domain Finder is a React Native alternative of [Domaine NC Mobile](https://github.com/lschaeffer313/domaine-nc-mobile)
 
-NC Domain Finder allow you to find domain names registered in `.nc`
+NC Domain Finder is the ideal application for anyone looking to register a domain name in .nc or simply wanting to learn more about already registered domain names. With NC Domain Finder, you can perform quick and accurate searches to find available domain names, discover information about current owners, and learn more about domain names registered in New Caledonia.
 
 <br>
 
