@@ -179,7 +179,7 @@ export default function Name() {
                 borderBottomRightRadius: 20,
                 flex: 1,
               }}
-              resizeMode='cover'
+              contentFit='cover'
               shimmerStyle={{
                 height: header,
                 position: 'absolute',

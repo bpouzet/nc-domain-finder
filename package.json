@@ -61,7 +61,7 @@
     "expo-localization": "~14.1.1",
     "expo-navigation-bar": "~2.1.1",
     "expo-network": "~5.2.1",
-    "expo-router": "^1.0.0-rc7",
+    "expo-router": "^1.0.1",
     "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.4",
     "expo-updates": "~0.16.3",

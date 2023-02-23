@@ -5,7 +5,7 @@ import { Provider as PaperProvider } from 'react-native-paper' ;
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client' ;
 //import { RootContainer } from 'expo-router' ;
 import { StatusBar } from 'expo-status-bar' ;
-import { Try } from 'expo-router/build/views/Try' ;
+import { Try } from 'expo-router/src/views/Try' ;
 import { View } from 'react-native' ;
 
 import { CombinedDarkTheme, CombinedDefaultTheme } from '@config/theme' ;

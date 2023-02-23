@@ -86,11 +86,11 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       'expo-build-properties', {
         android: {
           allowBackup: false,
-          enableProguardInReleaseBuilds: true,
-          newArchEnabled: false,
+          //enableProguardInReleaseBuilds: true,
+          //newArchEnabled: true,
         },
         ios: {
-          newArchEnabled: false,
+          //newArchEnabled: true,
         },
       },
     ],
