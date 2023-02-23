@@ -21,6 +21,7 @@ const getFavicon = (name: string, extension: string) => (props: {
         source={{ uri }}
         style={{ height: 20, width: 20 }}
         contentFit='contain'
+        recyclingKey={uri}
       />
     </View>
 

@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient' ;
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder' ;
 
 type Props = {
-  resizeMode?: ImageContentFit;
+  contentFit?: ImageContentFit;
   shimmerStyle?: StyleProp<ViewStyle>;
   source?: ImageSource | string | number | ImageSource[] | string[] | null;
   style?: ImageStyle | ImageStyle[];
@@ -13,7 +13,7 @@ type Props = {
 
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient) ;
 
-const LoaderImage:FC<Props> = ({ resizeMode, shimmerStyle, source, style }) => {
+const LoaderImage:FC<Props> = ({ contentFit, shimmerStyle, source, style }) => {
 
   const [ loading, setLoading ] = useState(false) ;
 
@@ -33,7 +33,8 @@ const LoaderImage:FC<Props> = ({ resizeMode, shimmerStyle, source, style }) => {
       <Image
         source={source}
         style={style}
-        contentFit={resizeMode}
+        contentFit={contentFit}
+        contentPosition='top'
         onLoadEnd={() => setLoading(false)}
         onLoadStart={() => setLoading(true)}
       />
