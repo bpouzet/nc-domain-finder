@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useTheme } from 'react-native-paper' ;
 
 import { CombinedDarkTheme, CombinedDefaultTheme } from '@config/theme' ;
+import useAppUpdate from '@hooks/useAppUpdate' ;
 import useColorScheme from '@hooks/useColorScheme' ;
 
 const IsAndroid = Platform.OS === 'android' ;
@@ -19,6 +20,8 @@ export default function RootLayout() {
   const theme = useTheme() ;
 
   const insets = useSafeAreaInsets() ;
+
+  useAppUpdate() ;
 
   useEffect(() => {
     if(IsAndroid) {

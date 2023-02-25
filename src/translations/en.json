@@ -2,9 +2,11 @@
   "actions": {
     "addFavorite": "Add to favorites",
     "addReminder": "Add reminder",
+    "cancel": "Cancel",
     "openWebsite": "Open website",
     "removeFavorite": "Remove from favorites",
-    "share": "Share"
+    "share": "Share",
+    "upgrade": "Update"
   },
   "clear": "Clear",
   "date": "{{val, datetime}}",
@@ -47,6 +49,10 @@
       "default": "System default",
       "light": "Light",
       "title": "Theme"
+    },
+    "update": {
+      "message": "There is a new version of the app available on the App Store, do you want to update it?",
+      "title": "Update available"
     }
   }
 }

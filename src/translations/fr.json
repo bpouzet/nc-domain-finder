@@ -2,9 +2,11 @@
   "actions": {
     "addFavorite": "Ajouter aux favoris",
     "addReminder": "Ajouter rappel",
+    "cancel": "Annuler",
     "openWebsite": "Ouvrir le site internet",
     "removeFavorite": "Enlever des favoris",
-    "share": "Partager"
+    "share": "Partager",
+    "upgrade": "Mettre à jour"
   },
   "clear": "Effacer",
   "date": "{{val, datetime}}",
@@ -47,6 +49,10 @@
       "default": "Valeur par défaut du système",
       "light": "Clair",
       "title": "Thème"
+    },
+    "update": {
+      "message": "Il y a une nouvelle version de l'application sur l'App Store, voulez-vous mettre à jour?",
+      "title": "Mise à jour disponible"
     }
   }
 }

@@ -29,18 +29,21 @@ const DialogTheme: FC<Props> = ({ close, visible }) => {
           <RadioButton.Item
             position='leading'
             value='default'
+            accessibilityLabel={t('settings.theme.default')}
             label={t('settings.theme.default')}
             labelStyle={styles.text}
           />
           <RadioButton.Item
             position='leading'
             value='light'
+            accessibilityLabel={t('settings.theme.light')}
             label={t('settings.theme.light')}
             labelStyle={styles.text}
           />
           <RadioButton.Item
             position='leading'
             value='dark'
+            accessibilityLabel={t('settings.theme.dark')}
             label={t('settings.theme.dark')}
             labelStyle={styles.text}
           />
