@@ -14,7 +14,7 @@ import { useDomains } from '@helpers/query' ;
 
 export default function Index () {
 
-  const { t } = useTranslation() ;
+  const { t, i18n } = useTranslation() ;
   const router = useRouter() ;
 
   const [ value, setValue ] = useState<string>('') ;
@@ -56,7 +56,7 @@ export default function Index () {
         <Text>{message}</Text>
       </View>
     ) ;
-  }, [ isFetching, data ]) ;
+  }, [ isFetching, data, i18n.language ]) ;
 
   const ItemSeparator = useCallback(() => <Divider />, []) ;
 
