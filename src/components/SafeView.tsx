@@ -10,6 +10,7 @@ const SafeView: FC<Props> = ({ children }) => {
     <SafeAreaView style={{
       flex: 1,
       paddingHorizontal: 10,
+      paddingVertical: 10,
     }}>
       { children }
     </SafeAreaView>

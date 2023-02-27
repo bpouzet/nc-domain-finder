@@ -26,6 +26,12 @@
     "en": "English",
     "fr": "French"
   },
+  "modals": {
+    "connection": {
+      "title": "No internet connection!",
+      "description": "Please, check your internet connection."
+    }
+  },
   "relateTime": "{{val, relativetime}}",
   "reminder": {
     "added": "Reminder added!",

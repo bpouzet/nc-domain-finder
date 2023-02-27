@@ -8,12 +8,12 @@ import SpInAppUpdates, {
   StatusUpdateEvent,
 } from 'sp-react-native-in-app-updates' ;
 import { Platform } from 'react-native' ;
-import checkVersion from 'react-native-store-version' ;
-import diff from 'semver/functions/diff' ;
+//import checkVersion from 'react-native-store-version' ;
+//import diff from 'semver/functions/diff' ;
 import { useEffect } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
 
-const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=' ;
+//const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=' ;
 
 let inAppUpdates: SpInAppUpdates ;
 const useAppUpdate = () => {
@@ -35,25 +35,32 @@ const useAppUpdate = () => {
         if(Device.isDevice && Application.nativeApplicationVersion && Application.applicationId) {
           inAppUpdates = new SpInAppUpdates(true) ;
 
-          let needUpdate = true ;
+          let needUpdate = false ;
           let force = false ;
 
           if( Platform.OS === 'android' ) {
             // Check Google Play Store
-            const check = await checkVersion({
-              androidStoreURL: PLAY_STORE_URL + Application.applicationId,
-              version: Application.nativeApplicationVersion,
-            }) ;
 
-            // check version diff
-            const result = diff(check.local, check.remote) ;
+            // TODO uncomment when app will be public
+            // const check = await checkVersion({
+            //   androidStoreURL: PLAY_STORE_URL + Application.applicationId,
+            //   version: Application.nativeApplicationVersion,
+            // }) ;
+            //
+            // // check version diff
+            // const result = diff(check.local, check.remote) ;
+            //
+            // if(result === 'major') {
+            //   needUpdate = true ;
+            //   force = true ;
+            // } else if(result === 'minor') {
+            //   needUpdate = true ;
+            // }
 
-            if(result === 'major') {
-              needUpdate = true ;
-              force = true ;
-            } else if(result === 'minor') {
-              needUpdate = true ;
-            }
+            // TODO remove when app will be public
+            const check = await inAppUpdates.checkNeedsUpdate() ;
+            needUpdate = check.shouldUpdate ;
+            force = true ;
           } else {
             // check Apple App Store
             const check = await inAppUpdates.checkNeedsUpdate() ;
