@@ -3,7 +3,6 @@ import React, { FC } from 'react' ;
 import Constants from 'expo-constants' ;
 import { Provider as PaperProvider } from 'react-native-paper' ;
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client' ;
-//import { RootContainer } from 'expo-router' ;
 import { StatusBar } from 'expo-status-bar' ;
 import { Try } from 'expo-router/src/views/Try' ;
 import { View } from 'react-native' ;
@@ -57,8 +56,6 @@ type Props = {
 }
 const AppRoot: FC<Props> = ({ children }) => {
 
-  //const navigationRef = RootContainer.useRef() ;
-
   const isLoadingComplete = useCachedResources() ;
 
   const colorScheme = useColorScheme() ;
@@ -66,10 +63,6 @@ const AppRoot: FC<Props> = ({ children }) => {
   if (!isLoadingComplete) {
     return null ;
   } else {
-    // if(navigationRef?.isReady) {
-    //   // Register the navigation container with the instrumentation
-    //   routingInstrumentation.registerNavigationContainer(navigationRef) ;
-    // }
     const theme = colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme ;
 
     return (

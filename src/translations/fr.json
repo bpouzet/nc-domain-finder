@@ -26,6 +26,12 @@
     "en": "Anglais",
     "fr": "Français"
   },
+  "modals": {
+    "connection": {
+      "title": "Pas de connexion internet!",
+      "description": "Veuillez vérifier votre connexion internet."
+    }
+  },
   "relateTime": "{{val, relativetime}}",
   "reminder": {
     "added": "Rappel ajouté!",

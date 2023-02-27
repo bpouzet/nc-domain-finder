@@ -7,8 +7,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useTheme } from 'react-native-paper' ;
 
 import { CombinedDarkTheme, CombinedDefaultTheme } from '@config/theme' ;
+import ConnectionModal from '@components/modals/ConnectionModal' ;
 import useAppUpdate from '@hooks/useAppUpdate' ;
 import useColorScheme from '@hooks/useColorScheme' ;
+import useIsConnected from '@hooks/useIsConnected' ;
 
 const IsAndroid = Platform.OS === 'android' ;
 
@@ -22,6 +24,8 @@ export default function RootLayout() {
   const insets = useSafeAreaInsets() ;
 
   useAppUpdate() ;
+
+  const { isConnected } = useIsConnected() ;
 
   useEffect(() => {
     if(IsAndroid) {
@@ -38,6 +42,7 @@ export default function RootLayout() {
         style={{ flex: 1 }}
       >
         <Stack screenOptions={{ headerShown: false }} />
+        <ConnectionModal isConnected={isConnected} />
       </KeyboardAvoidingView>
     </ThemeProvider>
   ) ;
