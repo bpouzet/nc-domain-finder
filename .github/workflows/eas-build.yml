@@ -53,4 +53,11 @@ jobs:
         run: yarn install --immutable
 
       - name: 🚀 Build on EAS
-        run: EAS_PROJECT_ID=${{ secrets.EAS_PROJECT_ID }} eas build --platform all --non-interactive --auto-submit
+        run: eas build --platform all --non-interactive --auto-submit
+        env: 
+          EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
+          EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
+          EXPO_APPLE_TEAM_TYPE: ${{ secrets.EXPO_APPLE_TEAM_TYPE }}
+          EXPO_ASC_ISSUER_ID: ${{ secrets.EXPO_ASC_ISSUER_ID }}
+          EXPO_ASC_KEY_ID: ${{ secrets.EXPO_ASC_KEY_ID }}
+        
