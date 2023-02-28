@@ -1,7 +1,8 @@
 {
   "cli": {
     "appVersionSource": "remote",
-    "version": ">= 3.6.0"
+    "version": ">= 3.6.0",
+    "promptToConfigurePushNotifications": false
   },
   "build": {
     "development": {
@@ -35,7 +36,8 @@
       "channel": "production",
       "env": {
         "APP_ENV": "production",
-        "FLIPPER_DISABLE": "1"
+        "FLIPPER_DISABLE": "1",
+        "NO_FLIPPER": "1"
       }
     }
   },

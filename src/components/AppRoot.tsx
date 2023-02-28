@@ -81,7 +81,7 @@ const AppRoot: FC<Props> = ({ children }) => {
               { children }
             </Try>
           </View>
-          <StatusBar hidden={false} />
+          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} hidden={false} />
         </PaperProvider>
       </PersistQueryClientProvider>
     ) ;
