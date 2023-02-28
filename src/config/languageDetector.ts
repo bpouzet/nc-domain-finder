@@ -23,12 +23,18 @@ export const initLanguageDetector: LanguageDetectorAsyncModule = {
           //if language was stored before, use this language in the app
           return callback(language) ;
         } else {
-          //if language was not stored yet, use device's locale
-          const locales = Localization.getLocales() ;
           let deviceLocale = 'en' ;
-          if(locales.length > 0) {
-            deviceLocale = locales[0].languageCode ;
+
+          try {
+            //if language was not stored yet, use device's locale
+            const locales = Localization.getLocales() ;
+            if(locales.length > 0) {
+              deviceLocale = locales[0].languageCode ;
+            }
+          } catch (e) {
+            Sentry.Native.captureException(e) ;
           }
+
           return callback(deviceLocale) ;
         }
       }) ;

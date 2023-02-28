@@ -98,11 +98,11 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
           //newArchEnabled: true,
         },
         ios: {
+          flipper: true,
           //newArchEnabled: true,
         },
       },
     ],
-    'expo-community-flipper',
     'expo-localization',
     'sentry-expo',
   ],

@@ -53,4 +53,4 @@ jobs:
         run: yarn install --immutable
 
       - name: 🚀 Build on EAS
-        run: EAS_PROJECT_ID=${{ secrets.EAS_PROJECT_ID }} eas build --platform android --non-interactive --auto-submit
+        run: EAS_PROJECT_ID=${{ secrets.EAS_PROJECT_ID }} eas build --non-interactive --auto-submit

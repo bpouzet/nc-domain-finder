@@ -4874,14 +4874,6 @@ expo-community-add-event-to-calendar@^0.9.0:
   resolved "https://registry.yarnpkg.com/expo-community-add-event-to-calendar/-/expo-community-add-event-to-calendar-0.9.0.tgz#32c7be019a0d379251161e8da2e791d2a62aca77"
   integrity sha512-oPM56HDbo58UoPqWRBOKhGQUx1dWwJE6GDnG068SFkM1DN9XoO9GzoBkZnp41rcpouLU0I1ip5I41QX6/eG4Gg==
 
-expo-community-flipper@^47.0.2:
-  version "47.0.2"
-  resolved "https://registry.yarnpkg.com/expo-community-flipper/-/expo-community-flipper-47.0.2.tgz#7713576f12c2b7460c313c8c9dc3a426100c8570"
-  integrity sha512-ZfqjVGiDM29D3ZdlDxTPfBrP7+dcPBsrY2Tl+KcWI1XHBY3Ka7VR41wSiseFLeqeNWlPjiOqDtLIEYqfBuV/Rg==
-  dependencies:
-    semver "^7.3.8"
-    ts-dedent "^2.2.0"
-
 expo-constants@~14.2.0, expo-constants@~14.2.1:
   version "14.2.1"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-14.2.1.tgz#b5b6b8079d2082c31ccf2cbc7cf97a0e83c229c3"
@@ -8779,11 +8771,6 @@ react-native-device-info@^10.4.0:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.4.0.tgz#9d90706641941d7da8ab7b316a37d3111eb231e4"
   integrity sha512-Z37e0HtpBvfkPRgv4xN7lXpvmJyzjwCXSFTXEkw6m2UgnnIsWlOD02Avu4hJXBlIMMazaW3ZLKal3o9h3AYvCw==
 
-react-native-flipper@^0.181.0:
-  version "0.181.0"
-  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.181.0.tgz#452f2acd13ed28378bad56696a0a1f80aa08da0c"
-  integrity sha512-YJxc9YAEOmdrtluyoVTJjh87WKN25L2uqQnF2g5MzUjiPPDhU1tzEFgU4t+yGJnxntpuY5ilQ+rcOGzZcU9krw==
-
 react-native-gesture-handler@~2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.9.0.tgz#2f63812e523c646f25b9ad660fc6f75948e51241"
@@ -10112,11 +10099,6 @@ traverse@~0.6.6:
   version "0.6.7"
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.7.tgz#46961cd2d57dd8706c36664acde06a248f1173fe"
   integrity sha512-/y956gpUo9ZNCb99YjxG7OaslxZWHfCHAUUfshwqOXmxUIvqLjVO581BT+gM59+QV9tFe6/CGG53tsA1Y7RSdg==
-
-ts-dedent@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ts-dedent/-/ts-dedent-2.2.0.tgz#39e4bd297cd036292ae2394eb3412be63f563bb5"
-  integrity sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==
 
 ts-interface-checker@^0.1.9:
   version "0.1.13"
