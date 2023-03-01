@@ -1,4 +1,19 @@
-# NC Domain Finder
+<h1 align="center">NC Domain Finder</h1>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+  <div style="width: 200px;">
+    <a href="https://apps.apple.com/us/app/nc-domain-finder/id6445902027" ><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1549843200" alt="Download on the App Store" style="width: 250px; height: 83px;"></a>
+  </div>
+  <div style="width: 250px">
+    <a href='https://play.google.com/store/apps/details?id=nc.domainFinder.app'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+  </div>
+</div>
+
+<div align="center">
+
+[![PRs-Welcome][contribute-image]][contribute-url] 
+
+</div>
 
 ## Getting Started
 <br>
@@ -32,3 +47,7 @@ Feel free to contribute to this project!
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
+
+
+[contribute-url]: https://github.com/bpouzet/nc-domain-finder/issues
+[contribute-image]: https://img.shields.io/badge/PRs-welcome-blue.svg
