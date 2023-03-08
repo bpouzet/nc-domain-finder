@@ -19,6 +19,7 @@ import useFavoritesStore from '@hooks/useFavoritesStore' ;
 const BOTTOM_APPBAR_HEIGHT = 80 ;
 const MEDIUM_FAB_HEIGHT = 56 ;
 
+const CHECK_DNS_URL = 'https://www.whatsmydns.net/#A/' ;
 const THUMB_URL = 'https://image.thum.io/get/noanimate/http://' ;
 
 const options = {
@@ -119,6 +120,8 @@ export default function Name() {
       return ;
     }
   } ;
+
+  const onCheckDNS = () => void Linking.openURL(CHECK_DNS_URL + name + extension) ;
 
   const onOpenWebsite = () => void Linking.openURL('http://' + name + extension) ;
 
@@ -223,6 +226,11 @@ export default function Name() {
           accessibilityLabel={t('actions.openWebsite')}
           icon="open-in-new"
           onPress={onOpenWebsite}
+        />
+        <Appbar.Action
+          accessibilityLabel={t('actions.checkDNS')}
+          icon="dns"
+          onPress={onCheckDNS}
         />
         <Appbar.Action
           accessibilityLabel={t('actions.addReminder')}
