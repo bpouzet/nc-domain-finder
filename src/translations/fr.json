@@ -4,20 +4,41 @@
     "addReminder": "Ajouter rappel",
     "cancel": "Annuler",
     "checkDNS": "Vérifier les DNS",
+    "goBack": "Revenir",
     "openWebsite": "Ouvrir le site internet",
     "removeFavorite": "Enlever des favoris",
     "share": "Partager",
+    "tryAgain": "Réessayer?",
     "upgrade": "Mettre à jour"
   },
   "clear": "Effacer",
   "date": "{{val, datetime}}",
   "domain": {
+    "badRequest": {
+      "description": "Il y a un problème avec la requête",
+      "title": "Requête invalide"
+    },
     "created": "Date création",
     "dns": "DNS",
+    "error": {
+      "description": "Il y a une erreur avec la requête",
+      "title": "Erreur de requête"
+    },
     "expired": "Date d'expiration",
     "manager": "Gestionnaire",
+    "missing": {
+      "description": "Il n'y a pas les paramètres domain et extension",
+      "title": "Paramètres manquants"
+    },
+    "notFound": {
+      "description": "Le domaine '{{val, string}}' n'existe pas",
+      "title": "Domaine introuvable"
+    },
     "owner": "Bénéficiaire",
     "ridet": "RIDET"
+  },
+  "errorBoundary": {
+    "title": "Erreur inattendue"
   },
   "favorites": {
     "empty": "Pas de favoris!",
@@ -61,5 +82,9 @@
       "message": "Il y a une nouvelle version de l'application sur l'App Store, voulez-vous mettre à jour?",
       "title": "Mise à jour disponible"
     }
+  },
+  "unmatched": {
+    "title": "Route inexistante",
+    "description": "Aucun écran trouvé"
   }
 }

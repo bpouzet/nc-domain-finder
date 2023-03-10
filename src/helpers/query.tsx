@@ -7,7 +7,7 @@ import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persi
 import { z } from 'zod' ;
 
 import DomainListSchema, { DomainList } from '../schemas/DomainListSchema' ;
-import DomainSchema, { Domain } from '../schemas/DomainSchema' ;
+import DomainSchema from '../schemas/DomainSchema' ;
 import { MyExpoConfig } from '@customTypes/expoConfig' ;
 
 const API_URL = 'https://domaine-nc.p.rapidapi.com/domaines' ;
@@ -16,24 +16,6 @@ const headers = {
   'Accept': 'application/json',
   'X-RapidAPI-Key': (Constants.expoConfig as MyExpoConfig).extra.api.key,
 } ;
-
-function fetchDomain(name: string, extension: string): Promise<Domain|null> {
-  const ext = extension.startsWith('.') ? extension.substring(1) : extension ;
-  return axios.get(
-    API_URL + '/' + name + '/' + ext,
-    {
-      headers,
-    }
-  ).then(response => {
-    if(response) {
-      return DomainSchema.parse(response.data) ;
-    }
-    return null ;
-  }).catch(error => {
-    Sentry.Native.captureException(error) ;
-    return null ;
-  }) ;
-}
 
 function fetchDomains(search: string): Promise<DomainList[]> {
   return axios.get(
@@ -62,8 +44,16 @@ function useDomains(search: string) {
 
 function useDomain(name: string, extension: string) {
   return useQuery({
-    enabled: name !== '',
-    queryFn: () => fetchDomain(name, extension),
+    enabled: name !== undefined && extension !== undefined,
+    queryFn: () => {
+      const ext = extension.startsWith('.') ? extension.substring(1) : extension ;
+      return axios.get(
+        API_URL + '/' + name + '/' + ext,
+        {
+          headers,
+        }
+      ).then(response => DomainSchema.parse(response.data)) ;
+    },
     queryKey: [ name, extension ],
   }) ;
 }

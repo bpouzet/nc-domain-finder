@@ -1,8 +1,10 @@
 import * as Calendar from 'expo-calendar' ;
 import * as Linking from 'expo-linking' ;
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated' ;
 import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
 import { useRouter, useSearchParams } from 'expo-router' ;
+import { AxiosError } from 'axios' ;
 import { DateTime } from 'luxon' ;
 import { startAddEventToCalendarAsync } from 'expo-community-add-event-to-calendar' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
@@ -10,6 +12,7 @@ import { useState } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
 
 import { DomainList } from '../../schemas/DomainListSchema' ;
+import ErrorView from '@components/views/ErrorView' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
@@ -29,17 +32,31 @@ const options = {
   year: 'numeric',
 } ;
 
-export default function Name() {
+export default function Domain() {
   const { t } = useTranslation() ;
   const theme = useTheme() ;
   const router = useRouter() ;
 
-  const { name, extension } = useSearchParams() ;
+  const { domain, extension } = useSearchParams() ;
 
   const { bottom, top } = useSafeAreaInsets() ;
   const { height } = useWindowDimensions() ;
 
-  const { data, isLoading } = useDomain(name, extension) ;
+  const sharedVal = useSharedValue(BOTTOM_APPBAR_HEIGHT + bottom) ;
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [ { translateY: withTiming(sharedVal.value, { duration: 500 }) } ],
+    } ;
+  }) ;
+
+  const { data, isLoading, error } = useDomain(domain, extension) ;
+
+  if(error && error instanceof AxiosError) console.log('error => ', error) ;
+
+  if( data ) {
+    sharedVal.value = 0 ;
+  }
 
   const [ showSnackBar, setShowSnackBar ] = useState<boolean>(false) ;
 
@@ -47,7 +64,7 @@ export default function Name() {
 
   const header = (40 / 100) * height ;
 
-  const isItemFavorite = isFavorite({ extension, name }) ;
+  const isItemFavorite = isFavorite({ extension, name: domain }) ;
 
   const getDate = (date: string) => t('date', {
     formatParams: { val: options },
@@ -73,7 +90,7 @@ export default function Name() {
       if(!data) return ;
 
       const timeZone = 'Pacific/Noumea' ;
-      const eventTitle = t('reminder.title', { val: name + extension }) ;
+      const eventTitle = t('reminder.title', { val: domain + extension }) ;
 
       let endDate = DateTime.fromISO(data.dateExpiration, { zone: timeZone }) ;
       endDate = endDate.plus({ hours: 23, minutes: 59 }) ;
@@ -121,12 +138,12 @@ export default function Name() {
     }
   } ;
 
-  const onCheckDNS = () => void Linking.openURL(CHECK_DNS_URL + name + extension) ;
+  const onCheckDNS = () => void Linking.openURL(CHECK_DNS_URL + domain + extension) ;
 
-  const onOpenWebsite = () => void Linking.openURL('http://' + name + extension) ;
+  const onOpenWebsite = () => void Linking.openURL('http://' + domain + extension) ;
 
   const onChangeFavorite = () => {
-    const fav: DomainList = { extension, name } ;
+    const fav: DomainList = { extension, name: domain } ;
     if(isFavorite(fav)) {
       removeFavorite(fav) ;
     } else {
@@ -164,6 +181,39 @@ export default function Name() {
     }
   } ;
 
+  if( !domain || !extension ) {
+    return (
+      <ErrorView
+        description={t('domain.missing.description', { val: (domain + extension) })}
+        icon='alert'
+        title={t('domain.missing.title')}
+      />
+    ) ;
+  } else if( error && error instanceof AxiosError ) {
+
+    // default
+    let errorTitle = t('domain.error.title') ;
+    let errorDescription = t('domain.error.title') ;
+
+    if( error.response ) {
+      if( error.response.status === 404 ) {
+        errorTitle = t('domain.notFound.title') ;
+        errorDescription = t('domain.notFound.description', { val: (domain + extension) }) ;
+      } else {
+        errorTitle = t('domain.badRequest.title') ;
+        errorDescription = t('domain.badRequest.description', { val: (domain + extension) }) ;
+      }
+    }
+
+    return (
+      <ErrorView
+        description={errorDescription}
+        icon='alert'
+        title={errorTitle}
+      />
+    ) ;
+  }
+
   return (
     <>
       <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
@@ -176,7 +226,7 @@ export default function Name() {
             }}
           >
             <LoaderImage
-              source={{ uri: THUMB_URL + name + extension }}
+              source={{ uri: THUMB_URL + domain + extension }}
               style={{
                 borderBottomLeftRadius: 20,
                 borderBottomRightRadius: 20,
@@ -198,9 +248,9 @@ export default function Name() {
         </View>
 
         <List.Item
-          title={name}
+          title={domain}
           description={extension}
-          left={getFavicon(name, extension)}
+          left={getFavicon(domain, extension)}
         />
 
         {renderContent()}
@@ -212,50 +262,56 @@ export default function Name() {
         style={{ bottom: BOTTOM_APPBAR_HEIGHT }}
       >{t('reminder.added')}</Snackbar>
 
-      <Appbar
+      <Animated.View
         style={[
           styles.bottom,
           {
             backgroundColor: theme.colors.elevation.level2,
-            height: BOTTOM_APPBAR_HEIGHT + bottom,
+            paddingBottom: bottom,
           },
+          animatedStyles,
         ]}
-        safeAreaInsets={{ bottom }}
       >
-        <Appbar.Action
-          accessibilityLabel={t('actions.openWebsite')}
-          icon="open-in-new"
-          onPress={onOpenWebsite}
-        />
-        <Appbar.Action
-          accessibilityLabel={t('actions.checkDNS')}
-          icon="dns"
-          onPress={onCheckDNS}
-        />
-        <Appbar.Action
-          accessibilityLabel={t('actions.addReminder')}
-          icon="bell-outline"
-          onPress={onAddReminder}
-        />
-        <FAB
-          accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
-          mode="flat"
-          size="medium"
-          icon={isItemFavorite ? 'heart' : 'heart-outline'}
-          onPress={onChangeFavorite}
-          style={[
-            styles.fab,
-            { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
-          ]}
-        />
-      </Appbar>
+        <Appbar
+          style={{
+            backgroundColor: theme.colors.elevation.level2,
+            height: BOTTOM_APPBAR_HEIGHT,
+          }}
+        >
+          <Appbar.Action
+            accessibilityLabel={t('actions.openWebsite')}
+            icon="open-in-new"
+            onPress={onOpenWebsite}
+          />
+          <Appbar.Action
+            accessibilityLabel={t('actions.checkDNS')}
+            icon="dns"
+            onPress={onCheckDNS}
+          />
+          <Appbar.Action
+            accessibilityLabel={t('actions.addReminder')}
+            icon="bell-outline"
+            onPress={onAddReminder}
+          />
+          <FAB
+            accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
+            mode="flat"
+            size="medium"
+            icon={isItemFavorite ? 'heart' : 'heart-outline'}
+            onPress={onChangeFavorite}
+            style={[
+              styles.fab,
+              { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+            ]}
+          />
+        </Appbar>
+      </Animated.View>
     </>
   ) ;
 }
 
 const styles = StyleSheet.create({
   bottom: {
-    backgroundColor: 'aquamarine',
     bottom: 0,
     left: 0,
     position: 'absolute',

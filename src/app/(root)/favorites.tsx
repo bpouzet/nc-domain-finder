@@ -17,10 +17,10 @@ export default function Favorites() {
 
   const onPress = (item: DomainList) => () => router.push({
     params: {
+      domain: item.name,
       extension: item.extension,
-      name: item.name,
     },
-    pathname: 'domain/:name',
+    pathname: 'domain',
   }) ;
 
   const renderItem: ListRenderItem<DomainList> = useCallback(({ item }) => (
