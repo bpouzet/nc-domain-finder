@@ -4,20 +4,41 @@
     "addReminder": "Add reminder",
     "cancel": "Cancel",
     "checkDNS": "Check DNS",
+    "goBack": "Go back",
     "openWebsite": "Open website",
     "removeFavorite": "Remove from favorites",
     "share": "Share",
+    "tryAgain": "Try again?",
     "upgrade": "Update"
   },
   "clear": "Clear",
   "date": "{{val, datetime}}",
   "domain": {
+    "badRequest": {
+      "description": "There is something wrong with the request",
+      "title": "Bad request"
+    },
     "created": "Creation date",
     "dns": "DNS",
+    "error": {
+      "description": "There is an error with the request",
+      "title": "Error request"
+    },
     "expired": "Expired date",
     "manager": "Manager",
+    "missing": {
+      "description": "There are no domain and extension parameters",
+      "title": "Missing params"
+    },
+    "notFound": {
+      "description": "The domain '{{val, string}}' doesn't exist",
+      "title": "Domain not found"
+    },
     "owner": "Owner",
     "ridet": "RIDET"
+  },
+  "errorBoundary": {
+    "title": "Unexpected error"
   },
   "favorites": {
     "empty": "No favorites!",
@@ -61,5 +82,9 @@
       "message": "There is a new version of the app available on the App Store, do you want to update it?",
       "title": "Update available"
     }
+  },
+  "unmatched": {
+    "title": "Unmatched Route",
+    "description": "Screen could not be found"
   }
 }

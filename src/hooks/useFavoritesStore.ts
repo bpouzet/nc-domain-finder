@@ -1,7 +1,8 @@
 import { createJSONStorage, persist } from 'zustand/middleware' ;
 import AsyncStorage from '@react-native-async-storage/async-storage' ;
-import { DomainList } from '../schemas/DomainListSchema' ;
 import { create } from 'zustand' ;
+
+import { DomainList } from '../schemas/DomainListSchema' ;
 
 const FAVORITES_KEY = 'favorites' ;
 
