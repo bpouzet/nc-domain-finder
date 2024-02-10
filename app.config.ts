@@ -1,5 +1,3 @@
-import 'dotenv/config' ;
-
 import { ConfigContext } from 'expo/config' ;
 import { MyExpoConfig } from '@customTypes/expoConfig' ;
 import manifest from './package.json' ;

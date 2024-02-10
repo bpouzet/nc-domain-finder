@@ -9,8 +9,7 @@ import { DomainList } from '../../../schemas/DomainListSchema' ;
 import SafeView from '@components/SafeView' ;
 import getFavicon from '@helpers/favicon' ;
 import useDebounce from '@hooks/useDebounce' ;
-import { useDomains } from '@helpers/query' ;
-
+import { useDomains } from '@hooks/queries' ;
 
 export default function Home () {
 

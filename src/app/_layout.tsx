@@ -38,7 +38,7 @@ import '../i18n' ;
 // Construct a new instrumentation instance. This is needed to communicate between the integration and React
 const routingInstrumentation = new Sentry.ReactNavigationInstrumentation() ;
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.APP_ENV === 'development'
 
 // Init Sentry
 Sentry.init({
@@ -75,6 +75,8 @@ export default function RootLayout() {
   const { isConnected } = useIsConnected() ;
   const colorScheme = useColorScheme() ;
 
+  const theme = colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme ;
+
   const insets = useSafeAreaInsets() ;
 
   useAppUpdate() ;
@@ -95,7 +97,7 @@ export default function RootLayout() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <ThemeProvider value={colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme}>
+      <ThemeProvider value={theme}>
         <KeyboardAvoidingView
           behavior={IsAndroid ? 'height' : 'padding'}
           keyboardVerticalOffset={IsAndroid ? 0 : -TabBarHeightIOS-insets.bottom}

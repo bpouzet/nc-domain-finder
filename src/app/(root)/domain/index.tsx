@@ -15,8 +15,8 @@ import ErrorView from '@components/views/ErrorView' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
-import { useDomain } from '@helpers/query' ;
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
+import { useDomain } from "@hooks/queries";
 
 const BOTTOM_APPBAR_HEIGHT = 80 ;
 const MEDIUM_FAB_HEIGHT = 56 ;
@@ -188,7 +188,7 @@ export default function Domain() {
         title={t('domain.missing.title')}
       />
     ) ;
-  } else if( error && error instanceof AxiosError ) {
+  } else if( error ) {
 
     // default
     let errorTitle = t('domain.error.title') ;

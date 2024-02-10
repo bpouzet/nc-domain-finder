@@ -19,7 +19,7 @@
         "simulator": true
       }
     },
-    "preview": {
+    "staging": {
       "autoIncrement": true,
       "android": {
         "buildType": "app-bundle"
@@ -41,7 +41,7 @@
     }
   },
   "submit": {
-    "preview": {
+    "staging": {
       "ios": {
         "appleId": "${EXPO_APPLE_ID}",
         "appleTeamId": "${EXPO_APPLE_TEAM_ID}",
