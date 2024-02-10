@@ -5,14 +5,14 @@ import { View } from 'react-native' ;
 import { useRouter } from 'expo-router' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { DomainList } from '../../schemas/DomainListSchema' ;
+import { DomainList } from '../../../schemas/DomainListSchema' ;
 import SafeView from '@components/SafeView' ;
 import getFavicon from '@helpers/favicon' ;
 import useDebounce from '@hooks/useDebounce' ;
 import { useDomains } from '@helpers/query' ;
 
 
-export default function Index () {
+export default function Home () {
 
   const { t, i18n } = useTranslation() ;
   const router = useRouter() ;

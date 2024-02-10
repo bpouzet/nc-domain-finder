@@ -1,13 +1,9 @@
-import * as Sentry from 'sentry-expo' ;
 import { QueryClient, useQuery } from '@tanstack/react-query' ;
 import AsyncStorage from '@react-native-async-storage/async-storage' ;
 import Constants from 'expo-constants' ;
-import axios from 'axios' ;
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister' ;
-import { z } from 'zod' ;
 
-import DomainListSchema, { DomainList } from '../schemas/DomainListSchema' ;
-import DomainSchema from '../schemas/DomainSchema' ;
+import { DomainList } from '../schemas/DomainListSchema' ;
 import { MyExpoConfig } from '@customTypes/expoConfig' ;
 
 const API_URL = 'https://domaine-nc.p.rapidapi.com/domaines' ;
@@ -17,27 +13,23 @@ const headers = {
   'X-RapidAPI-Key': (Constants.expoConfig as MyExpoConfig).extra.api.key,
 } ;
 
-function fetchDomains(search: string): Promise<DomainList[]> {
-  return axios.get(
+function fetchDomains(search: string, signal?: AbortSignal) {
+  return fetch(
     API_URL + '?startswith=' + search,
     {
       headers,
+      signal,
     }
   ).then(response => {
-    if(response) {
-      return z.array(DomainListSchema).parse(response.data) ;
-    }
-    return [] ;
-  }).catch(error => {
-    Sentry.Native.captureException(error) ;
-    return [] ;
+    if ( !response.ok ) throw Error(response.statusText)
+    return response.json() as Promise<DomainList[]> ;
   }) ;
 }
 
 function useDomains(search: string) {
   return useQuery({
     enabled: search !== '',
-    queryFn: () => fetchDomains(search),
+    queryFn: ({ signal }) => fetchDomains(search, signal),
     queryKey: [ search ],
   }) ;
 }
@@ -45,14 +37,18 @@ function useDomains(search: string) {
 function useDomain(name: string, extension: string) {
   return useQuery({
     enabled: name !== undefined && extension !== undefined,
-    queryFn: () => {
+    queryFn: ({ signal }) => {
       const ext = extension.startsWith('.') ? extension.substring(1) : extension ;
-      return axios.get(
+      return fetch(
         API_URL + '/' + name + '/' + ext,
         {
           headers,
+          signal,
         }
-      ).then(response => DomainSchema.parse(response.data)) ;
+      ).then(response => {
+        if ( !response.ok ) throw Error(response.statusText)
+        return response.json() as Promise<DomainList> ;
+      }) ;
     },
     queryKey: [ name, extension ],
   }) ;
@@ -61,7 +57,7 @@ function useDomain(name: string, extension: string) {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      cacheTime: 1000 * 60 * 60 * 24, // 24 hours,
+      gcTime: 1000 * 60 * 60 * 24, // 24 hours,
       //queryFn: defaultQueryFn,
       retry: 2,
     },

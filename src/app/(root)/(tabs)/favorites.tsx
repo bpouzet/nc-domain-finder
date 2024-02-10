@@ -6,7 +6,7 @@ import useFavoritesStore from '@hooks/useFavoritesStore' ;
 import { useRouter } from 'expo-router' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { DomainList } from '../../schemas/DomainListSchema' ;
+import { DomainList } from '../../../schemas/DomainListSchema' ;
 import getFavicon from '@helpers/favicon' ;
 
 export default function Favorites() {

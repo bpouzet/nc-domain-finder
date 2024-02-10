@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ["16"]
+        node: ["18"]
     name: Install and build with Node ${{ matrix.node }}
     steps:
       - name: Check for EXPO_TOKEN
@@ -54,7 +54,7 @@ jobs:
 
       - name: 🚀 Build on EAS
         run: eas build --platform all --non-interactive --auto-submit
-        env: 
+        env:
           EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
           EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
           EXPO_APPLE_TEAM_TYPE: ${{ secrets.EXPO_APPLE_TEAM_TYPE }}
@@ -62,4 +62,4 @@ jobs:
           EXPO_ASC_APP_ID: ${{ secrets.EXPO_ASC_APP_ID }}
           EXPO_ASC_ISSUER_ID: ${{ secrets.EXPO_ASC_ISSUER_ID }}
           EXPO_ASC_KEY_ID: ${{ secrets.EXPO_ASC_KEY_ID }}
-        
+

@@ -57,18 +57,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       dsn: process.env.SENTRY_DSN,
     },
   },
-  hooks: {
-    postPublish: [
-      {
-        config: {
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-          organization: process.env.SENTRY_ORG,
-          project: process.env.SENTRY_PROJECT,
-        },
-        file: 'sentry-expo/upload-sourcemaps',
-      },
-    ],
-  },
   icon: ICON,
   ios: {
     bundleIdentifier: PACKAGE,
@@ -91,10 +79,20 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   ],
   plugins: [
     [
+      '@sentry/react-native/expo',
+      {
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        organization: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        url: 'https://sentry.io/',
+      },
+    ],
+    [
       'expo-build-properties', {
         android: {
           allowBackup: false,
-          //enableProguardInReleaseBuilds: true,
+          enableShrinkResourcesInReleaseBuilds: true,
+          enableProguardInReleaseBuilds: true,
           //newArchEnabled: true,
         },
         ios: {
@@ -104,7 +102,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       },
     ],
     'expo-localization',
-    'sentry-expo',
   ],
   primaryColor: BG_COLOR,
   runtimeVersion: {

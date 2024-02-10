@@ -1,4 +1,4 @@
-import * as Sentry from 'sentry-expo' ;
+import * as Sentry from '@sentry/react-native' ;
 import { Avatar, Button, Text, useTheme } from 'react-native-paper' ;
 import { FC, useEffect } from 'react' ;
 import { ErrorBoundaryProps } from 'expo-router' ;
@@ -13,7 +13,7 @@ const ErrorAppBoundary: FC<ErrorBoundaryProps> = ({ error, retry }) => {
   const { t } = useTranslation() ;
 
   useEffect(() => {
-    Sentry.Native.captureException(error) ;
+    Sentry.captureException(error) ;
   }, [ error ]) ;
 
   return (

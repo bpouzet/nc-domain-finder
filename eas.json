@@ -16,7 +16,6 @@
     "development-simulator": {
       "extends": "development",
       "ios": {
-        "resourceClass": "m1-medium",
         "simulator": true
       }
     },

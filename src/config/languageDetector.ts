@@ -1,5 +1,5 @@
 import * as Localization from 'expo-localization' ;
-import * as Sentry from 'sentry-expo' ;
+import * as Sentry from '@sentry/react-native' ;
 import AsyncStorage from '@react-native-async-storage/async-storage' ;
 import { LanguageDetectorAsyncModule } from 'i18next' ;
 
@@ -12,7 +12,7 @@ export const initLanguageDetector: LanguageDetectorAsyncModule = {
       //save a user's language choice in Async storage
       await AsyncStorage.setItem(STORE_LOCALE_KEY, language) ;
     } catch (error) {
-      Sentry.Native.captureException(error) ;
+      Sentry.captureException(error) ;
     }
   },
   detect: async function (callback: (lng: (string)) => undefined): Promise<string | undefined> {
@@ -32,14 +32,14 @@ export const initLanguageDetector: LanguageDetectorAsyncModule = {
               deviceLocale = locales[0].languageCode ;
             }
           } catch (e) {
-            Sentry.Native.captureException(e) ;
+            Sentry.captureException(e) ;
           }
 
           return callback(deviceLocale) ;
         }
       }) ;
     } catch (error) {
-      Sentry.Native.captureException(error) ;
+      Sentry.captureException(error) ;
       return undefined ;
     }
   },
