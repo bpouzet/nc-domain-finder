@@ -1,8 +1,9 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
 import React from 'react' ;
 import { useTranslation } from 'react-i18next' ;
+import { useTheme } from "react-native-paper";
 
-import MaterialTabs from '@components/router/layouts/MaterialTabs' ;
+import { MaterialBottomTabs } from '@components/router/layouts/MaterialBottomTabs' ;
 
 const renderTabBarIcon = (name: React.ComponentProps<typeof MaterialCommunityIcons>['name']) => ({ color }: {color: string}) => <TabBarIcon name={name} color={color} /> ;
 
@@ -16,20 +17,23 @@ const TabBarIcon = (props: {
 export default function RootLayout() {
 
   const { t } = useTranslation() ;
+  const theme = useTheme()
 
   return (
-    <MaterialTabs
-      initialRouteName='index'
+    <MaterialBottomTabs
+      initialRouteName='home'
+      backBehavior='history'
+      theme={theme}
     >
-      <MaterialTabs.Screen
-        name='index'
+      <MaterialBottomTabs.Screen
+        name='home'
         options={{
-          href: '/',
+          href: '/home',
           tabBarIcon: renderTabBarIcon('magnify'),
           title: t('search.title'),
         }}
       />
-      <MaterialTabs.Screen
+      <MaterialBottomTabs.Screen
         name='favorites'
         options={{
           href: '/favorites',
@@ -37,7 +41,7 @@ export default function RootLayout() {
           title: t('favorites.title'),
         }}
       />
-      <MaterialTabs.Screen
+      <MaterialBottomTabs.Screen
         name='settings'
         options={{
           href: '/settings',
@@ -45,6 +49,6 @@ export default function RootLayout() {
           title: t('settings.title'),
         }}
       />
-    </MaterialTabs>
+    </MaterialBottomTabs>
   ) ;
 }

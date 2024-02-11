@@ -2,8 +2,10 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       API_KEY: string;
+      APP_ENV: 'development' | 'staging' | 'production';
       NODE_ENV: 'development' | 'production';
       EAS_PROJECT_ID: string;
+      EAS_UPDATES_URL: string;
       SENTRY_AUTH_TOKEN: string;
       SENTRY_DSN: string;
       SENTRY_ORG: string;

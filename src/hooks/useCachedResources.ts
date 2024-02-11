@@ -1,12 +1,10 @@
 import * as Font from 'expo-font' ;
-import * as Sentry from 'sentry-expo' ;
+import * as Sentry from '@sentry/react-native' ;
 import * as SplashScreen from 'expo-splash-screen' ;
 import { useEffect, useState } from 'react' ;
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
 
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
-
-import SpaceMono from '../assets/fonts/SpaceMono-Regular.ttf' ;
 
 export default function useCachedResources() {
   const [ isLoadingComplete, setLoadingComplete ] = useState(false) ;
@@ -23,10 +21,9 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...MaterialCommunityIcons.font,
-          'space-mono': SpaceMono,
         }) ;
       } catch (e) {
-        Sentry.Native.captureException(e) ;
+        Sentry.captureException(e) ;
       } finally {
         setLoadingComplete(true) ;
         // expo router handle closing splashscreen

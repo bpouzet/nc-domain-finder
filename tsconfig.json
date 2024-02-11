@@ -1,10 +1,8 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "allowJs": true,
-    "strict": true,
-    "types": [ "node", "webpack-env", "react", "react-native" ],
-    "typeRoots": [ "src/types" ],
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
       "@components/*": [ "src/components/*" ],
@@ -14,5 +12,6 @@
       "@hooks/*": [ "src/hooks/*" ]
     }
   },
-  "include": [ "src", "app.config.ts", ".eslintrc.js", "babel.config.js", "index.js" ],
+  "include": [ "src", "app.config.ts", "index.js" ],
+  "exclude": [ "node_modules", "babel.config.js", "metro.config.js" ]
 }

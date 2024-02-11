@@ -9,9 +9,20 @@ module.exports = function(api) {
       },
     },
     plugins: [
-      require.resolve('expo-router/babel'),
       [
-        'module-resolver',
+        'module:react-native-dotenv', {
+          'envName': 'APP_ENV',
+          'moduleName': '@env',
+          'path': '.env',
+          'blocklist': null,
+          'allowlist': null,
+          'safe': false,
+          'allowUndefined': true,
+          'verbose': false
+        },
+      ],
+      [
+        require.resolve('babel-plugin-module-resolver'),
         {
           alias: {
             // This needs to be mirrored in tsconfig.json
@@ -20,11 +31,11 @@ module.exports = function(api) {
             '@customTypes': './src/types',
             '@helpers': './src/helpers',
             '@hooks': './src/hooks',
+            'react-native-device-info': './react-native-device-info.js',
           },
         },
       ],
-      'react-native-reanimated/plugin',
     ],
-    presets: [ 'babel-preset-expo' ],
+    presets: [['babel-preset-expo', { jsxRuntime: 'automatic' }]],
   } ;
 } ;

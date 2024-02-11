@@ -3,21 +3,20 @@ import * as Linking from 'expo-linking' ;
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated' ;
 import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
-import { useRouter, useSearchParams } from 'expo-router' ;
-import { AxiosError } from 'axios' ;
+import { useRouter, useLocalSearchParams } from 'expo-router' ;
 import { DateTime } from 'luxon' ;
 import { startAddEventToCalendarAsync } from 'expo-community-add-event-to-calendar' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useState } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { DomainList } from '../../schemas/DomainListSchema' ;
+import { DomainList } from '../../../schemas/DomainListSchema' ;
 import ErrorView from '@components/views/ErrorView' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
-import { useDomain } from '@helpers/query' ;
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
+import { useDomain } from "@hooks/queries";
 
 const BOTTOM_APPBAR_HEIGHT = 80 ;
 const MEDIUM_FAB_HEIGHT = 56 ;
@@ -37,7 +36,7 @@ export default function Domain() {
   const theme = useTheme() ;
   const router = useRouter() ;
 
-  const { domain, extension } = useSearchParams() ;
+  const { domain, extension } = useLocalSearchParams() ;
 
   const { bottom, top } = useSafeAreaInsets() ;
   const { height } = useWindowDimensions() ;
@@ -52,7 +51,7 @@ export default function Domain() {
 
   const { data, isLoading, error } = useDomain(domain, extension) ;
 
-  if(error && error instanceof AxiosError) console.log('error => ', error) ;
+  if( error ) console.log('error => ', error) ;
 
   if( data ) {
     sharedVal.value = 0 ;
@@ -189,7 +188,7 @@ export default function Domain() {
         title={t('domain.missing.title')}
       />
     ) ;
-  } else if( error && error instanceof AxiosError ) {
+  } else if( error ) {
 
     // default
     let errorTitle = t('domain.error.title') ;

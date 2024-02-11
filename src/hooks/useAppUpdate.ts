@@ -1,6 +1,6 @@
 import * as Application from 'expo-application' ;
 import * as Device from 'expo-device' ;
-import * as Sentry from 'sentry-expo' ;
+import * as Sentry from '@sentry/react-native' ;
 import SpInAppUpdates, {
   IAUInstallStatus,
   IAUUpdateKind,
@@ -95,7 +95,7 @@ const useAppUpdate = () => {
         }
 
       } catch (e) {
-        Sentry.Native.captureException(e) ;
+        Sentry.captureException(e) ;
       }
     } ;
 
