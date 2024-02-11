@@ -1,10 +1,13 @@
 import AppRoot from "@components/AppRoot";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFonts } from "expo-font";
+import * as NavigationBar from "expo-navigation-bar";
+import {StatusBar} from "expo-status-bar";
 import { KeyboardAvoidingView, Platform, View } from 'react-native' ;
 import { Slot, SplashScreen } from 'expo-router' ;
 import { ThemeProvider } from '@react-navigation/native' ;
-import { useCallback } from 'react' ;
+import React, {useCallback, useEffect} from 'react' ;
+import {PaperProvider} from "react-native-paper";
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import * as Sentry from '@sentry/react-native' ;
 import Constants from 'expo-constants' ;
@@ -90,25 +93,36 @@ export default function RootLayout() {
     }
   }, [fontsLoaded, fontError])
 
+  useEffect(() => {
+
+    if(IsAndroid) {
+      void NavigationBar.setBackgroundColorAsync(theme.colors.elevation.level2) ;
+      void NavigationBar.setButtonStyleAsync(theme.dark ? 'light' : 'dark') ;
+    }
+  }, [ theme ]) ;
+
   // Prevent rendering until the font has loaded or an error was returned
   if (!fontsLoaded || fontError) {
     return null
   }
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <ThemeProvider value={theme}>
-        <KeyboardAvoidingView
-          behavior={IsAndroid ? 'height' : 'padding'}
-          keyboardVerticalOffset={IsAndroid ? 0 : -TabBarHeightIOS-insets.bottom}
-          style={{ flex: 1 }}
-        >
-          <AppRoot>
-            <Slot />
-            <ConnectionModal isConnected={isConnected} />
-          </AppRoot>
-        </KeyboardAvoidingView>
-      </ThemeProvider>
+    <View style={{ backgroundColor: theme.colors.background, flex: 1 }} onLayout={onLayoutRootView}>
+      <PaperProvider theme={theme}>
+        <ThemeProvider value={theme}>
+          <KeyboardAvoidingView
+            behavior={IsAndroid ? 'height' : 'padding'}
+            keyboardVerticalOffset={IsAndroid ? 0 : -TabBarHeightIOS-insets.bottom}
+            style={{ flex: 1 }}
+          >
+            <AppRoot>
+              <Slot />
+              <ConnectionModal isConnected={isConnected} />
+            </AppRoot>
+          </KeyboardAvoidingView>
+          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} hidden={false} />
+        </ThemeProvider>
+      </PaperProvider>
     </View>
   )
 }

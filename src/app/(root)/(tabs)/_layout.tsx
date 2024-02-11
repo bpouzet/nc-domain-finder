@@ -1,6 +1,7 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
 import React from 'react' ;
 import { useTranslation } from 'react-i18next' ;
+import { useTheme } from "react-native-paper";
 
 import { MaterialBottomTabs } from '@components/router/layouts/MaterialBottomTabs' ;
 
@@ -16,11 +17,13 @@ const TabBarIcon = (props: {
 export default function RootLayout() {
 
   const { t } = useTranslation() ;
+  const theme = useTheme()
 
   return (
     <MaterialBottomTabs
       initialRouteName='home'
       backBehavior='history'
+      theme={theme}
     >
       <MaterialBottomTabs.Screen
         name='home'

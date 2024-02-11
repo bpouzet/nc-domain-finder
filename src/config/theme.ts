@@ -10,18 +10,20 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 }) ;
 
 const CombinedDefaultTheme = {
-  ...LightTheme,
   ...MD3LightTheme,
+  ...LightTheme,
   colors: {
+    ...MD3LightTheme.colors,
     ...LightTheme.colors,
     ...light.colors,
   },
 } ;
 
 const CombinedDarkTheme = {
-  ...DarkTheme,
   ...MD3DarkTheme,
+  ...DarkTheme,
   colors: {
+    ...MD3DarkTheme.colors,
     ...DarkTheme.colors,
     ...dark.colors,
   },
