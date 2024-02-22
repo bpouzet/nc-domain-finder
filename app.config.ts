@@ -96,7 +96,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
           //newArchEnabled: true,
         },
         ios: {
-          flipper: true,
           //newArchEnabled: true,
         },
       },
