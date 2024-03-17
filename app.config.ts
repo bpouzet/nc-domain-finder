@@ -5,9 +5,10 @@ import { MyExpoConfig } from '@customTypes/expoConfig' ;
 import manifest from './package.json' ;
 
 const IS_DEV = process.env.APP_ENV === 'development' ;
+const IS_STAGING = process.env.APP_ENV === 'staging'
 
 const VERSION = manifest.version ;
-const PACKAGE = 'nc.domainFinder.app' + (IS_DEV ? '.dev' : '') ;
+const PACKAGE = 'nc.domainFinder.app' + (IS_STAGING ? '.staging' : IS_DEV ? '.dev' : '') ;
 
 const SPLASH = './assets/images/splash.png' ;
 const ICON = './assets/images/' + (IS_DEV ? 'dev_' : '') + 'icon.png' ;
@@ -51,7 +52,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       key: process.env.API_KEY,
     },
     eas: {
-      projectId: process.env.EAS_PROJECT_ID,
+      projectId: '9df8db98-43eb-41f6-a9e8-04873f919754',
     },
     sentry: {
       dsn: process.env.SENTRY_DSN,
@@ -71,7 +72,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     en: './assets/translations/en.json',
     fr: './assets/translations/fr.json',
   },
-  name: 'NC Domain Finder' + (IS_DEV ? ' (dev)' : ''),
+  name: 'NC Domain Finder' + (IS_STAGING ? ' (staging)' : IS_DEV ? '(dev)' : ''),
   orientation: 'portrait',
   platforms: [
     'android',
@@ -81,7 +82,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     [
       '@sentry/react-native/expo',
       {
-        authToken: process.env.SENTRY_AUTH_TOKEN,
         organization: process.env.SENTRY_ORG,
         project: process.env.SENTRY_PROJECT,
         url: 'https://sentry.io/',
@@ -100,6 +100,11 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
         },
       },
     ],
+    [
+      'expo-font', {
+        fonts: ['assets/fonts/SpaceMono.ttf'],
+      },
+    ],
     'expo-localization',
   ],
   primaryColor: BG_COLOR,
@@ -115,7 +120,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   },
   updates: {
     fallbackToCacheTimeout: 0,
-    url: process.env.EAS_UPDATES_URL,
+    url: 'https://u.expo.dev/9df8db98-43eb-41f6-a9e8-04873f919754',
   },
   //userInterfaceStyle: 'automatic',
   version: VERSION,

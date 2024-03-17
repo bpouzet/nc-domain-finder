@@ -22,7 +22,7 @@
     "staging": {
       "autoIncrement": true,
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "apk"
       },
       "distribution": "internal",
       "channel": "staging",

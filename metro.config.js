@@ -25,6 +25,12 @@ module.exports = (() => {
     ...transformer,
     unstable_allowRequireContext: true,
     minifierPath: require.resolve('metro-minify-terser'),
+    minifierConfig: {
+      compress: {
+        drop_console: true,
+        ecma: '2022',
+      },
+    }
   }
   config.resolver = {
     ...resolver,

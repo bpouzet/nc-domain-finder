@@ -1,42 +1,37 @@
-import AppRoot from "@components/AppRoot";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFonts } from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
-import {StatusBar} from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 import { KeyboardAvoidingView, Platform, View } from 'react-native' ;
-import { Slot, SplashScreen } from 'expo-router' ;
+import { Slot } from 'expo-router' ;
 import { ThemeProvider } from '@react-navigation/native' ;
-import React, {useCallback, useEffect} from 'react' ;
-import {PaperProvider} from "react-native-paper";
+import React, { useEffect } from 'react' ;
+import { PaperProvider } from "react-native-paper";
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import * as Sentry from '@sentry/react-native' ;
 import Constants from 'expo-constants' ;
+import * as SplashScreen from 'expo-splash-screen'
+import dayjs from 'dayjs'
+import RelativeTime from 'dayjs/plugin/relativeTime'
+import Utc from 'dayjs/plugin/utc'
 
+dayjs.extend(RelativeTime)
+dayjs.extend(Utc)
+import 'dayjs/locale/fr'
+
+import AppRoot from "@components/AppRoot";
 import { CombinedDarkTheme, CombinedDefaultTheme } from '@config/theme' ;
 import ConnectionModal from '@components/modals/ConnectionModal' ;
-import useAppUpdate from '@hooks/useAppUpdate' ;
 import useColorScheme from '@hooks/useColorScheme' ;
 import useIsConnected from '@hooks/useIsConnected' ;
+
 import { MyExpoConfig } from '@customTypes/expoConfig' ;
 
-// polyfills for Intl API
-import '@formatjs/intl-getcanonicallocales/polyfill' ;
-import '@formatjs/intl-locale/polyfill' ;
-import '@formatjs/intl-pluralrules/polyfill' ;
-import '@formatjs/intl-pluralrules/locale-data/en' ; // locale-data for en
-import '@formatjs/intl-pluralrules/locale-data/fr' ; // locale-data for fr
-import '@formatjs/intl-relativetimeformat/polyfill' ;
-import '@formatjs/intl-numberformat/polyfill' ;
-import '@formatjs/intl-numberformat/locale-data/en' ; // locale-data for en
-import '@formatjs/intl-numberformat/locale-data/fr' ; // locale-data for fr
-import '@formatjs/intl-relativetimeformat/locale-data/en' ; // locale-data for en
-import '@formatjs/intl-relativetimeformat/locale-data/fr' ; // locale-data for fr
-import '@formatjs/intl-datetimeformat/polyfill' ;
-import '@formatjs/intl-datetimeformat/locale-data/en' ; // locale-data for en
-import '@formatjs/intl-datetimeformat/locale-data/fr' ; // locale-data for fr
-import '@formatjs/intl-datetimeformat/add-golden-tz' ; // Add ALL tz data
+import '../i18n'
 
-import '../i18n' ;
+export { ErrorBoundary } from '@components/ErrorBoundary'
+
+SplashScreen.preventAutoHideAsync()
 
 // Construct a new instrumentation instance. This is needed to communicate between the integration and React
 const routingInstrumentation = new Sentry.ReactNavigationInstrumentation() ;
@@ -60,16 +55,14 @@ Sentry.init({
   tracesSampleRate: 1.0,
 }) ;
 
-
 const IsAndroid = Platform.OS === 'android' ;
 
 // TODO Do better
 const TabBarHeightIOS = 80 ;
 
-SplashScreen.preventAutoHideAsync()
 const start = Date.now()
 
-export default function RootLayout() {
+function RootLayout() {
 
   const [fontsLoaded, fontError] = useFonts({
     ...MaterialCommunityIcons.font,
@@ -82,16 +75,18 @@ export default function RootLayout() {
 
   const insets = useSafeAreaInsets() ;
 
-  useAppUpdate() ;
+  useEffect(() => {
+    if (fontError) throw fontError
+  }, [fontError])
 
-  const onLayoutRootView = useCallback(() => {
-    if ( fontsLoaded || fontError !== null ) {
+  useEffect(() => {
+    if ( fontsLoaded ) {
       const now = Date.now()
       console.log(`Rendered in ${now - start}ms`)
 
       SplashScreen.hideAsync()
     }
-  }, [fontsLoaded, fontError])
+  }, [fontsLoaded])
 
   useEffect(() => {
 
@@ -102,12 +97,12 @@ export default function RootLayout() {
   }, [ theme ]) ;
 
   // Prevent rendering until the font has loaded or an error was returned
-  if (!fontsLoaded || fontError) {
-    return null
+  if ( !fontsLoaded ) {
+    return <View style={{ backgroundColor: theme.colors.background, flex: 1 }}></View>
   }
 
   return (
-    <View style={{ backgroundColor: theme.colors.background, flex: 1 }} onLayout={onLayoutRootView}>
+    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
       <PaperProvider theme={theme}>
         <ThemeProvider value={theme}>
           <KeyboardAvoidingView
@@ -117,8 +112,8 @@ export default function RootLayout() {
           >
             <AppRoot>
               <Slot />
-              <ConnectionModal isConnected={isConnected} />
             </AppRoot>
+            <ConnectionModal isConnected={isConnected} />
           </KeyboardAvoidingView>
           <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} hidden={false} />
         </ThemeProvider>
@@ -126,3 +121,5 @@ export default function RootLayout() {
     </View>
   )
 }
+
+export default Sentry.wrap(RootLayout)
