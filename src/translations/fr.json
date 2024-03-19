@@ -54,7 +54,6 @@
       "description": "Veuillez vérifier votre connexion internet."
     }
   },
-  "relateTime": "{{val, relativetime}}",
   "reminder": {
     "added": "Rappel ajouté!",
     "date": "Date d'expiration {{val, string}}",

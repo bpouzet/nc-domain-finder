@@ -4,19 +4,21 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-na
 import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
 import { useRouter, useLocalSearchParams } from 'expo-router' ;
-import { DateTime } from 'luxon' ;
 import { startAddEventToCalendarAsync } from 'expo-community-add-event-to-calendar' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useState } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { DomainList } from '../../../schemas/DomainListSchema' ;
+import { getDateTimeWithTz, getDateTimeWithTzEndDay } from "@helpers/getDateTimeWithTz";
+import getRelativeTimeFromNow from "@helpers/getRelativeTime";
 import ErrorView from '@components/views/ErrorView' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
 import { useDomain } from "@hooks/queries";
+
+import type { DomainList } from '../../../schemas/DomainListSchema' ;
 
 const BOTTOM_APPBAR_HEIGHT = 80 ;
 const MEDIUM_FAB_HEIGHT = 56 ;
@@ -32,7 +34,7 @@ const options = {
 } ;
 
 export default function Domain() {
-  const { t } = useTranslation() ;
+  const { i18n, t } = useTranslation() ;
   const theme = useTheme() ;
   const router = useRouter() ;
 
@@ -78,8 +80,6 @@ export default function Domain() {
     return owner ;
   } ;
 
-  const getRelativeTime = (num: number) => t('relateTime', { val: num }) ;
-
   const onAddReminder = () => {
     void addReminder() ;
   } ;
@@ -91,10 +91,9 @@ export default function Domain() {
       const timeZone = 'Pacific/Noumea' ;
       const eventTitle = t('reminder.title', { val: domain + extension }) ;
 
-      let endDate = DateTime.fromISO(data.dateExpiration, { zone: timeZone }) ;
-      endDate = endDate.plus({ hours: 23, minutes: 59 }) ;
+      let endDate = getDateTimeWithTzEndDay(data.dateExpiration) ;
 
-      const startDate = DateTime.fromISO(data.dateExpiration, { zone: timeZone }) ;
+      const startDate = getDateTimeWithTz(data.dateExpiration) ;
 
       if( Platform.OS === 'android' ) {
 
@@ -171,7 +170,7 @@ export default function Domain() {
           />
           <List.Item
             title={t('domain.expired')}
-            description={getDate(data.dateExpiration) + ' ' + getRelativeTime(data.nbDaysBeforeExpires)}
+            description={getDate(data.dateExpiration) + ' ' + getRelativeTimeFromNow(data.dateExpiration, i18n.language)}
           />
         </ScrollView>
       ) ;

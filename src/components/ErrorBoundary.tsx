@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next' ;
 
 import SafeView from '@components/SafeView' ;
 
-const ErrorAppBoundary: FC<ErrorBoundaryProps> = ({ error, retry }) => {
+const ErrorBoundary: FC<ErrorBoundaryProps> = ({ error, retry }) => {
 
   const theme = useTheme() ;
   const { t } = useTranslation() ;
@@ -39,4 +39,4 @@ const ErrorAppBoundary: FC<ErrorBoundaryProps> = ({ error, retry }) => {
   ) ;
 } ;
 
-export default ErrorAppBoundary ;
+export { ErrorBoundary } ;

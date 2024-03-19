@@ -54,7 +54,6 @@
       "description": "Please, check your internet connection."
     }
   },
-  "relateTime": "{{val, relativetime}}",
   "reminder": {
     "added": "Reminder added!",
     "date": "Expiration date {{val, string}}",
