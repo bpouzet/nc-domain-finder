@@ -3,6 +3,7 @@
 .idea/
 android/
 ios/
+dist/
 node_modules/
 *.iml
 *.log
