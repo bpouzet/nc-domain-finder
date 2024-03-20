@@ -2,8 +2,8 @@ name: EAS Build
 on:
   workflow_dispatch:
   push:
-    branches:
-      - release/*
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
   build:
     runs-on: ubuntu-latest
