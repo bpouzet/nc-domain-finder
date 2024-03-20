@@ -22,6 +22,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     adaptiveIcon: {
       backgroundColor: BG_COLOR,
       foregroundImage: ADAPTIVE_ICON,
+      monochromeImage: './assets/images/adaptive-monochrome-icon.png'
     },
     blockedPermissions: [
       'android.permission.READ_CALENDAR',
