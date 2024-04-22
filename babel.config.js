@@ -31,13 +31,6 @@ module.exports = function(api) {
           },
         },
       ],
-      [
-        'formatjs',
-        {
-          "idInterpolationPattern": "[sha512:contenthash:base64:6]",
-          "ast": true
-        }
-      ],
     ],
     presets: [['babel-preset-expo', { jsxRuntime: 'automatic' }]],
   } ;

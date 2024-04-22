@@ -123,6 +123,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     fallbackToCacheTimeout: 0,
     url: 'https://u.expo.dev/9df8db98-43eb-41f6-a9e8-04873f919754',
   },
-  //userInterfaceStyle: 'automatic',
+  userInterfaceStyle: 'automatic',
   version: VERSION,
 }) ;
