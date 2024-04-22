@@ -1,7 +1,7 @@
 import dayjs from "dayjs"
 
 const getDateTimeWithTz = (date: string) => {
-  return dayjs.utc(date).utcOffset(11, true).format()
+  return dayjs.utc(date).utcOffset(11, true)
 }
 
 const getDateTimeWithTzEndDay = (date: string) => {

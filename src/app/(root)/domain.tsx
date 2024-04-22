@@ -18,7 +18,7 @@ import getFavicon from '@helpers/favicon' ;
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
 import { useDomain } from "@hooks/queries";
 
-import type { DomainList } from '../../../schemas/DomainListSchema' ;
+import type { DomainList } from '../../schemas/DomainListSchema' ;
 
 const BOTTOM_APPBAR_HEIGHT = 80 ;
 const MEDIUM_FAB_HEIGHT = 56 ;
@@ -98,8 +98,8 @@ export default function Domain() {
       if( Platform.OS === 'android' ) {
 
         const event = {
-          endDate: endDate.toJSDate(),
-          startDate: startDate.toJSDate(),
+          endDate: endDate.toDate(),
+          startDate: startDate.toDate(),
           title: eventTitle,
         } ;
 
@@ -113,12 +113,12 @@ export default function Domain() {
           // check permissions
           const { status } = await Calendar.requestRemindersPermissionsAsync() ;
           if(status === Calendar.PermissionStatus.GRANTED) {
-            const minusDate = startDate.minus({ days: 7 }) ;
+            const minusDate = startDate.subtract(7, 'day') ;
 
             await Calendar.createReminderAsync(null, {
-              dueDate: startDate.toJSDate(),
+              dueDate: startDate.toDate(),
               notes: t('reminder.date', { val: startDate.toString() }),
-              startDate: minusDate.toJSDate(),
+              startDate: minusDate.toDate(),
               timeZone,
               title: eventTitle,
             }) ;
@@ -216,6 +216,18 @@ export default function Domain() {
     <>
       <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
         <View style={{ height: header }}>
+          {(top && top > 0) && (
+            <View
+              style={{
+                position: 'absolute',
+                backgroundColor: 'black',
+                height: top,
+                opacity: 0.2,
+                width: '100%',
+                zIndex: 10,
+              }}
+            />
+          )}
           <Appbar.Header
             style={{
               backgroundColor: 'transparent',
@@ -257,7 +269,7 @@ export default function Domain() {
       <Snackbar
         visible={showSnackBar}
         onDismiss={() => setShowSnackBar(false)}
-        style={{ bottom: BOTTOM_APPBAR_HEIGHT }}
+        style={{ bottom: BOTTOM_APPBAR_HEIGHT, backgroundColor: theme.colors.primary }}
       >{t('reminder.added')}</Snackbar>
 
       <Animated.View
