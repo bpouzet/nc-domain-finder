@@ -1,12 +1,13 @@
 {
   "name": "nc-domain-finder",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "expo-router/entry",
   "scripts": {
     "start": "npx expo start -c",
     "build:dev:android": "cross-env APP_ENV=development npx eas-cli build --profile development --platform android",
-    "build:staging:android": "cross-env APP_ENV=staging npx eas-cli build --profile staging --platform android",
+    "build:dev:ios": "cross-env APP_ENV=development npx eas-cli build --profile development --platform ios",
     "build:dev:ios:simulator": "cross-env APP_ENV=development npx eas-cli build --profile development-simulator --platform ios",
+    "build:staging:android": "cross-env APP_ENV=staging npx eas-cli build --profile staging --platform android",
     "update:staging": "cross-env APP_ENV=staging npx eas-cli update --channel staging --auto",
     "prebuild": "cross-env APP_ENV=production npx expo prebuild",
     "android": "npx expo run:android --variant release",
@@ -41,28 +42,27 @@
     "@expo/vector-icons": "^14.0.0",
     "@react-native-async-storage/async-storage": "1.21.0",
     "@react-native-community/netinfo": "11.1.0",
-    "@react-navigation/material-bottom-tabs": "^6.2.20",
-    "@react-navigation/native": "^6.1.4",
-    "@react-navigation/native-stack": "^6.9.18",
-    "@sentry/react-native": "5.20.0",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/native-stack": "^6.9.26",
+    "@sentry/react-native": "5.22.0",
     "@shopify/flash-list": "1.6.4",
-    "@tanstack/query-async-storage-persister": "^5.28.4",
-    "@tanstack/react-query": "^5.28.4",
-    "@tanstack/react-query-persist-client": "^5.28.4",
+    "@tanstack/query-async-storage-persister": "^5.29.1",
+    "@tanstack/react-query": "^5.29.2",
+    "@tanstack/react-query-persist-client": "^5.29.2",
     "dayjs": "^1.11.10",
-    "expo": "~50.0.14",
-    "expo-application": "~5.8.3",
+    "expo": "~50.0.17",
+    "expo-application": "~5.8.4",
     "expo-build-properties": "~0.11.1",
     "expo-calendar": "~12.2.1",
     "expo-community-add-event-to-calendar": "^0.10.0",
-    "expo-constants": "~15.4.5",
+    "expo-constants": "~15.4.6",
     "expo-dev-client": "~3.3.11",
-    "expo-device": "~5.9.3",
+    "expo-device": "~5.9.4",
     "expo-font": "~11.10.3",
     "expo-image": "~1.10.6",
     "expo-linear-gradient": "~12.7.2",
     "expo-linking": "~6.2.2",
-    "expo-localization": "~14.8.3",
+    "expo-localization": "~14.8.4",
     "expo-navigation-bar": "~2.8.1",
     "expo-router": "~3.4.8",
     "expo-splash-screen": "~0.26.4",
@@ -84,8 +84,8 @@
     "react-native-store-version": "^1.4.1",
     "semver": "^7.6.0",
     "sp-react-native-in-app-updates": "^1.4.0",
-    "zod": "^3.22.4",
-    "zustand": "^4.5.0"
+    "zod": "^3.23.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
@@ -113,8 +113,8 @@
     "validate-branch-name": "^1.3.0"
   },
   "resolutions": {
-    "@expo/config-plugins": "~7.8.0",
-    "@react-navigation/native": "^6.1.4"
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/native-stack": "^6.9.26"
   },
   "validate-branch-name": {
     "pattern": "^(main|develop){1}$|^(chore|feature|feat|fix|hotfix|release)/.+$"
