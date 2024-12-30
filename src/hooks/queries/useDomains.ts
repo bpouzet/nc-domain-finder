@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query' ;
 
-import { API_URL, headers } from "@helpers/query";
+import { API_URL, headers } from '@helpers/query' ;
 
-import type { DomainList } from "../../schemas/DomainListSchema";
-import type { Domain } from "../../schemas/DomainSchema";
+import type { Domain } from '../../schemas/DomainSchema' ;
+import type { DomainList } from '../../schemas/DomainListSchema' ;
 
 function fetchDomains(search: string, signal?: AbortSignal) {
   return fetch(
@@ -13,7 +13,7 @@ function fetchDomains(search: string, signal?: AbortSignal) {
       signal,
     }
   ).then(response => {
-    if ( !response.ok ) throw Error(response.statusText)
+    if ( !response.ok ) throw Error(response.statusText) ;
     return response.json() as Promise<DomainList[]> ;
   }) ;
 }
@@ -30,13 +30,13 @@ const useDomain = (name: string, extension: string) => {
           signal,
         }
       ).then(response => {
-        if ( !response.ok ) throw Error(response.statusText)
+        if ( !response.ok ) throw Error(response.statusText) ;
         return response.json() as Promise<Domain> ;
       }) ;
     },
     queryKey: [ name, extension ],
   }) ;
-}
+} ;
 
 const useDomains = (search: string) => {
   return useQuery({
@@ -44,6 +44,6 @@ const useDomains = (search: string) => {
     queryFn: ({ signal }) => fetchDomains(search, signal),
     queryKey: [ search ],
   }) ;
-}
+} ;
 
-export { useDomain, useDomains }
+export { useDomain, useDomains } ;

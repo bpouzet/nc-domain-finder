@@ -6,6 +6,7 @@
   },
   "build": {
     "development": {
+      "bun": "1.1.42",
       "developmentClient": true,
       "distribution": "internal",
       "channel": "development",
@@ -24,6 +25,7 @@
       "android": {
         "buildType": "apk"
       },
+      "bun": "1.1.42",
       "distribution": "internal",
       "channel": "staging",
       "env": {
@@ -32,6 +34,7 @@
     },
     "production": {
       "autoIncrement": true,
+      "bun": "1.1.42",
       "channel": "production",
       "env": {
         "APP_ENV": "production",

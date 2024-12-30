@@ -1,11 +1,11 @@
 import React, { FC } from 'react' ;
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client' ;
 
-import useAppUpdate from "@hooks/useAppUpdate";
 import { persister, queryClient } from '@helpers/query' ;
+import useAppUpdate from '@hooks/useAppUpdate' ;
 
 type Props = {
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 const AppRoot: FC<Props> = ({ children }) => {

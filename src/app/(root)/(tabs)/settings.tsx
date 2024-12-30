@@ -17,7 +17,7 @@ export default function Settings() {
   // TODO Do better
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const language = t(`languages.${i18n.language}`) as string ;
+  const language = t(`languages.${i18n.language}`) ;
 
   const [ visibleLanguageModal, setVisibleLanguageModal ] = useState<boolean>(false) ;
   const [ visibleThemeModal, setVisibleThemeModal ] = useState<boolean>(false) ;

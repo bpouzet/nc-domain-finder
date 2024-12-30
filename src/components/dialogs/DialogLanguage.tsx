@@ -29,7 +29,7 @@ const DialogLanguage: FC<Props> = ({ close, visible }) => {
           // TODO Do better
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          const translate = t(`languages.${el}`) as string ;
+          const translate = t(`languages.${el}`) ;
 
           return (
             <RadioButton.Item

@@ -1,5 +1,5 @@
 import { createJSONStorage, persist } from 'zustand/middleware' ;
-import AsyncStorage from '@react-native-async-storage/async-storage' ;
+import AsyncStorage from 'expo-sqlite/kv-store' ;
 import { create } from 'zustand' ;
 
 const SETTINGS_KEY = 'settings' ;
@@ -22,20 +22,13 @@ const useSettingsStore = create<SettingsState & Actions>()(
   persist(
     (set) => ({
       ...initialState,
-      setTheme: (theme) => {
-        set( state => {
-          return {
-            ...state,
-            theme,
-          } ;
-        }) ;
-      },
+      setTheme: (theme) => set({ theme }),
     }),
     {
       name: SETTINGS_KEY,
       storage: createJSONStorage(() => AsyncStorage),
-    }
-  )
+    },
+  ),
 ) ;
 
 export default useSettingsStore ;
