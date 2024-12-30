@@ -1,4 +1,4 @@
-import { MD3DarkTheme, MD3LightTheme, adaptNavigationTheme } from 'react-native-paper' ;
+import { MD3DarkTheme, MD3LightTheme, adaptNavigationTheme, configureFonts } from 'react-native-paper' ;
 import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native' ;
 
 import { dark } from '@config/dark' ;
@@ -9,6 +9,10 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
 }) ;
 
+const fontConfig = {
+  fontFamily: 'SpaceMono',
+} ;
+
 const CombinedDefaultTheme = {
   ...MD3LightTheme,
   ...LightTheme,
@@ -17,6 +21,7 @@ const CombinedDefaultTheme = {
     ...LightTheme.colors,
     ...light.colors,
   },
+  fonts: configureFonts({ config: fontConfig }),
 } ;
 
 const CombinedDarkTheme = {
@@ -27,6 +32,7 @@ const CombinedDarkTheme = {
     ...DarkTheme.colors,
     ...dark.colors,
   },
+  fonts: configureFonts({ config: fontConfig }),
 } ;
 
 export { CombinedDarkTheme, CombinedDefaultTheme } ;

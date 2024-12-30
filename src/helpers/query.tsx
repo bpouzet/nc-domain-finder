@@ -1,6 +1,6 @@
-import { QueryClient } from '@tanstack/react-query' ;
-import AsyncStorage from '@react-native-async-storage/async-storage' ;
+import AsyncStorage from 'expo-sqlite/kv-store' ;
 import Constants from 'expo-constants' ;
+import { QueryClient } from '@tanstack/react-query' ;
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister' ;
 
 import { MyExpoConfig } from '@customTypes/expoConfig' ;

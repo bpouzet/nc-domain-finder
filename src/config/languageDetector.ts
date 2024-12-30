@@ -1,6 +1,6 @@
 import * as Localization from 'expo-localization' ;
 import * as Sentry from '@sentry/react-native' ;
-import AsyncStorage from '@react-native-async-storage/async-storage' ;
+import AsyncStorage from 'expo-sqlite/kv-store' ;
 import { LanguageDetectorAsyncModule } from 'i18next' ;
 
 const STORE_LOCALE_KEY = 'settings.locale' ;

@@ -1,11 +1,11 @@
-import 'dotenv/config'
+import 'dotenv/config' ;
 
 import { ConfigContext } from 'expo/config' ;
 import { MyExpoConfig } from '@customTypes/expoConfig' ;
 import manifest from './package.json' ;
 
 const IS_DEV = process.env.APP_ENV === 'development' ;
-const IS_STAGING = process.env.APP_ENV === 'staging'
+const IS_STAGING = process.env.APP_ENV === 'staging' ;
 
 const VERSION = manifest.version ;
 const PACKAGE = 'nc.domainFinder.app' + (IS_STAGING ? '.staging' : IS_DEV ? '.dev' : '') ;
@@ -22,16 +22,9 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     adaptiveIcon: {
       backgroundColor: BG_COLOR,
       foregroundImage: ADAPTIVE_ICON,
-      monochromeImage: './assets/images/adaptive-monochrome-icon.png'
+      monochromeImage: './assets/images/adaptive-monochrome-icon.png',
     },
-    blockedPermissions: [
-      'android.permission.READ_CALENDAR',
-      'android.permission.WRITE_CALENDAR',
-      'android.permission.SYSTEM_ALERT_WINDOW',
-      'android.permission.READ_EXTERNAL_STORAGE',
-      'android.permission.WRITE_EXTERNAL_STORAGE',
-      'android.permission.VIBRATE',
-    ],
+    blockedPermissions: [],
     package: PACKAGE,
     permissions: [],
     softwareKeyboardLayoutMode: 'pan',
@@ -45,9 +38,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     barStyle: 'light-content',
     translucent: false,
   },
-  assetBundlePatterns: [
-    'src/assets/**/*',
-  ],
   extra: {
     api: {
       key: process.env.API_KEY,
@@ -64,7 +54,16 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     bundleIdentifier: PACKAGE,
     infoPlist: {
       CFBundleAllowMixedLocalizations: true,
+      CFBundleLocalizations: [ 'en', 'fr' ],
       LSApplicationQueriesSchemes: [ 'itms-apps' ],
+    },
+    privacyManifests: {
+      NSPrivacyAccessedAPITypes: [
+        {
+          NSPrivacyAccessedAPIType: 'NSPrivacyAccessedAPICategoryUserDefaults',
+          NSPrivacyAccessedAPITypeReasons: [ 'CA92.1' ],
+        },
+      ],
     },
     supportsTablet: true,
   },
@@ -74,39 +73,50 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     fr: './assets/translations/fr.json',
   },
   name: 'NC Domain Finder' + (IS_STAGING ? ' (staging)' : IS_DEV ? '(dev)' : ''),
+  newArchEnabled: false,
   orientation: 'portrait',
   platforms: [
     'android',
     'ios',
   ],
   plugins: [
-    [
-      '@sentry/react-native/expo',
-      {
-        organization: process.env.SENTRY_ORG,
-        project: process.env.SENTRY_PROJECT,
-        url: 'https://sentry.io/',
-      },
-    ],
+    // [
+    //   '@sentry/react-native/expo',
+    //   {
+    //     organization: process.env.SENTRY_ORG,
+    //     project: process.env.SENTRY_PROJECT,
+    //     url: 'https://sentry.io/',
+    //   },
+    // ],
     [
       'expo-build-properties', {
         android: {
           allowBackup: false,
-          enableShrinkResourcesInReleaseBuilds: true,
           enableProguardInReleaseBuilds: true,
-          //newArchEnabled: true,
+          enableShrinkResourcesInReleaseBuilds: true,
         },
-        ios: {
-          //newArchEnabled: true,
-        },
+        ios: {},
       },
     ],
     [
       'expo-font', {
-        fonts: ['assets/fonts/SpaceMono.ttf'],
+        fonts: [ 'assets/fonts/SpaceMono.ttf' ],
       },
     ],
     'expo-localization',
+    'expo-router',
+    [
+      'expo-splash-screen',
+      {
+        backgroundColor: BG_COLOR,
+        image: SPLASH,
+      },
+    ],
+    [
+      'expo-sqlite',
+      {},
+    ],
+    [ 'react-native-edge-to-edge' ],
   ],
   primaryColor: BG_COLOR,
   runtimeVersion: {
@@ -114,11 +124,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   },
   scheme: 'nc-domain-finder',
   slug: 'nc-domain-finder',
-  splash: {
-    backgroundColor: BG_COLOR,
-    image: SPLASH,
-    resizeMode: 'contain',
-  },
   updates: {
     fallbackToCacheTimeout: 0,
     url: 'https://u.expo.dev/9df8db98-43eb-41f6-a9e8-04873f919754',

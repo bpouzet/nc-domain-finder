@@ -3,20 +3,19 @@ import * as Linking from 'expo-linking' ;
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated' ;
 import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
-import { useRouter, useLocalSearchParams } from 'expo-router' ;
-import { startAddEventToCalendarAsync } from 'expo-community-add-event-to-calendar' ;
+import { useLocalSearchParams, useRouter } from 'expo-router' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useState } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { getDateTimeWithTz, getDateTimeWithTzEndDay } from "@helpers/getDateTimeWithTz";
-import getRelativeTimeFromNow from "@helpers/getRelativeTime";
+import { getDateTimeWithTz, getDateTimeWithTzEndDay } from '@helpers/getDateTimeWithTz' ;
 import ErrorView from '@components/views/ErrorView' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
+import getRelativeTimeFromNow from '@helpers/getRelativeTime' ;
+import { useDomain } from '@hooks/queries' ;
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
-import { useDomain } from "@hooks/queries";
 
 import type { DomainList } from '../../schemas/DomainListSchema' ;
 
@@ -91,7 +90,7 @@ export default function Domain() {
       const timeZone = 'Pacific/Noumea' ;
       const eventTitle = t('reminder.title', { val: domain + extension }) ;
 
-      let endDate = getDateTimeWithTzEndDay(data.dateExpiration) ;
+      const endDate = getDateTimeWithTzEndDay(data.dateExpiration) ;
 
       const startDate = getDateTimeWithTz(data.dateExpiration) ;
 
@@ -103,7 +102,7 @@ export default function Domain() {
           title: eventTitle,
         } ;
 
-        await startAddEventToCalendarAsync(event) ;
+        await Calendar.createEventInCalendarAsync(event) ;
 
       } else if(Platform.OS === 'ios') {
         // check if calendar is available
@@ -219,9 +218,9 @@ export default function Domain() {
           {(top && top > 0) && (
             <View
               style={{
-                position: 'absolute',
                 backgroundColor: 'black',
                 height: top,
+                position: 'absolute',
                 opacity: 0.2,
                 width: '100%',
                 zIndex: 10,
@@ -269,7 +268,7 @@ export default function Domain() {
       <Snackbar
         visible={showSnackBar}
         onDismiss={() => setShowSnackBar(false)}
-        style={{ bottom: BOTTOM_APPBAR_HEIGHT, backgroundColor: theme.colors.primary }}
+        style={{ backgroundColor: theme.colors.primary, bottom: BOTTOM_APPBAR_HEIGHT }}
       >{t('reminder.added')}</Snackbar>
 
       <Animated.View
