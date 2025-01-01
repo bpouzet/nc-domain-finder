@@ -60,9 +60,9 @@ function RootLayout() {
   const colorScheme = useColorScheme() ;
   const insets = useSafeAreaInsets() ;
 
-  const theme = useMemo(() => (
-    colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme
-  ), [ colorScheme ] ) ;
+  const theme = useMemo(() => {
+    return colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme ;
+  }, [ colorScheme ] ) ;
 
   const [ appIsReady, setAppIsReady ] = useState<boolean>(false) ;
 
