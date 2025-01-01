@@ -3,6 +3,7 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 
 import { persister, queryClient } from '@helpers/query' ;
 import useAppUpdate from '@hooks/useAppUpdate' ;
+import useCheckVersion from '@hooks/useCheckVersion' ;
 
 type Props = {
   children: React.ReactNode
@@ -10,6 +11,8 @@ type Props = {
 
 const AppRoot: FC<Props> = ({ children }) => {
   useAppUpdate() ;
+
+  useCheckVersion() ;
 
   return (
     <PersistQueryClientProvider

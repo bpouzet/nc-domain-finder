@@ -52,6 +52,9 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   icon: ICON,
   ios: {
     bundleIdentifier: PACKAGE,
+    entitlements: {
+      'aps-environment': 'production',
+    },
     infoPlist: {
       CFBundleAllowMixedLocalizations: true,
       CFBundleLocalizations: [ 'en', 'fr' ],
