@@ -32,12 +32,17 @@ const options = {
   year: 'numeric',
 } ;
 
+type Params = {
+  domain: string
+  extension: string
+} ;
+
 export default function Domain() {
   const { i18n, t } = useTranslation() ;
   const theme = useTheme() ;
   const router = useRouter() ;
 
-  const { domain, extension } = useLocalSearchParams() ;
+  const { domain, extension } = useLocalSearchParams<Params>() ;
 
   const { bottom, top } = useSafeAreaInsets() ;
   const { height } = useWindowDimensions() ;
@@ -189,18 +194,18 @@ export default function Domain() {
   } else if( error ) {
 
     // default
-    let errorTitle = t('domain.error.title') ;
-    let errorDescription = t('domain.error.title') ;
+    const errorTitle = t('domain.error.title') ;
+    const errorDescription = t('domain.error.title') ;
 
-    if( error.response ) {
-      if( error.response.status === 404 ) {
-        errorTitle = t('domain.notFound.title') ;
-        errorDescription = t('domain.notFound.description', { val: (domain + extension) }) ;
-      } else {
-        errorTitle = t('domain.badRequest.title') ;
-        errorDescription = t('domain.badRequest.description', { val: (domain + extension) }) ;
-      }
-    }
+    // if( error.response ) {
+    //   if( error.response.status === 404 ) {
+    //     errorTitle = t('domain.notFound.title') ;
+    //     errorDescription = t('domain.notFound.description', { val: (domain + extension) }) ;
+    //   } else {
+    //     errorTitle = t('domain.badRequest.title') ;
+    //     errorDescription = t('domain.badRequest.description', { val: (domain + extension) }) ;
+    //   }
+    // }
 
     return (
       <ErrorView
@@ -220,8 +225,8 @@ export default function Domain() {
               style={{
                 backgroundColor: 'black',
                 height: top,
-                position: 'absolute',
                 opacity: 0.2,
+                position: 'absolute',
                 width: '100%',
                 zIndex: 10,
               }}

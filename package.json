@@ -8,6 +8,7 @@
     "build:dev:ios": "cross-env NODE_ENV=development APP_ENV=development npx eas-cli build --profile development --platform ios",
     "build:dev:ios:simulator": "cross-env NODE_ENV=development APP_ENV=development npx eas-cli build --profile development-simulator --platform ios",
     "build:staging:android": "cross-env NODE_ENV=production APP_ENV=staging npx eas-cli build --profile staging --platform android",
+    "build:production": "cross-env NODE_ENV=production APP_ENV=production npx eas-cli build --profile production --platform all --auto-submit-with-profile=production",
     "update:staging": "cross-env NODE_ENV=production APP_ENV=staging npx eas-cli update --channel staging --auto",
     "update:production": "cross-env NODE_ENV=production APP_ENV=production npx eas-cli update --channel production --auto",
     "prebuild:staging": "cross-env NODE_ENV=production APP_ENV=staging npx expo prebuild",

@@ -6,7 +6,7 @@ export default function useColorScheme() {
     (state) => state.theme
   ) ;
 
-  const systemTheme = _useColorScheme() ;
+  const systemTheme = _useColorScheme() ?? 'light' ;
 
   // Return the appropriate theme without causing side effects
   return themeStore === 'default' ? systemTheme : themeStore ;
