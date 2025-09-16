@@ -1,7 +1,7 @@
 import 'dotenv/config' ;
 
-import { ConfigContext } from 'expo/config' ;
-import { MyExpoConfig } from '@customTypes/expoConfig' ;
+import type { ConfigContext } from 'expo/config' ;
+import type { MyExpoConfig } from '@customTypes/expoConfig' ;
 import manifest from './package.json' ;
 
 const IS_DEV = process.env.APP_ENV === 'development' ;
@@ -27,6 +27,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     blockedPermissions: [],
     package: PACKAGE,
     permissions: [],
+    predictiveBackGestureEnabled: true,
     softwareKeyboardLayoutMode: 'pan',
   },
   androidNavigationBar: {
@@ -55,9 +56,11 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     entitlements: {
       'aps-environment': 'production',
     },
+    icon: './assets/images/app.icon',
     infoPlist: {
       CFBundleAllowMixedLocalizations: true,
       CFBundleLocalizations: [ 'en', 'fr' ],
+      ITSAppUsesNonExemptEncryption: false,
       LSApplicationQueriesSchemes: [ 'itms-apps' ],
     },
     privacyManifests: {
@@ -76,29 +79,31 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     fr: './assets/translations/fr.json',
   },
   name: 'NC Domain Finder' + (IS_STAGING ? ' (staging)' : IS_DEV ? '(dev)' : ''),
-  newArchEnabled: false,
+  newArchEnabled: true,
   orientation: 'portrait',
   platforms: [
     'android',
     'ios',
   ],
   plugins: [
-    // [
-    //   '@sentry/react-native/expo',
-    //   {
-    //     organization: process.env.SENTRY_ORG,
-    //     project: process.env.SENTRY_PROJECT,
-    //     url: 'https://sentry.io/',
-    //   },
-    // ],
+    [
+      '@sentry/react-native/expo',
+      {
+        organization: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        url: 'https://sentry.io/',
+      },
+    ],
     [
       'expo-build-properties', {
         android: {
           allowBackup: false,
-          enableProguardInReleaseBuilds: true,
+          enableMinifyInReleaseBuilds: true,
           enableShrinkResourcesInReleaseBuilds: true,
         },
-        ios: {},
+        ios: {
+          useFrameworks: 'static',
+        },
       },
     ],
     [
@@ -106,7 +111,13 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
         fonts: [ 'assets/fonts/SpaceMono.ttf' ],
       },
     ],
-    'expo-localization',
+    [
+      'expo-localization',
+      {
+        fallbackLocale: 'en',
+        supportedLocales: [ 'en', 'fr' ],
+      },
+    ],
     'expo-router',
     [
       'expo-splash-screen',

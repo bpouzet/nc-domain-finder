@@ -24,6 +24,9 @@ export default function RootLayout() {
       initialRouteName='home'
       backBehavior='history'
       theme={theme}
+      screenOptions={{
+        headerShown: false,
+      }}
     >
       <MaterialBottomTabs.Screen
         name='home'

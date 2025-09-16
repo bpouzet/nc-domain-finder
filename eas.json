@@ -6,7 +6,7 @@
   },
   "build": {
     "development": {
-      "bun": "1.1.42",
+      "bun": "1.2.0",
       "developmentClient": true,
       "distribution": "internal",
       "channel": "development",
@@ -25,7 +25,7 @@
       "android": {
         "buildType": "apk"
       },
-      "bun": "1.1.42",
+      "bun": "1.2.0",
       "distribution": "internal",
       "channel": "staging",
       "env": {
@@ -34,7 +34,7 @@
     },
     "production": {
       "autoIncrement": true,
-      "bun": "1.1.42",
+      "bun": "1.2.0",
       "channel": "production",
       "env": {
         "APP_ENV": "production",
@@ -46,12 +46,14 @@
   "submit": {
     "staging": {
       "ios": {
+        "appleId": "${EXPO_APPLE_ID}",
         "appleTeamId": "${EXPO_APPLE_TEAM_ID}",
         "ascAppId": "${EXPO_ASC_APP_ID}"
       }
     },
     "production": {
       "ios": {
+        "appleId": "${EXPO_APPLE_ID}",
         "appleTeamId": "${EXPO_APPLE_TEAM_ID}",
         "ascAppId": "${EXPO_ASC_APP_ID}"
       }

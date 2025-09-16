@@ -3,7 +3,7 @@ import Constants from 'expo-constants' ;
 import { QueryClient } from '@tanstack/react-query' ;
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister' ;
 
-import { MyExpoConfig } from '@customTypes/expoConfig' ;
+import type { MyExpoConfig } from '@customTypes/expoConfig' ;
 
 const API_URL = 'https://domaine-nc.p.rapidapi.com/domaines' ;
 

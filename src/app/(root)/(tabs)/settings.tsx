@@ -14,10 +14,7 @@ export default function Settings() {
 
   const themeStore = useSettingsStore(state => state.theme) ;
 
-  // TODO Do better
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const language = t(`languages.${i18n.language}`) ;
+  const language = i18n.language === 'fr' ? t('languages.fr') : t('languages.en') ;
 
   const [ visibleLanguageModal, setVisibleLanguageModal ] = useState<boolean>(false) ;
   const [ visibleThemeModal, setVisibleThemeModal ] = useState<boolean>(false) ;

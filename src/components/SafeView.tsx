@@ -1,4 +1,4 @@
-import React, { FC } from 'react' ;
+import React, { type FC } from 'react' ;
 import { SafeAreaView } from 'react-native-safe-area-context' ;
 
 type Props = {

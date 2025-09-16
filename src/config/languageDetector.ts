@@ -1,7 +1,7 @@
 import * as Localization from 'expo-localization' ;
 import * as Sentry from '@sentry/react-native' ;
 import AsyncStorage from 'expo-sqlite/kv-store' ;
-import { LanguageDetectorAsyncModule } from 'i18next' ;
+import type { LanguageDetectorAsyncModule } from 'i18next' ;
 
 const STORE_LOCALE_KEY = 'settings.locale' ;
 
@@ -28,7 +28,7 @@ export const initLanguageDetector: LanguageDetectorAsyncModule = {
           try {
             //if language was not stored yet, use device's locale
             const locales = Localization.getLocales() ;
-            if(locales.length > 0) {
+            if (locales.length > 0 && locales[0]?.languageCode) {
               deviceLocale = locales[0].languageCode ;
             }
           } catch (e) {

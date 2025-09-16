@@ -4,8 +4,8 @@ import * as Sentry from '@sentry/react-native' ;
 import SpInAppUpdates, {
   IAUInstallStatus,
   IAUUpdateKind,
-  StartUpdateOptions,
-  StatusUpdateEvent,
+  type StartUpdateOptions,
+  type StatusUpdateEvent,
 } from 'sp-react-native-in-app-updates' ;
 import { Platform } from 'react-native' ;
 //import checkVersion from 'react-native-store-version' ;

@@ -22,25 +22,75 @@
 </div>
 
 ## Getting Started
-<br>
 
 NC Domain Finder is a React Native alternative of [Domaine NC Mobile](https://github.com/lschaeffer313/domaine-nc-mobile)
 
 NC Domain Finder is the ideal application for anyone looking to register a domain name in .nc or simply wanting to learn more about already registered domain names. With NC Domain Finder, you can perform quick and accurate searches to find available domain names, discover information about current owners, and learn more about domain names registered in New Caledonia.
 
-<br>
+## Tech Stack
+
+- **Framework**: React Native 0.81.4 with **New Architecture** enabled
+- **Platform**: Expo SDK 54
+- **React**: 19.1.0
+- **Package Manager**: Bun 1.2.x
+- **Language**: TypeScript
+- **Navigation**: Expo Router (file-based routing)
+- **UI Library**: React Native Paper
+- **State Management**: Zustand + TanStack Query
+- **Database**: Expo SQLite
+- **Internationalization**: i18next
+
+## Prerequisites
+
+- Node.js 22+ (LTS "Jod" - recommended for best performance)
+- [Bun](https://bun.sh/) package manager
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [EAS CLI](https://docs.expo.dev/build/setup/) for builds
+- iOS Simulator (macOS) or Android Emulator
 
 ## Install and develop locally
 
-To install this app and play with the code locally on your
-machine, just do the following:
+1. **Clone this repo**
+   ```bash
+   git clone https://github.com/bpouzet/nc-domain-finder.git
+   cd nc-domain-finder
+   ```
 
-1. Clone this repo
-1. From the directory where you cloned this repo, run `yarn`
-1. Build the dev client for Android run `yarn dev:android` or iOS simulator run `yarn dev:ios:simulator`
-1. Run `yarn start`
+2. **Install dependencies**
+   ```bash
+   bun install
+   ```
 
-<br>
+3. **Start development server**
+   ```bash
+   bun start
+   ```
+
+4. **Build and run on devices**
+
+   For development builds:
+   ```bash
+   # Android development build
+   bun run build:dev:android
+
+   # iOS development build
+   bun run build:dev:ios
+
+   # iOS simulator build
+   bun run build:dev:ios:simulator
+   ```
+
+5. **Other useful commands**
+   ```bash
+   # Run tests
+   bun test
+
+   # Lint code
+   bun run lint
+
+   # Clean prebuild
+   npx expo prebuild --clean
+   ```
 
 
 ## Contributors

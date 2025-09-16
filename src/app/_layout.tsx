@@ -1,19 +1,19 @@
 import * as Font from 'expo-font' ;
 import * as Sentry from '@sentry/react-native' ;
 import { KeyboardAvoidingView, View } from 'react-native' ;
+import { Slot, SplashScreen, useNavigationContainerRef } from 'expo-router' ;
+import { useCallback, useEffect, useMemo, useState } from 'react' ;
+import Constants from 'expo-constants' ;
 import { KeyboardProvider } from 'react-native-keyboard-controller' ;
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
 import { PaperProvider } from 'react-native-paper' ;
+import RelativeTime from 'dayjs/plugin/relativeTime' ;
 import { SystemBars } from 'react-native-edge-to-edge' ;
 import { ThemeProvider } from '@react-navigation/native' ;
-import { isRunningInExpoGo } from 'expo' ;
-import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
-import React, { useCallback, useEffect, useMemo, useState } from 'react' ;
-import { Slot, SplashScreen, useNavigationContainerRef } from 'expo-router' ;
-import Constants from 'expo-constants' ;
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
-import RelativeTime from 'dayjs/plugin/relativeTime' ;
 import Utc from 'dayjs/plugin/utc' ;
 import dayjs from 'dayjs' ;
+import { isRunningInExpoGo } from 'expo' ;
+import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 
 dayjs.extend(RelativeTime) ;
 dayjs.extend(Utc) ;
@@ -25,7 +25,7 @@ import ConnectionModal from '@components/modals/ConnectionModal' ;
 import useColorScheme from '@hooks/useColorScheme' ;
 import useIsConnected from '@hooks/useIsConnected' ;
 
-import { MyExpoConfig } from '@customTypes/expoConfig' ;
+import type { MyExpoConfig } from '@customTypes/expoConfig' ;
 
 import '../i18n' ;
 
@@ -40,6 +40,13 @@ const isDev = process.env.APP_ENV === 'development' ;
 
 // Init Sentry
 Sentry.init({
+  beforeSend(event) {
+    // Filter out development errors if needed
+    if (isDev) {
+      console.log('Sentry event (dev):', event) ;
+    }
+    return event ;
+  },
   debug: false, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
   dsn: (Constants.expoConfig as MyExpoConfig).extra.sentry.dsn,
   enableNative: !isDev,
@@ -47,6 +54,8 @@ Sentry.init({
   enabled: !isDev,
   environment: process.env.APP_ENV,
   integrations: [ navigationIntegration ],
+  profilesSampleRate: 1.0, // Profile 100% of transactions in production
+  sendDefaultPii: true, // Include user context and additional data
   tracesSampleRate: 1.0,
 }) ;
 

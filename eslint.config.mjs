@@ -72,9 +72,10 @@ export default [...compat.extends(
 
         "comma-style": ["error", "last"],
 
-        indent: ["error", 2, {
-            SwitchCase: 1,
-        }],
+        // Temporarily disabled due to stack overflow issue
+        // indent: ["error", 2, {
+        //     SwitchCase: 1,
+        // }],
 
         "key-spacing": ["error", {
             beforeColon: false,

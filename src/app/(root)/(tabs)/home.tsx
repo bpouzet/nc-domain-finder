@@ -1,11 +1,11 @@
 import { Divider, List, Searchbar, Text } from 'react-native-paper' ;
-import { FlashList, ListRenderItem } from '@shopify/flash-list' ;
-import { SetStateAction, useCallback, useState } from 'react' ;
+import { FlashList, type ListRenderItem } from '@shopify/flash-list' ;
+import { type SetStateAction, useCallback, useState } from 'react' ;
 import { View } from 'react-native' ;
 import { useRouter } from 'expo-router' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { DomainList } from '../../../schemas/DomainListSchema' ;
+import type { DomainList } from '../../../schemas/DomainListSchema' ;
 import SafeView from '@components/SafeView' ;
 import getFavicon from '@helpers/favicon' ;
 import useDebounce from '@hooks/useDebounce' ;
@@ -67,12 +67,12 @@ export default function Home () {
         onChangeText={onChangeSearch}
         value={value}
         loading={isFetching}
+        autoCapitalize='none'
       />
 
       <FlashList
         data={data}
         renderItem={renderItem}
-        estimatedItemSize={70}
         ItemSeparatorComponent={ItemSeparator}
         ListEmptyComponent={EmptyList}
       />

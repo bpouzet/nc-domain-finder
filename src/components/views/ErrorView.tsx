@@ -1,6 +1,6 @@
 import { Avatar, Button, Text, useTheme } from 'react-native-paper' ;
-import { GestureResponderEvent, View } from 'react-native' ;
-import { IconSource } from 'react-native-paper/lib/typescript/components/Icon' ;
+import { type GestureResponderEvent, View } from 'react-native' ;
+import type { IconSource } from 'react-native-paper/lib/typescript/components/Icon' ;
 import { useRouter } from 'expo-router' ;
 import { useTranslation } from 'react-i18next' ;
 
