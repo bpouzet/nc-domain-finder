@@ -32,6 +32,19 @@ module.exports = function(api) {
         },
       ],
     ],
-    presets: [['babel-preset-expo', { jsxRuntime: 'automatic' }]],
+    presets: [
+      [
+        'babel-preset-expo',
+        {
+          jsxRuntime: 'automatic',
+          'react-compiler': {
+            sources: filename => {
+              // Match file names to include in the React Compiler.
+              return filename.includes('src/app');
+            },
+          }
+        }
+      ]
+    ],
   } ;
 } ;

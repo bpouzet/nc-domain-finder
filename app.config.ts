@@ -39,6 +39,9 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     barStyle: 'light-content',
     translucent: false,
   },
+  experiments: {
+    reactCompiler: true,
+  },
   extra: {
     api: {
       key: process.env.API_KEY,
@@ -108,7 +111,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     ],
     [
       'expo-font', {
-        fonts: [ 'assets/fonts/SpaceMono.ttf' ],
+        fonts: [ 'assets/fonts/SpaceMono-Regular.ttf' ],
       },
     ],
     [

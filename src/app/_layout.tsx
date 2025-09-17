@@ -1,7 +1,7 @@
 import * as Font from 'expo-font' ;
 import * as Sentry from '@sentry/react-native' ;
 import { KeyboardAvoidingView, View } from 'react-native' ;
-import { Slot, SplashScreen, useNavigationContainerRef } from 'expo-router' ;
+import { SplashScreen, Stack, useNavigationContainerRef } from 'expo-router' ;
 import { useCallback, useEffect, useMemo, useState } from 'react' ;
 import Constants from 'expo-constants' ;
 import { KeyboardProvider } from 'react-native-keyboard-controller' ;
@@ -105,7 +105,7 @@ function RootLayout() {
   }
 
   return (
-    <View style={{ backgroundColor: theme.colors.background, flex: 1 }} onLayout={onLayoutRootView}>
+    <View style={{ backgroundColor: theme.colors.surfaceVariant, flex: 1 }} onLayout={onLayoutRootView}>
       <PaperProvider theme={theme}>
         <ThemeProvider value={theme}>
           <KeyboardProvider>
@@ -115,7 +115,10 @@ function RootLayout() {
               style={{ flex: 1 }}
             >
               <AppRoot>
-                <Slot />
+                <Stack screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name='(tabs)' />
+                  <Stack.Screen name='(zShared)' />
+                </Stack>
               </AppRoot>
               <ConnectionModal isConnected={isConnected} />
             </KeyboardAvoidingView>

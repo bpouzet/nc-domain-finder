@@ -1,18 +1,21 @@
 import { MD3DarkTheme, MD3LightTheme, adaptNavigationTheme, configureFonts } from 'react-native-paper' ;
-import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native' ;
+import { DarkTheme as ReactNavigationDarkTheme, DefaultTheme as ReactNavigationDefaultTheme } from '@react-navigation/native' ;
 
 import { dark } from '@config/dark' ;
 import { light } from '@config/light' ;
 
+import type { MD3Type } from 'react-native-paper/lib/typescript/types' ;
+
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationDark: NavigationDarkTheme,
-  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationDark: ReactNavigationDarkTheme,
+  reactNavigationLight: ReactNavigationDefaultTheme,
 }) ;
 
-const fontConfig = {
-  fontFamily: 'SpaceMono',
-} ;
+const fontConfig: Partial<MD3Type> = {
+  fontFamily: 'SpaceMono-Regular',
+} as const ;
 
+// Thèmes unifiés pour MD3 (compatible avec PaperProvider et ThemeProvider)
 const CombinedDefaultTheme = {
   ...MD3LightTheme,
   ...LightTheme,
@@ -21,7 +24,7 @@ const CombinedDefaultTheme = {
     ...LightTheme.colors,
     ...light.colors,
   },
-  fonts: configureFonts({ config: fontConfig }),
+  fonts: configureFonts({ config: fontConfig, isV3: true }),
 } ;
 
 const CombinedDarkTheme = {
@@ -32,7 +35,7 @@ const CombinedDarkTheme = {
     ...DarkTheme.colors,
     ...dark.colors,
   },
-  fonts: configureFonts({ config: fontConfig }),
+  fonts: configureFonts({ config: fontConfig, isV3: true }),
 } ;
 
 export { CombinedDarkTheme, CombinedDefaultTheme } ;

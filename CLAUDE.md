@@ -9,7 +9,7 @@ NC Domain Finder is a React Native mobile application built with Expo 54 that al
 ## Development Commands
 
 ### Package Manager
-- Uses Bun as the package manager (v1.1.42)
+- Uses Bun as the package manager (v1.2.0+)
 - Install dependencies: `bun install`
 
 ### Development & Testing
@@ -18,6 +18,7 @@ NC Domain Finder is a React Native mobile application built with Expo 54 that al
 - Run iOS app: `expo run:ios`
 - Run tests: `jest --watchAll`
 - Lint code: `eslint src/ app.config.ts`
+- Type check: `tsc --noEmit`
 
 ### Build Commands
 - Dev Android build: `cross-env NODE_ENV=development APP_ENV=development npx eas-cli build --profile development --platform android`
@@ -63,6 +64,8 @@ NC Domain Finder is a React Native mobile application built with Expo 54 that al
 - Offline capability with React Query persistence
 - In-app updates using Expo Updates
 - Error boundary with Sentry integration
+- Native tab navigation using `expo-router/unstable-native-tabs` for enhanced performance
+- React Compiler enabled for automatic optimization and memoization
 
 ### Path Aliases
 The project uses TypeScript path aliases configured in both `tsconfig.json` and `babel.config.js`:
@@ -127,6 +130,8 @@ This project uses React Native's New Architecture for enhanced performance and m
 ### Development Requirements
 - **Node.js**: 22+ LTS (Jod) - Required for optimal performance and latest features
 - **Bun**: 1.2.0+ - Package manager with enhanced lockfile compatibility
+- **Navigation**: Native tabs with `expo-router/unstable-native-tabs` for optimal performance
+- **React Compiler**: Enabled with strict compilation mode for automatic optimization
 - **Expo CLI**: Latest version
 - **EAS CLI**: For building and deploying
 
@@ -135,8 +140,43 @@ This project uses React Native's New Architecture for enhanced performance and m
 - Run with New Architecture: `npx expo run:ios` or `npx expo run:android`
 - Debug New Architecture: Use Flipper or React DevTools with JSI support
 
+### React Compiler Configuration
+
+React Compiler is enabled with strict compilation mode for automatic optimization and memoization. The configuration is set in `babel.config.js`:
+
+```javascript
+presets: [
+  [
+    'babel-preset-expo',
+    {
+      jsxRuntime: 'automatic',
+      'react-compiler': {
+        compilationMode: 'strict'
+      }
+    }
+  ]
+]
+```
+
+#### Opting Out of React Compiler
+You can disable React Compiler for specific components using the "use no memo" directive:
+
+```javascript
+function MyComponent() {
+  'use no memo';
+  // This component will not be optimized by React Compiler
+  return <Text>Component content</Text>;
+}
+```
+
+#### Benefits
+- Automatic memoization of expensive calculations
+- Reduced re-renders through intelligent dependency tracking
+- Better performance without manual `useMemo` and `useCallback` usage
+
 ### Troubleshooting
 - If builds fail, clean node_modules and run `bun install`
 - For iOS issues, delete ios/ folder and run `npx expo prebuild --platform ios`
 - For Android issues, delete android/ folder and run `npx expo prebuild --platform android`
 - Use `npx react-native info` to verify New Architecture status
+- React Compiler logs "Experimental React Compiler is enabled." during development

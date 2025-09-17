@@ -1,6 +1,6 @@
 import * as Application from 'expo-application' ;
 import * as Updates from 'expo-updates' ;
-import { Appbar, List } from 'react-native-paper' ;
+import { Appbar, List, useTheme } from 'react-native-paper' ;
 import { ScrollView, StyleSheet, View } from 'react-native' ;
 import { useState } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
@@ -11,7 +11,7 @@ import useSettingsStore from '@hooks/useSettingsStore' ;
 
 export default function Settings() {
   const { t, i18n } = useTranslation() ;
-
+  const theme = useTheme() ;
   const themeStore = useSettingsStore(state => state.theme) ;
 
   const language = i18n.language === 'fr' ? t('languages.fr') : t('languages.en') ;
@@ -20,7 +20,7 @@ export default function Settings() {
   const [ visibleThemeModal, setVisibleThemeModal ] = useState<boolean>(false) ;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
       <Appbar.Header>
         <Appbar.Content title={t('settings.title')} />
       </Appbar.Header>

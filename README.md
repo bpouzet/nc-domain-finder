@@ -88,6 +88,9 @@ NC Domain Finder is the ideal application for anyone looking to register a domai
    # Lint code
    bun run lint
 
+   # Type check
+   bun run typecheck
+
    # Clean prebuild
    npx expo prebuild --clean
    ```
