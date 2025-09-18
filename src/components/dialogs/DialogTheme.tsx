@@ -1,9 +1,9 @@
 import { Dialog, Portal, RadioButton } from 'react-native-paper' ;
-import { FC } from 'react' ;
+import type { FC } from 'react' ;
 import { StyleSheet } from 'react-native' ;
 import { useTranslation } from 'react-i18next' ;
 
-import useSettingsStore, { Theme } from '@hooks/useSettingsStore' ;
+import useSettingsStore, { type Theme } from '@hooks/useSettingsStore' ;
 
 type Props = {
   visible: boolean;

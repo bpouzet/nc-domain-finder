@@ -1,4 +1,4 @@
-import { FlexAlignType, View } from 'react-native' ;
+import { type FlexAlignType, View } from 'react-native' ;
 import { Image } from 'expo-image' ;
 
 const FAVICONS_URL = 'https://icons.duckduckgo.com/ip3/' ;

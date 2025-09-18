@@ -1,18 +1,18 @@
-import { Appbar, Divider, List, Text } from 'react-native-paper' ;
-import { FlashList, ListRenderItem } from '@shopify/flash-list' ;
+import { Appbar, Divider, List, Text, useTheme } from 'react-native-paper' ;
+import { FlashList, type ListRenderItem } from '@shopify/flash-list' ;
 import { View } from 'react-native' ;
 import { useCallback } from 'react' ;
 import useFavoritesStore from '@hooks/useFavoritesStore' ;
 import { useRouter } from 'expo-router' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { DomainList } from '../../../schemas/DomainListSchema' ;
+import type { DomainList } from '../../schemas/DomainListSchema' ;
 import getFavicon from '@helpers/favicon' ;
 
 export default function Favorites() {
   const { t } = useTranslation() ;
   const router = useRouter() ;
-
+  const theme = useTheme() ;
   const favorites = useFavoritesStore(state => state.favorites) ;
 
   const onPress = (item: DomainList) => () => router.push({
@@ -47,13 +47,12 @@ export default function Favorites() {
   const ItemSeparator = useCallback(() => <Divider />, []) ;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>
       <Appbar.Header>
         <Appbar.Content title={t('favorites.title')} />
       </Appbar.Header>
       <FlashList
         data={favorites}
-        estimatedItemSize={70}
         renderItem={renderItem}
         ItemSeparatorComponent={ItemSeparator}
         ListEmptyComponent={EmptyList}

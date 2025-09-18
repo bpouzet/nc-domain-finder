@@ -1,4 +1,4 @@
-import NetInfo, { NetInfoSubscription } from '@react-native-community/netinfo' ;
+import NetInfo, { type NetInfoSubscription } from '@react-native-community/netinfo' ;
 import { useEffect, useState } from 'react' ;
 import useAppState from '@hooks/useAppState' ;
 
@@ -14,7 +14,7 @@ const useIsConnected = () => {
 
     if( appStateVisible === 'active' ) {
       unsubscribe = NetInfo.addEventListener(state => {
-        setIsConnect(state.isConnected) ;
+        setIsConnect(state.isConnected ?? false) ;
       }) ;
     } else {
       if( unsubscribe ) {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react' ;
+import React, { type FC } from 'react' ;
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client' ;
 
 import { persister, queryClient } from '@helpers/query' ;

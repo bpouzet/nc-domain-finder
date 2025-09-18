@@ -17,13 +17,19 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
-export default [...compat.extends(
+export default [
+  {
+    ignores: ['babel.config.js', 'metro.config.js', 'jest.config.js', '*.config.js', 'dist/**', 'node_modules/**']
+  },
+  ...compat.extends(
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-), {
+  ),
+  {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
         react,
         "react-hooks": fixupPluginRules(reactHooks),
@@ -72,9 +78,10 @@ export default [...compat.extends(
 
         "comma-style": ["error", "last"],
 
-        indent: ["error", 2, {
-            SwitchCase: 1,
-        }],
+        // Temporarily disabled due to stack overflow issue
+        // indent: ["error", 2, {
+        //     SwitchCase: 1,
+        // }],
 
         "key-spacing": ["error", {
             beforeColon: false,

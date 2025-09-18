@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react-native' ;
 import { Avatar, Button, Text, useTheme } from 'react-native-paper' ;
-import { FC, useEffect } from 'react' ;
-import { ErrorBoundaryProps } from 'expo-router' ;
+import { type FC, useEffect } from 'react' ;
+import type { ErrorBoundaryProps } from 'expo-router' ;
 import { View } from 'react-native' ;
 import { useTranslation } from 'react-i18next' ;
 
@@ -13,7 +13,17 @@ const ErrorBoundary: FC<ErrorBoundaryProps> = ({ error, retry }) => {
   const { t } = useTranslation() ;
 
   useEffect(() => {
-    Sentry.captureException(error) ;
+    // Capture the error with additional context
+    Sentry.withScope((scope) => {
+      scope.setTag('errorBoundary', true) ;
+      scope.setLevel('error') ;
+      scope.setContext('errorInfo', {
+        componentStack: error.stack,
+        errorMessage: error.message,
+        errorName: error.name,
+      }) ;
+      Sentry.captureException(error) ;
+    }) ;
   }, [ error ]) ;
 
   return (

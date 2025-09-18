@@ -19,7 +19,7 @@ void i18next
   .use(initReactI18next)
   .use(initLanguageDetector)
   .init({
-    compatibilityJSON: 'v3',
+    compatibilityJSON: 'v4',
     //language to use if translations in user language are not available
     fallbackLng: 'en',
     interpolation: {

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        bun: ["1.1.42"]
+        bun: ["1.2.10"]
     name: Install and build with Bun ${{ matrix.bun }}
     steps:
       - name: Check for EXPO_TOKEN
@@ -20,14 +20,14 @@ jobs:
           fi
 
       - name: 🏗 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1
 
       - name: 🏗 Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: ${{ matrix.node }}
+          bun-version: ${{ matrix.bun }}
 
       - name: 🏗 Setup Expo and EAS
         uses: expo/expo-github-action@v8
@@ -45,7 +45,7 @@ jobs:
           EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
           EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
           EXPO_APPLE_TEAM_TYPE: ${{ secrets.EXPO_APPLE_TEAM_TYPE }}
-          EXPO_APP_ID: ${{ secrets.EXPO_APP_ID }}
+          EXPO_APPLE_ID: ${{ secrets.EXPO_APPLE_ID }}
           EXPO_ASC_APP_ID: ${{ secrets.EXPO_ASC_APP_ID }}
           EXPO_ASC_ISSUER_ID: ${{ secrets.EXPO_ASC_ISSUER_ID }}
           EXPO_ASC_KEY_ID: ${{ secrets.EXPO_ASC_KEY_ID }}

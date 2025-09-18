@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next' ;
 
 import { getDateTimeWithTz, getDateTimeWithTzEndDay } from '@helpers/getDateTimeWithTz' ;
 import ErrorView from '@components/views/ErrorView' ;
+import GlassViewComponent from '@components/GlassViewComponent' ;
 import LoaderImage from '@components/LoaderImage' ;
 import LoaderItems from '@components/LoaderItems' ;
 import getFavicon from '@helpers/favicon' ;
@@ -252,12 +253,31 @@ export default function Domain() {
                 position: 'absolute',
                 top: -top,
                 width: '100%',
+                zIndex: -1,
               }}
             />
-            <Appbar.BackAction
-              style={{ backgroundColor: theme.colors.background, zIndex: 2 }}
-              onPress={() => router.back()}
-            />
+            <GlassViewComponent
+              style={{
+                borderRadius: 100,
+                left: 8,
+                position: 'absolute',
+                top: 8,
+                zIndex: 2,
+              }}
+              glassEffectStyle="clear"
+              isInteractive
+              fallback={
+                <Appbar.BackAction
+                  style={{ backgroundColor: theme.colors.background, zIndex: 2 }}
+                  onPress={() => router.back()}
+                />
+              }
+            >
+              <Appbar.BackAction
+                style={{ backgroundColor: 'transparent' }}
+                onPress={() => router.back()}
+              />
+            </GlassViewComponent>
           </Appbar.Header>
         </View>
 
@@ -307,17 +327,38 @@ export default function Domain() {
             icon="bell-outline"
             onPress={onAddReminder}
           />
-          <FAB
-            accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
-            mode="flat"
-            size="medium"
-            icon={isItemFavorite ? 'heart' : 'heart-outline'}
-            onPress={onChangeFavorite}
-            style={[
-              styles.fab,
-              { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
-            ]}
-          />
+          <GlassViewComponent
+            style={{
+              borderRadius: 15,
+              position: 'absolute',
+              right: 16,
+              top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2,
+            }}
+            glassEffectStyle="clear"
+            isInteractive
+            fallback={
+              <FAB
+                accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
+                mode="flat"
+                size="medium"
+                icon={isItemFavorite ? 'heart' : 'heart-outline'}
+                onPress={onChangeFavorite}
+                style={[
+                  styles.fab,
+                  { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+                ]}
+              />
+            }
+          >
+            <FAB
+              accessibilityLabel={isItemFavorite ? t('actions.removeFavorite') : t('actions.addFavorite')}
+              mode="flat"
+              size="medium"
+              icon={isItemFavorite ? 'heart' : 'heart-outline'}
+              onPress={onChangeFavorite}
+              style={{ backgroundColor: 'transparent' }}
+            />
+          </GlassViewComponent>
         </Appbar>
       </Animated.View>
     </>

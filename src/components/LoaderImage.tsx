@@ -1,6 +1,6 @@
-import { FC, useState } from 'react' ;
-import { Image, ImageContentFit, ImageSource, ImageStyle } from 'expo-image' ;
-import { StyleProp, View, ViewStyle } from 'react-native' ;
+import { type FC, useState } from 'react' ;
+import { Image, type ImageContentFit, type ImageSource, type ImageStyle } from 'expo-image' ;
+import { type StyleProp, View, type ViewStyle } from 'react-native' ;
 import { LinearGradient } from 'expo-linear-gradient' ;
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder' ;
 

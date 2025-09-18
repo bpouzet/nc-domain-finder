@@ -1,3 +1,5 @@
 {
-  "NSRemindersUsageDescription": "Remind you when the domain expires"
+  "ios": {
+    "NSRemindersUsageDescription": "Remind you when the domain expires"
+  }
 }

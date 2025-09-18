@@ -1,9 +1,29 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    // React 19 JSX transform
+    "jsx": "react-jsx",
+
+    // Modern module resolution
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolvePackageJsonExports": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+
+    // Enhanced type checking
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "skipLibCheck": true,
+
+    // Libraries
+    "lib": ["DOM", "ES2022", "ESNext"],
+
+    // Path resolution
     "baseUrl": ".",
     "paths": {
       "@components/*": [ "src/components/*" ],
@@ -13,6 +33,19 @@
       "@hooks/*": [ "src/hooks/*" ]
     }
   },
-  "include": [ "src", "app.config.ts", "index.js" ],
-  "exclude": [ "node_modules", "babel.config.js", "metro.config.js" ]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "app.config.ts",
+    "index.js",
+    ".expo/**/*.ts",
+    ".expo/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    "dist"
+  ]
 }

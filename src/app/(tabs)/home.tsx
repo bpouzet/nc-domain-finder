@@ -1,15 +1,17 @@
 import { Divider, List, Searchbar, Text } from 'react-native-paper' ;
-import { FlashList, ListRenderItem } from '@shopify/flash-list' ;
-import { SetStateAction, useCallback, useState } from 'react' ;
-import { View } from 'react-native' ;
+import { FlashList, type ListRenderItem } from '@shopify/flash-list' ;
+import { Platform, View } from 'react-native' ;
+import { type SetStateAction, useCallback, useState } from 'react' ;
 import { useRouter } from 'expo-router' ;
 import { useTranslation } from 'react-i18next' ;
 
-import { DomainList } from '../../../schemas/DomainListSchema' ;
+import type { DomainList } from '../../schemas/DomainListSchema' ;
 import SafeView from '@components/SafeView' ;
 import getFavicon from '@helpers/favicon' ;
 import useDebounce from '@hooks/useDebounce' ;
 import { useDomains } from '@hooks/queries' ;
+
+const isIOSBelow26 = Platform.OS === 'ios' && parseInt(Platform.Version, 10) < 26 ;
 
 export default function Home () {
 
@@ -67,14 +69,17 @@ export default function Home () {
         onChangeText={onChangeSearch}
         value={value}
         loading={isFetching}
+        autoCapitalize='none'
       />
 
       <FlashList
         data={data}
         renderItem={renderItem}
-        estimatedItemSize={70}
         ItemSeparatorComponent={ItemSeparator}
         ListEmptyComponent={EmptyList}
+        contentContainerStyle={{
+          paddingBottom: Platform.OS === 'ios' ? isIOSBelow26 ? 0 : 85 : 130, // TODO: when available, get correct TabBarHeight
+        }}
       />
     </SafeView>
   ) ;

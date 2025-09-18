@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        bun: ["1.1.42"]
+        bun: ["1.2.10"]
     name: Run linters with Bun ${{ matrix.bun }}
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -31,8 +31,7 @@ jobs:
         run: bun install
 
       - name: Run ESLint
-        uses: wearerequired/lint-action@v2
-        with:
-          github_token: ${{ secrets.github_token }}
-          # Enable linters
-          eslint: true
+        run: bun run lint
+
+      - name: Run TypeScript type-check
+        run: bun run typecheck
