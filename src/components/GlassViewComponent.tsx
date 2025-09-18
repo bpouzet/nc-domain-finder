@@ -1,5 +1,5 @@
-import { Platform } from 'react-native' ;
 import { GlassView, isLiquidGlassAvailable } from 'expo-glass-effect' ;
+import { Platform } from 'react-native' ;
 
 import type { GlassViewProps } from 'expo-glass-effect' ;
 import type { ReactNode } from 'react' ;
