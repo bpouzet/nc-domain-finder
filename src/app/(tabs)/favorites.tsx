@@ -15,22 +15,24 @@ export default function Favorites() {
   const theme = useTheme() ;
   const favorites = useFavoritesStore(state => state.favorites) ;
 
-  const onPress = (item: DomainList) => () => router.push({
-    params: {
-      domain: item.name,
-      extension: item.extension,
-    },
-    pathname: 'domain',
-  }) ;
+  const renderItem: ListRenderItem<DomainList> = useCallback(({ item }) => {
+    const onPress = (item: DomainList) => () => router.push({
+      params: {
+        domain: item.name,
+        extension: item.extension,
+      },
+      pathname: 'domain',
+    }) ;
 
-  const renderItem: ListRenderItem<DomainList> = useCallback(({ item }) => (
-    <List.Item
-      title={item.name}
-      description={item.extension}
-      onPress={onPress(item)}
-      left={getFavicon(item.name, item.extension)}
-    />
-  ), []) ;
+    return (
+      <List.Item
+        title={item.name}
+        description={item.extension}
+        onPress={onPress(item)}
+        left={getFavicon(item.name, item.extension)}
+      />
+    ) ;
+}, [ router ]) ;
 
   const EmptyList = useCallback(() => (
     <View
@@ -42,7 +44,7 @@ export default function Favorites() {
     >
       <Text>{t('favorites.empty')}</Text>
     </View>
-  ), []) ;
+  ), [ t ]) ;
 
   const ItemSeparator = useCallback(() => <Divider />, []) ;
 

@@ -45,6 +45,10 @@
   },
   "submit": {
     "staging": {
+      "android": {
+        "track": "internal",
+        "releaseStatus": "draft"
+      },
       "ios": {
         "appleId": "${EXPO_APPLE_ID}",
         "appleTeamId": "${EXPO_APPLE_TEAM_ID}",
@@ -52,6 +56,10 @@
       }
     },
     "production": {
+      "android": {
+        "track": "internal",
+        "releaseStatus": "completed"
+      },
       "ios": {
         "appleId": "${EXPO_APPLE_ID}",
         "appleTeamId": "${EXPO_APPLE_TEAM_ID}",

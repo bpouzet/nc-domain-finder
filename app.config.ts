@@ -25,6 +25,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       monochromeImage: './assets/images/adaptive-monochrome-icon.png',
     },
     blockedPermissions: [],
+    edgeToEdgeEnabled: true,
     package: PACKAGE,
     permissions: [],
     predictiveBackGestureEnabled: true,
@@ -41,6 +42,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
   },
   experiments: {
     reactCompiler: true,
+    //typedRoutes: true,
   },
   extra: {
     api: {
@@ -101,8 +103,12 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       'expo-build-properties', {
         android: {
           allowBackup: false,
+          enableBundleCompression: true,
           enableMinifyInReleaseBuilds: true,
+          enablePngCrunchInReleaseBuilds: true,
+          enableProguardInReleaseBuilds: true,
           enableShrinkResourcesInReleaseBuilds: true,
+          resConfigs: [ 'en', 'fr' ],
         },
         ios: {
           useFrameworks: 'static',
@@ -133,7 +139,6 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       'expo-sqlite',
       {},
     ],
-    [ 'react-native-edge-to-edge' ],
   ],
   primaryColor: BG_COLOR,
   runtimeVersion: {

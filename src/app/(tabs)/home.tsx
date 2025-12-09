@@ -15,7 +15,7 @@ const isIOSBelow26 = Platform.OS === 'ios' && parseInt(Platform.Version, 10) < 2
 
 export default function Home () {
 
-  const { t, i18n } = useTranslation() ;
+  const { t } = useTranslation() ;
   const router = useRouter() ;
 
   const [ value, setValue ] = useState<string>('') ;
@@ -25,22 +25,24 @@ export default function Home () {
 
   const onChangeSearch = useCallback((inputValue: SetStateAction<string>) => setValue(inputValue), []) ;
 
-  const onPress = (item: DomainList) => () => router.push({
-    params: {
-      domain: item.name,
-      extension: item.extension,
-    },
-    pathname: 'domain',
-  }) ;
+  const renderItem: ListRenderItem<DomainList> = useCallback(({ item }) => {
+    const onPress = (item: DomainList) => () => router.push({
+      params: {
+        domain: item.name,
+        extension: item.extension,
+      },
+      pathname: 'domain',
+    }) ;
 
-  const renderItem: ListRenderItem<DomainList> = useCallback(({ item }) => (
-    <List.Item
-      title={item.name}
-      description={item.extension}
-      onPress={onPress(item)}
-      left={getFavicon(item.name, item.extension)}
-    />
-  ), []) ;
+    return (
+      <List.Item
+        title={item.name}
+        description={item.extension}
+        onPress={onPress(item)}
+        left={getFavicon(item.name, item.extension)}
+      />
+    ) ;
+  }, [ router ]) ;
 
   const EmptyList = useCallback(() => {
     if(isFetching) return null ;
@@ -57,7 +59,7 @@ export default function Home () {
         <Text>{message}</Text>
       </View>
     ) ;
-  }, [ isFetching, data, i18n.language ]) ;
+  }, [ isFetching, data, t ]) ;
 
   const ItemSeparator = useCallback(() => <Divider />, []) ;
 

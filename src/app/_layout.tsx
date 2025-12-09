@@ -1,6 +1,7 @@
 import * as Font from 'expo-font' ;
+import * as NavigationBar from 'expo-navigation-bar' ;
 import * as Sentry from '@sentry/react-native' ;
-import { KeyboardAvoidingView, View } from 'react-native' ;
+import { KeyboardAvoidingView, Platform, View } from 'react-native' ;
 import { SplashScreen, Stack, useNavigationContainerRef } from 'expo-router' ;
 import { useCallback, useEffect, useMemo, useState } from 'react' ;
 import Constants from 'expo-constants' ;
@@ -8,26 +9,23 @@ import { KeyboardProvider } from 'react-native-keyboard-controller' ;
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
 import { PaperProvider } from 'react-native-paper' ;
 import RelativeTime from 'dayjs/plugin/relativeTime' ;
-import { SystemBars } from 'react-native-edge-to-edge' ;
+import { StatusBar } from 'expo-status-bar' ;
 import { ThemeProvider } from '@react-navigation/native' ;
 import Utc from 'dayjs/plugin/utc' ;
 import dayjs from 'dayjs' ;
 import { isRunningInExpoGo } from 'expo' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 
-dayjs.extend(RelativeTime) ;
-dayjs.extend(Utc) ;
 import 'dayjs/locale/fr' ;
-
+import '../i18n' ;
 import { CombinedDarkTheme, CombinedDefaultTheme } from '@config/theme' ;
 import AppRoot from '@components/AppRoot' ;
 import ConnectionModal from '@components/modals/ConnectionModal' ;
+import type { MyExpoConfig } from '@customTypes/expoConfig' ;
 import useColorScheme from '@hooks/useColorScheme' ;
 import useIsConnected from '@hooks/useIsConnected' ;
-
-import type { MyExpoConfig } from '@customTypes/expoConfig' ;
-
-import '../i18n' ;
+dayjs.extend(RelativeTime) ;
+dayjs.extend(Utc) ;
 
 void SplashScreen.preventAutoHideAsync() ;
 
@@ -70,7 +68,12 @@ function RootLayout() {
   const insets = useSafeAreaInsets() ;
 
   const theme = useMemo(() => {
-    return colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme ;
+    const theme = colorScheme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme ;
+    if ( Platform.OS === 'android' ) {
+    // set navigation and status bars
+      NavigationBar.setStyle(theme.dark ? 'dark' : 'light') ;
+    }
+    return theme ;
   }, [ colorScheme ] ) ;
 
   const [ appIsReady, setAppIsReady ] = useState<boolean>(false) ;
@@ -121,9 +124,9 @@ function RootLayout() {
                 </Stack>
               </AppRoot>
               <ConnectionModal isConnected={isConnected} />
+              <StatusBar style={theme.dark ? 'light' : 'dark'} translucent />
             </KeyboardAvoidingView>
           </KeyboardProvider>
-          <SystemBars style={theme.dark ? 'light' : 'dark'} />
         </ThemeProvider>
       </PaperProvider>
     </View>

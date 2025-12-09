@@ -5,7 +5,7 @@ import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
 import { useLocalSearchParams, useRouter } from 'expo-router' ;
 import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
-import { useState } from 'react' ;
+import { useEffect, useState } from 'react' ;
 import { useTranslation } from 'react-i18next' ;
 
 import { getDateTimeWithTz, getDateTimeWithTzEndDay } from '@helpers/getDateTimeWithTz' ;
@@ -24,7 +24,7 @@ const BOTTOM_APPBAR_HEIGHT = 80 ;
 const MEDIUM_FAB_HEIGHT = 56 ;
 
 const CHECK_DNS_URL = 'https://www.whatsmydns.net/#A/' ;
-const THUMB_URL = 'https://image.thum.io/get/noanimate/http://' ;
+const THUMB_URL = 'https://api.microlink.io/?url=' ;
 
 const options = {
   day: 'numeric',
@@ -60,9 +60,11 @@ export default function Domain() {
 
   if( error ) console.log('error => ', error) ;
 
-  if( data ) {
-    sharedVal.value = 0 ;
-  }
+  useEffect(() => {
+    if( data ) {
+      sharedVal.value = 0 ;
+    }
+  }, [ data, sharedVal ]) ;
 
   const [ showSnackBar, setShowSnackBar ] = useState<boolean>(false) ;
 
@@ -83,6 +85,12 @@ export default function Domain() {
       return owner.slice(pos + ridet.length).trim() ;
     }
     return owner ;
+  } ;
+
+  const getUriThumb = () => {
+    const domainUri = 'http://' + domain + extension ;
+    const uri = THUMB_URL + encodeURIComponent(domainUri) + '&screenshot=true&embed=screenshot.url' ;
+    return uri ;
   } ;
 
   const onAddReminder = () => {
@@ -241,7 +249,7 @@ export default function Domain() {
             }}
           >
             <LoaderImage
-              source={{ uri: THUMB_URL + domain + extension }}
+              source={{ uri: getUriThumb() }}
               style={{
                 borderBottomLeftRadius: 20,
                 borderBottomRightRadius: 20,

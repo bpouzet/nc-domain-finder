@@ -11,7 +11,7 @@ function fetchDomains(search: string, signal?: AbortSignal) {
     {
       headers,
       signal,
-    }
+    },
   ).then(response => {
     if ( !response.ok ) throw Error(response.statusText) ;
     return response.json() as Promise<DomainList[]> ;
@@ -28,7 +28,7 @@ const useDomain = (name: string, extension: string) => {
         {
           headers,
           signal,
-        }
+        },
       ).then(response => {
         if ( !response.ok ) throw Error(response.statusText) ;
         return response.json() as Promise<Domain> ;

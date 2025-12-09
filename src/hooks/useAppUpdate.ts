@@ -20,16 +20,16 @@ const useAppUpdate = () => {
 
   const { t } = useTranslation() ;
 
-  const onUpdateState = (event: StatusUpdateEvent) => {
-    if( event.status === IAUInstallStatus.DOWNLOADED && inAppUpdates ) {
-      // Launch installation update
-      inAppUpdates.installUpdate() ;
-    } else if( event.status === IAUInstallStatus.INSTALLED && inAppUpdates ) {
-      inAppUpdates.removeStatusUpdateListener(onUpdateState) ;
-    }
-  } ;
-
   useEffect(() => {
+    const onUpdateState = (event: StatusUpdateEvent) => {
+      if( event.status === IAUInstallStatus.DOWNLOADED && inAppUpdates ) {
+        // Launch installation update
+        inAppUpdates.installUpdate() ;
+      } else if( event.status === IAUInstallStatus.INSTALLED && inAppUpdates ) {
+        inAppUpdates.removeStatusUpdateListener(onUpdateState) ;
+      }
+    } ;
+
     const appUpdate = async () => {
       try {
         if(Device.isDevice && Application.nativeApplicationVersion && Application.applicationId) {
