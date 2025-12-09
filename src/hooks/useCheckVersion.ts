@@ -5,11 +5,13 @@ import { useEffect } from 'react' ;
 import useSettingsStore from '@hooks/useSettingsStore' ;
 
 const useCheckVersion = () => {
-  const version = useSettingsStore((state) => state.version) ;
-  const setVersion = useSettingsStore((state) => state.setVersion) ;
 
   useEffect(() => {
     void (async () => {
+      const version = useSettingsStore.getState().version ;
+      const setVersion = useSettingsStore.getState().setVersion ;
+
+      if( version ) return ;
       // check new version
       const appVersion = Application.nativeApplicationVersion ;
 

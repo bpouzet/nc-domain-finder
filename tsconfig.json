@@ -1,17 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    // React 19 JSX transform
     "jsx": "react-jsx",
-
-    // Modern module resolution
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolvePackageJsonExports": true,
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
-
-    // Enhanced type checking
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
@@ -19,18 +14,28 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "skipLibCheck": true,
-
-    // Libraries
-    "lib": ["DOM", "ES2022", "ESNext"],
-
-    // Path resolution
+    "lib": [
+      "DOM",
+      "ES2022",
+      "ESNext"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@components/*": [ "src/components/*" ],
-      "@config/*": [ "src/config/*" ],
-      "@customTypes/*": [ "src/types/*" ],
-      "@helpers/*": [ "src/helpers/*" ],
-      "@hooks/*": [ "src/hooks/*" ]
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@customTypes/*": [
+        "src/types/*"
+      ],
+      "@helpers/*": [
+        "src/helpers/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ]
     }
   },
   "include": [

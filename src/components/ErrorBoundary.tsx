@@ -42,7 +42,6 @@ const ErrorBoundary: FC<ErrorBoundaryProps> = ({ error, retry }) => {
         />
         <Text variant='headlineLarge'>{t('errorBoundary.title')}</Text>
         <Text>{error.message}</Text>
-        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <Button onPress={retry}>{t('actions.tryAgain')}</Button>
       </View>
     </SafeView>

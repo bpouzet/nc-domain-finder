@@ -27,7 +27,6 @@ const DialogLanguage: FC<Props> = ({ close, visible }) => {
         if( el !== 'cimode') {
 
           // TODO Do better
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           const translate = t(`languages.${el}`) ;
 

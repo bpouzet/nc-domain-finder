@@ -3,7 +3,7 @@ import useSettingsStore from '@hooks/useSettingsStore' ;
 
 export default function useColorScheme() {
   const themeStore = useSettingsStore(
-    (state) => state.theme
+    (state) => state.theme,
   ) ;
 
   const systemTheme = _useColorScheme() ?? 'light' ;

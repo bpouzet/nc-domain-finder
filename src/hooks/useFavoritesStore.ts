@@ -40,7 +40,7 @@ const useFavoritesStore = create<FavoritesState>()(
     {
       name: FAVORITES_KEY,
       storage: createJSONStorage(() => AsyncStorage),
-    }
+    },
   )) ;
 
 export default useFavoritesStore ;
