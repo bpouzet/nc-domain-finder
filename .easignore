@@ -7,3 +7,7 @@ dist/
 node_modules/
 *.iml
 *.log
+
+*.apk
+*.tar.gz
+*.ipa
