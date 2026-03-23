@@ -5,11 +5,11 @@ import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persi
 
 import type { MyExpoConfig } from '@customTypes/expoConfig' ;
 
-const API_URL = 'https://domaine-nc.p.rapidapi.com/domaines' ;
+const API_URL = 'https://api.opt.nc/domainenc/domaines' ;
 
 const headers = {
   'Accept': 'application/json',
-  'X-RapidAPI-Key': (Constants.expoConfig as MyExpoConfig).extra.api.key,
+  'x-apikey': (Constants.expoConfig as MyExpoConfig).extra.api.key,
 } ;
 
 const queryClient = new QueryClient({
