@@ -20,7 +20,7 @@ jobs:
     name: Run linters with Bun ${{ matrix.bun }}
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
