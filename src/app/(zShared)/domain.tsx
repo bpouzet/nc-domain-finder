@@ -113,12 +113,16 @@ export default function Domain() {
         // check permissions
         const { status } = await Calendar.requestCalendarPermissions() ;
         if(status === PermissionStatus.GRANTED) {
-          const calendar = Calendar.getDefaultCalendarSync() ;
-          await calendar.addEventWithForm({
-            endDate: endDate.toDate(),
-            startDate: startDate.toDate(),
-            title: eventTitle,
-          }) ;
+          // getDefaultCalendarSync is iOS-only; on Android pick the first writable calendar
+          const calendars = await Calendar.getCalendars() ;
+          const calendar = calendars.find(el => el.allowsModifications) ?? calendars[0] ;
+          if(calendar) {
+            await calendar.addEventWithForm({
+              endDate: endDate.toDate(),
+              startDate: startDate.toDate(),
+              title: eventTitle,
+            }) ;
+          }
         } else {
           console.log('NOT GRANTED') ;
         }
