@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-NC Domain Finder is a React Native mobile application built with Expo 54 that allows users to search and find available domain names in .nc (New Caledonia) or discover information about registered domains. This is an alternative to the Domaine NC Mobile app with enhanced features and better user experience.
+NC Domain Finder is a React Native mobile application built with Expo 56 that allows users to search and find available domain names in .nc (New Caledonia) or discover information about registered domains. This is an alternative to the Domaine NC Mobile app with enhanced features and better user experience.
 
 ## Development Commands
 
 ### Package Manager
-- Uses Bun as the package manager (v1.2.0+)
+- Uses Bun as the package manager (v1.2.10+)
 - Install dependencies: `bun install`
 
 ### Development & Testing
@@ -36,7 +36,7 @@ NC Domain Finder is a React Native mobile application built with Expo 54 that al
 ## Architecture
 
 ### Tech Stack
-- **Framework**: React Native with Expo 54
+- **Framework**: React Native 0.85 with Expo 56
 - **Navigation**: Expo Router (file-based routing)
 - **UI Library**: React Native Paper
 - **State Management**: Zustand for global state
@@ -115,14 +115,14 @@ This project uses React Native's New Architecture for enhanced performance and m
 - **Type-safe native interfaces** with compile-time validation
 
 ### New Architecture Configuration
-- Enabled globally via `newArchEnabled: true` in app.config.ts
+- Enabled by default in SDK 56 — the explicit `newArchEnabled` flag is no longer required and has been removed from app.config.ts
 - Platform-specific configuration in expo-build-properties:
   - iOS: `useFrameworks: 'static'` for optimal performance
   - Android: Native configuration automatically applied
 - Metro bundler optimized for New Architecture compatibility
 
 ### Migration Guidelines
-1. **Dependency Compatibility**: All expo-* packages in SDK 54 support New Architecture
+1. **Dependency Compatibility**: All expo-* packages in SDK 56 support New Architecture
 2. **Third-party Libraries**: Verify library compatibility or use interop layer
 3. **Custom Native Modules**: Migrate to TurboModules for best performance
 4. **Testing**: Run prebuild and test on both platforms after enabling
@@ -131,7 +131,7 @@ This project uses React Native's New Architecture for enhanced performance and m
 - **Node.js**: 22+ LTS (Jod) - Required for optimal performance and latest features
 - **Bun**: 1.2.0+ - Package manager with enhanced lockfile compatibility
 - **Navigation**: Native tabs with `expo-router/unstable-native-tabs` for optimal performance
-- **React Compiler**: Enabled with strict compilation mode for automatic optimization
+- **React Compiler**: Enabled (scoped to `src/app`) for automatic optimization
 - **Expo CLI**: Latest version
 - **EAS CLI**: For building and deploying
 
@@ -142,7 +142,7 @@ This project uses React Native's New Architecture for enhanced performance and m
 
 ### React Compiler Configuration
 
-React Compiler is enabled with strict compilation mode for automatic optimization and memoization. The configuration is set in `babel.config.js`:
+React Compiler is enabled via `experiments.reactCompiler: true` in `app.config.ts`. Compilation is scoped to the app's route files (`src/app`) through babel-preset-expo's `react-compiler.sources` filter in `babel.config.js`:
 
 ```javascript
 presets: [
@@ -151,7 +151,8 @@ presets: [
     {
       jsxRuntime: 'automatic',
       'react-compiler': {
-        compilationMode: 'strict'
+        // Only run the React Compiler on files under src/app.
+        sources: filename => filename.includes('src/app'),
       }
     }
   ]

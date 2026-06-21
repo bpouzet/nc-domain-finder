@@ -10,7 +10,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
 import { PaperProvider } from 'react-native-paper' ;
 import RelativeTime from 'dayjs/plugin/relativeTime' ;
 import { StatusBar } from 'expo-status-bar' ;
-import { ThemeProvider } from '@react-navigation/native' ;
+import { ThemeProvider } from 'expo-router/react-navigation' ;
 import Utc from 'dayjs/plugin/utc' ;
 import dayjs from 'dayjs' ;
 import { isRunningInExpoGo } from 'expo' ;
@@ -34,7 +34,7 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !isRunningInExpoGo(),
 }) ;
 
-const isDev = process.env.APP_ENV === 'development' ;
+const isDev = (Constants.expoConfig as MyExpoConfig).extra.appEnv === 'development' ;
 
 // Init Sentry
 Sentry.init({
@@ -50,7 +50,7 @@ Sentry.init({
   enableNative: !isDev,
   enableNativeFramesTracking: !isRunningInExpoGo(), // Tracks slow and frozen frames in the application
   enabled: !isDev,
-  environment: process.env.APP_ENV,
+  environment: (Constants.expoConfig as MyExpoConfig).extra.appEnv,
   integrations: [ navigationIntegration ],
   profilesSampleRate: 1.0, // Profile 100% of transactions in production
   sendDefaultPii: true, // Include user context and additional data
@@ -110,7 +110,8 @@ function RootLayout() {
   return (
     <View style={{ backgroundColor: theme.colors.surfaceVariant, flex: 1 }} onLayout={onLayoutRootView}>
       <PaperProvider theme={theme}>
-        <ThemeProvider value={theme}>
+        {/* Combined Paper+Navigation theme uses MD3 fonts; cast to satisfy the stricter react-navigation Theme type (runtime-compatible). */}
+        <ThemeProvider value={theme as unknown as Parameters<typeof ThemeProvider>[0]['value']}>
           <KeyboardProvider>
             <KeyboardAvoidingView
               behavior="padding"
@@ -124,7 +125,7 @@ function RootLayout() {
                 </Stack>
               </AppRoot>
               <ConnectionModal isConnected={isConnected} />
-              <StatusBar style={theme.dark ? 'light' : 'dark'} translucent />
+              <StatusBar style={theme.dark ? 'light' : 'dark'} />
             </KeyboardAvoidingView>
           </KeyboardProvider>
         </ThemeProvider>

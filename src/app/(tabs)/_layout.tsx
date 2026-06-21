@@ -1,6 +1,6 @@
 import { DynamicColorIOS, Platform } from 'react-native' ;
-import { Icon, Label, NativeTabs, VectorIcon } from 'expo-router/unstable-native-tabs' ;
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons' ;
+import { NativeTabs } from 'expo-router/unstable-native-tabs' ;
 import { useTheme } from 'react-native-paper' ;
 import { useTranslation } from 'react-i18next' ;
 
@@ -35,24 +35,24 @@ export default function RootLayout() {
       } : {})}
     >
       <NativeTabs.Trigger name='home'>
-        <Label>{t('search.title')}</Label>
+        <NativeTabs.Trigger.Label>{t('search.title')}</NativeTabs.Trigger.Label>
         {Platform.select({
-          android: <Icon src={<VectorIcon family={MaterialCommunityIcons} name='magnify' />} />,
-          ios: <Icon sf='magnifyingglass' />,
+          android: <NativeTabs.Trigger.Icon src={<NativeTabs.Trigger.VectorIcon family={MaterialCommunityIcons} name='magnify' />} />,
+          ios: <NativeTabs.Trigger.Icon sf='magnifyingglass' />,
         })}
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name='favorites'>
-        <Label>{t('favorites.title')}</Label>
+        <NativeTabs.Trigger.Label>{t('favorites.title')}</NativeTabs.Trigger.Label>
         {Platform.select({
-          android: <Icon src={<VectorIcon family={MaterialCommunityIcons} name='cards-heart' />} />,
-          ios: <Icon sf='heart.fill' />,
+          android: <NativeTabs.Trigger.Icon src={<NativeTabs.Trigger.VectorIcon family={MaterialCommunityIcons} name='cards-heart' />} />,
+          ios: <NativeTabs.Trigger.Icon sf='heart.fill' />,
         })}
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name='settings'>
-        <Label>{t('settings.title')}</Label>
+        <NativeTabs.Trigger.Label>{t('settings.title')}</NativeTabs.Trigger.Label>
         {Platform.select({
-          android: <Icon src={<VectorIcon family={MaterialCommunityIcons} name='cog' />} />,
-          ios: <Icon sf='gearshape.fill' />,
+          android: <NativeTabs.Trigger.Icon src={<NativeTabs.Trigger.VectorIcon family={MaterialCommunityIcons} name='cog' />} />,
+          ios: <NativeTabs.Trigger.Icon sf='gearshape.fill' />,
         })}
       </NativeTabs.Trigger>
     </NativeTabs>

@@ -5,6 +5,7 @@ export interface MyExpoConfig extends Omit<ExpoConfig, 'extra'> {
     api: {
       key: string
     },
+    appEnv: string,
     eas: {
       projectId: string
     },

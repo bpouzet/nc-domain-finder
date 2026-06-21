@@ -3,9 +3,10 @@ import * as Linking from 'expo-linking' ;
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated' ;
 import { Appbar, FAB, List, Snackbar, useTheme } from 'react-native-paper' ;
 import { Platform, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native' ;
-import { useLocalSearchParams, useRouter } from 'expo-router' ;
-import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useEffect, useState } from 'react' ;
+import { useLocalSearchParams, useRouter } from 'expo-router' ;
+import { PermissionStatus } from 'expo-modules-core' ;
+import { useSafeAreaInsets } from 'react-native-safe-area-context' ;
 import { useTranslation } from 'react-i18next' ;
 
 import { getDateTimeWithTz, getDateTimeWithTzEndDay } from '@helpers/getDateTimeWithTz' ;
@@ -109,26 +110,30 @@ export default function Domain() {
       const startDate = getDateTimeWithTz(data.dateExpiration) ;
 
       if( Platform.OS === 'android' ) {
-
-        const event = {
-          endDate: endDate.toDate(),
-          startDate: startDate.toDate(),
-          title: eventTitle,
-        } ;
-
-        await Calendar.createEventInCalendarAsync(event) ;
-
+        // check permissions
+        const { status } = await Calendar.requestCalendarPermissions() ;
+        if(status === PermissionStatus.GRANTED) {
+          const calendar = Calendar.getDefaultCalendarSync() ;
+          await calendar.addEventWithForm({
+            endDate: endDate.toDate(),
+            startDate: startDate.toDate(),
+            title: eventTitle,
+          }) ;
+        } else {
+          console.log('NOT GRANTED') ;
+        }
       } else if(Platform.OS === 'ios') {
-        // check if calendar is available
-        const available = await Calendar.isAvailableAsync() ;
+        // check permissions
+        const { status } = await Calendar.requestRemindersPermissions() ;
+        if(status === PermissionStatus.GRANTED) {
+          const minusDate = startDate.subtract(7, 'day') ;
 
-        if(available) {
-          // check permissions
-          const { status } = await Calendar.requestRemindersPermissionsAsync() ;
-          if(status === Calendar.PermissionStatus.GRANTED) {
-            const minusDate = startDate.subtract(7, 'day') ;
+          // pick the default (first modifiable) reminders calendar
+          const reminderCalendars = await Calendar.getCalendars(Calendar.EntityTypes.REMINDER) ;
+          const reminderCalendar = reminderCalendars.find(el => el.allowsModifications) ?? reminderCalendars[0] ;
 
-            await Calendar.createReminderAsync(null, {
+          if(reminderCalendar) {
+            await reminderCalendar.createReminder({
               dueDate: startDate.toDate(),
               notes: t('reminder.date', { val: startDate.toString() }),
               startDate: minusDate.toDate(),
@@ -137,9 +142,9 @@ export default function Domain() {
             }) ;
 
             setShowSnackBar(true) ;
-          } else {
-            console.log('NOT GRANTED') ;
           }
+        } else {
+          console.log('NOT GRANTED') ;
         }
       }
       return ;

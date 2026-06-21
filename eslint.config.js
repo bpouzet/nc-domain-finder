@@ -4,7 +4,6 @@ const expoConfig = require('eslint-config-expo/flat');
 const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
 const reactPlugin = require('eslint-plugin-react');
 const reactHooksPlugin = require('eslint-plugin-react-hooks');
-const reactCompilerPlugin = require('eslint-plugin-react-compiler');
 
 module.exports = defineConfig([
   expoConfig,
@@ -16,7 +15,6 @@ module.exports = defineConfig([
       '@typescript-eslint': typescriptPlugin,
       'react': reactPlugin,
       'react-hooks': reactHooksPlugin,
-      'react-compiler': reactCompilerPlugin,
     },
     rules: {
       // TypeScript rules
@@ -83,9 +81,9 @@ module.exports = defineConfig([
       // React Hooks
       'react-hooks/rules-of-hooks': 'error',
       //'react-hooks/exhaustive-deps': 'warn',
-
-      // React Compiler
-      'react-compiler/react-compiler': 'error',
+      // React Compiler linting: the standalone eslint-plugin-react-compiler rule was removed in
+      // SDK 56. Its checks now live as granular react-hooks/* rules (via the plugin's
+      // 'recommended-latest' config). React Compiler optimization itself still runs via babel-preset-expo.
     },
     settings: {
       react: {
