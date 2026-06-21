@@ -23,8 +23,6 @@ module.exports = (() => {
 
   config.transformer = {
     ...transformer,
-    // Enable unstable_allowRequireContext for New Architecture
-    unstable_allowRequireContext: true,
     minifierPath: require.resolve('metro-minify-terser'),
     minifierConfig: {
       compress: {
@@ -41,10 +39,6 @@ module.exports = (() => {
     ],
     // Force Metro to resolve (sub)dependencies only from the `nodeModulesPaths`
     //disableHierarchicalLookup: true,
-    sourceExts: [
-      ...resolver.sourceExts,
-      "mjs"
-    ]
   }
 
   config.resetCache = true

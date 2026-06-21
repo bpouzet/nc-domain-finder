@@ -29,9 +29,9 @@ NC Domain Finder is the ideal application for anyone looking to register a domai
 
 ## Tech Stack
 
-- **Framework**: React Native 0.81.4 with **New Architecture** enabled
-- **Platform**: Expo SDK 54
-- **React**: 19.1.0
+- **Framework**: React Native 0.85.3 with **New Architecture** (default in SDK 56)
+- **Platform**: Expo SDK 56
+- **React**: 19.2.3
 - **Package Manager**: Bun 1.2.x
 - **Language**: TypeScript
 - **Navigation**: Expo Router (file-based routing)

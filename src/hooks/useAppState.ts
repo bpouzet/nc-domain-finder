@@ -3,7 +3,7 @@ import { AppState } from 'react-native' ;
 
 const useAppState = () => {
   const appState = useRef(AppState.currentState) ;
-  const [ appStateVisible, setAppStateVisible ] = useState(appState.current) ;
+  const [ appStateVisible, setAppStateVisible ] = useState(AppState.currentState) ;
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {

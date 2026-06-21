@@ -28,7 +28,7 @@ const DialogLanguage: FC<Props> = ({ close, visible }) => {
 
           // TODO Do better
           // @ts-ignore
-          const translate = t(`languages.${el}`) ;
+          const translate = t(`languages.${el}`) as string ;
 
           return (
             <RadioButton.Item

@@ -1,5 +1,3 @@
-import 'dotenv/config' ;
-
 import type { ConfigContext } from 'expo/config' ;
 import type { MyExpoConfig } from '@customTypes/expoConfig' ;
 import manifest from './package.json' ;
@@ -25,20 +23,10 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       monochromeImage: './assets/images/adaptive-monochrome-icon.png',
     },
     blockedPermissions: [],
-    edgeToEdgeEnabled: true,
     package: PACKAGE,
     permissions: [],
     predictiveBackGestureEnabled: true,
     softwareKeyboardLayoutMode: 'pan',
-  },
-  androidNavigationBar: {
-    backgroundColor: BG_COLOR,
-    barStyle: 'light-content',
-  },
-  androidStatusBar: {
-    backgroundColor: BG_COLOR,
-    barStyle: 'light-content',
-    translucent: false,
   },
   experiments: {
     reactCompiler: true,
@@ -48,6 +36,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     api: {
       key: process.env.API_KEY,
     },
+    appEnv: process.env.APP_ENV,
     eas: {
       projectId: '9df8db98-43eb-41f6-a9e8-04873f919754',
     },
@@ -78,13 +67,11 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
     },
     supportsTablet: true,
   },
-  jsEngine: 'hermes',
   locales: {
     en: './assets/translations/en.json',
     fr: './assets/translations/fr.json',
   },
   name: 'NC Domain Finder' + (IS_STAGING ? ' (staging)' : IS_DEV ? '(dev)' : ''),
-  newArchEnabled: true,
   orientation: 'portrait',
   platforms: [
     'android',
@@ -116,6 +103,13 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       },
     ],
     [
+      'expo-calendar',
+      {
+        calendarPermission: false,
+        remindersPermission: 'Remind you when the domain expires',
+      },
+    ],
+    [
       'expo-font', {
         fonts: [ 'assets/fonts/SpaceMono-Regular.ttf' ],
       },
@@ -127,6 +121,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
         supportedLocales: [ 'en', 'fr' ],
       },
     ],
+    'expo-image',
     'expo-router',
     [
       'expo-splash-screen',
@@ -139,6 +134,7 @@ export default ({ config }: ConfigContext): MyExpoConfig => ({
       'expo-sqlite',
       {},
     ],
+    'expo-status-bar',
   ],
   primaryColor: BG_COLOR,
   runtimeVersion: {

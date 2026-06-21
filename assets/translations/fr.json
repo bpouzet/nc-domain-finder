@@ -1,5 +1,6 @@
 {
   "ios": {
+    "NSRemindersFullAccessUsageDescription": "Permet de créer un rappel lors de l'expiration du domaine",
     "NSRemindersUsageDescription": "Permet de créer un rappel lors de l'expiration du domaine"
   }
 }
